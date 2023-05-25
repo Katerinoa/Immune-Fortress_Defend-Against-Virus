@@ -2728,7 +2728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0e730fb52c82f4e8aa1c879300cbc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virusprefab: {fileID: 2088920284432561718, guid: 57f36f933526c90479a9532af514c249, type: 3}
+  virusprefab: {fileID: 6304970113263836850, guid: 68fb58e2bb0282d45b21127e029bb5e0, type: 3}
 --- !u!4 &1634656099
 Transform:
   m_ObjectHideFlags: 0
