@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2062304658902387074}
   m_Layer: 0
   m_Name: Bcell3
-  m_TagString: Untagged
+  m_TagString: cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,8 +134,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746902198040855908}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.5664012, y: 2.0800352, z: 1.6222699}
   m_Center: {x: 0.024425596, y: -0.31748477, z: 0.13273081}
