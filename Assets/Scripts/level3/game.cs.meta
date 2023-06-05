@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 99ad487c680510446a04ddbadb092013
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - prefab: {instanceID: 0}
+  - wcell: {fileID: 4215844650020831068, guid: 27fe906949c790045aa646a67c5f0fb2, type: 3}
+  - Tcell: {fileID: 5158364106536439044, guid: 785069ad783097b478c0d8f2d1865c34, type: 3}
+  - virus: {fileID: 6304970113263836850, guid: 68fb58e2bb0282d45b21127e029bb5e0, type: 3}
+  - Bcell: {fileID: 5072255911423498526, guid: 89f8752da3caed64286f28441ea3ca88, type: 3}
+  - cell: {fileID: 8129603801023192442, guid: d816c8edbf431904999c2910d6593abd, type: 3}
+  - macrophage: {fileID: 7415282054881824665, guid: a4a498de8e490544bb44d4aa47ca191a, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
