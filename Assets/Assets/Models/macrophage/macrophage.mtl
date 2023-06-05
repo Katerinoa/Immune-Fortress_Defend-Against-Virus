@@ -1,6 +1,0 @@
-# Exported from Nomad Sculpt
-
-newmtl Sphere_UV_1
- map_Kd Sphere_UV_1_color.png
- map_roughness Sphere_UV_1_roughness.png
- map_metallic Sphere_UV_1_metalness.png

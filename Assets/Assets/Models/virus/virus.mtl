@@ -1,6 +1,0 @@
-# Exported from Nomad Sculpt
-
-newmtl Sphere_3
- map_Kd Sphere_3_color.png
- map_roughness Sphere_3_roughness.png
- map_metallic Sphere_3_metalness.png
