@@ -32,7 +32,7 @@ public class Controller : MonoBehaviour
         {
 
         
-            Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
+         Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
         bool foundEnemy = false;
 
         foreach (Collider collider in colliders)
