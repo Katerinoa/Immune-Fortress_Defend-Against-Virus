@@ -40,10 +40,31 @@ public class VirusController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("hurt"))
+        {
+            StartCoroutine(DestroyAfterDelay(0)); // 启动协程
+            Counter.passCount++;
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("mucous"))
+        {
+            speed *= 0.99f;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("mucous"))
+            speed = Core.Speed*0.3f;
+    }
     private IEnumerator DestroyAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         Destroy(gameObject); // 销毁该物体
+        Counter.destroyCount++;
     }
 
     private void FixedUpdate()

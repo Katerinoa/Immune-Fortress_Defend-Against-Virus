@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     public Transform player;
 
     [Tooltip(" Û±Í¡È√Ù∂»")]
-    public float mouseSensitivity = 20f;
+    public float mouseSensitivity = 100f;
 
     private float mouseX, mouseY;
 

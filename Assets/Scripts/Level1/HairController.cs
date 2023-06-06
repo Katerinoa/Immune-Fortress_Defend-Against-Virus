@@ -17,7 +17,6 @@ public class HairController : MonoBehaviour
         if (collision.gameObject.CompareTag("virus"))
         {
             preventCount++;
-            Counter.destroyCount++;
         }
         if(preventCount > preventMaxNum)
             Destroy(gameObject);

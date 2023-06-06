@@ -6,9 +6,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Tooltip("移动速度")]
-    public float moveSpeed = 10;
+    public float moveSpeed = 30;
     [Tooltip("滚轮灵敏度")]
-    public float scrollSensitivity = 50f;
+    public float scrollSensitivity = 500f;
 
     private CharacterController cc;
 
