@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MainControll : MonoBehaviour
 {
+    public int fps = 60;
     private void Awake()
     {
-        Application.targetFrameRate = 60; // 游戏帧率
+        Application.targetFrameRate = fps; // 游戏帧率
     }
 }

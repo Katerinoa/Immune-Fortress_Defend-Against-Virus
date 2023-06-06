@@ -8,21 +8,24 @@ public class MonsterGenerationPoint : MonoBehaviour
     public List<GameObject> Viruses;
     [Tooltip("生成位置")]
     public Transform TargetPos;
-    [Tooltip("生成间隔")]
-    public float SpawnInterval = 5.0f;
+
+    private Vector2 SpawnIntervalRange; //生成时间间隔
+    private int MaxGenerateNum; //最大生成数量
 
     private void Start()
     {
-        SpawnMonster();
-        StartCoroutine(SpawnIntervalCoroutine());
+        StartCoroutine("SpawnCoroutine");
+        SpawnIntervalRange = Core.SpawnIntervalRange;
+        MaxGenerateNum = Core.MaxGenerateNum;
     }
 
-    private IEnumerator SpawnIntervalCoroutine()
+    private IEnumerator SpawnCoroutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(SpawnInterval);
             SpawnMonster();
+            float interval = Random.Range(SpawnIntervalRange.x, SpawnIntervalRange.y);
+            yield return new WaitForSeconds(interval);
         }
     }
 
@@ -35,7 +38,16 @@ public class MonsterGenerationPoint : MonoBehaviour
         }
 
         int randomIndex = Random.Range(0, Viruses.Count);
-        GameObject Virus = Viruses[randomIndex];
-        Instantiate(Virus, TargetPos.position, TargetPos.rotation);
+        GameObject virus = Viruses[randomIndex];
+        Instantiate(virus, TargetPos.position, TargetPos.rotation);
+        Counter.generateCount++;
     }
+
+    private void Update()
+    {
+        if (Counter.generateCount > MaxGenerateNum)
+            StopCoroutine("SpawnCoroutine");
+    }
+
+
 }
