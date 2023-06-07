@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Core : MonoBehaviour
 {
-    private static int preventMaxNum = 10; //ÈÞÃ«×î¶à×èµ²ÊýÁ¿
+    private static int preventMaxNum = 10; //ï¿½ï¿½Ã«ï¿½ï¿½ï¿½ï¿½èµ²ï¿½ï¿½ï¿½ï¿½
 
-    private static Vector2 spawnIntervalRange = new Vector2(2.5f, 5.0f);  //Éú³ÉÊ±¼ä¼ä¸ô
+    private static Vector2 spawnIntervalRange = new Vector2(2.5f, 5.0f);  //ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
 
-    private static float speed = 5.0f;  // ²¡¶¾ÒÆ¶¯ËÙ¶È
+    private static float speed = 2.0f;  // ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Ù¶ï¿½
 
-    private static int maxGenerateNum = 800;  // ×î´óÉú³É²¡¶¾ÊýÁ¿
+    private static int maxGenerateNum = 300;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    // Ìá¹©public·½·¨£¬ÓÃÓÚ·ÃÎÊÉÏÊöÈý¸ö±äÁ¿²¢ÔÊÐíÍâ²¿ÐÞ¸Ä
+    // ï¿½á¹©publicï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â²¿ï¿½Þ¸ï¿½
     public static int PreventMaxNum
     {
         get { return preventMaxNum; }

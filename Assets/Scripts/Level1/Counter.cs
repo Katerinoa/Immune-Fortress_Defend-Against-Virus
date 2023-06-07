@@ -9,7 +9,7 @@ public class Counter : MonoBehaviour
     public static int passCount;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         generateCount = 0;
         destroyCount = 0;
