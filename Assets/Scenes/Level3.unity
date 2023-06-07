@@ -1482,7 +1482,7 @@ MonoBehaviour:
   Bcell: {fileID: 5072255911423498526, guid: 89f8752da3caed64286f28441ea3ca88, type: 3}
   cell: {fileID: 8129603801023192442, guid: d816c8edbf431904999c2910d6593abd, type: 3}
   macrophage: {fileID: 7415282054881824665, guid: a4a498de8e490544bb44d4aa47ca191a, type: 3}
-  name:
+  Name:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -2597,6 +2597,7 @@ MonoBehaviour:
   attackDamage: 10
   attackInterval: 1
   fadeDuration: 2
+  bulletPrefab: {fileID: 0}
 --- !u!135 &2026939839
 SphereCollider:
   m_ObjectHideFlags: 0

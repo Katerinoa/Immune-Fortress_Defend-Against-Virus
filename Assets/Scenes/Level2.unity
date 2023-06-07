@@ -2728,7 +2728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0e730fb52c82f4e8aa1c879300cbc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virusprefab: {fileID: 6304970113263836850, guid: 68fb58e2bb0282d45b21127e029bb5e0, type: 3}
+  virusprefab: {fileID: 2088920284432561718, guid: 57f36f933526c90479a9532af514c249, type: 3}
 --- !u!4 &1634656099
 Transform:
   m_ObjectHideFlags: 0
@@ -3533,6 +3533,18 @@ PrefabInstance:
     - target: {fileID: 2099369601712188480, guid: 1843338f5d315e74199f8b217e96ee4f, type: 3}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099369601712188480, guid: 1843338f5d315e74199f8b217e96ee4f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099369601712188480, guid: 1843338f5d315e74199f8b217e96ee4f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099369601712188480, guid: 1843338f5d315e74199f8b217e96ee4f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2099369601712188480, guid: 1843338f5d315e74199f8b217e96ee4f, type: 3}
       propertyPath: m_LocalPosition.x
