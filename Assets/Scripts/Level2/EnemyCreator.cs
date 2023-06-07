@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,7 +27,7 @@ public class EnemyCreator : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(6.0f);
+            yield return new WaitForSeconds(6f);
             virus = Instantiate(virusprefab,this.transform.position,this.transform.rotation,this.transform);
             //改名
             virus.name = "virus";

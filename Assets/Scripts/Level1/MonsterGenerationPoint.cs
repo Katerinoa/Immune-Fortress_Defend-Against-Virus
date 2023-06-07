@@ -12,11 +12,15 @@ public class MonsterGenerationPoint : MonoBehaviour
     private Vector2 SpawnIntervalRange; //生成时间间隔
     private int MaxGenerateNum; //最大生成数量
 
+
+    private void Awake()
+    {
+        SpawnIntervalRange = Core.SpawnIntervalRange;
+        MaxGenerateNum = Core.MaxGenerateNum;
+    }
     private void Start()
     {
         StartCoroutine("SpawnCoroutine");
-        SpawnIntervalRange = Core.SpawnIntervalRange;
-        MaxGenerateNum = Core.MaxGenerateNum;
     }
 
     private IEnumerator SpawnCoroutine()
