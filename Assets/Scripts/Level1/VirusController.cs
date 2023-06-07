@@ -11,11 +11,15 @@ public class VirusController : MonoBehaviour
 
     private float speed;
 
-    private bool hasLanded = false;
+    private bool hasLanded = true;
 
     private bool isStopped = false;
 
     private Rigidbody rig;
+
+    private Vector3 swingDirection = Vector3.zero; // 摆动方向
+    private float swingSpeed = 2f; // 摆动速度
+    private float maxSwingAngle = 10f; // 最大摆动角度
 
 
     private void Start()
@@ -72,9 +76,13 @@ public class VirusController : MonoBehaviour
     {
         if (!isStopped && hasLanded)
         {
-            transform.position += direction.normalized * speed * Time.fixedDeltaTime; // 沿着指定方向移动
+            // 计算摆动方向
+            Vector3 directionToSwing = Quaternion.Euler(0, Random.Range(-maxSwingAngle, maxSwingAngle), 0) * direction;
+            swingDirection = Vector3.Lerp(swingDirection, directionToSwing, Time.fixedDeltaTime * swingSpeed).normalized;
+
+            transform.position += (direction.normalized + swingDirection) * speed * Time.fixedDeltaTime; // 沿着指定方向和摆动方向移动
         }
-        else if(isStopped)
+        else if (isStopped)
         {
             rig.constraints = RigidbodyConstraints.FreezeAll; // 锁定位置
         }
