@@ -23,9 +23,9 @@ public class MonsterGenerationPoint : MonoBehaviour
     {
         while (true)
         {
-            SpawnMonster();
             float interval = Random.Range(SpawnIntervalRange.x, SpawnIntervalRange.y);
             yield return new WaitForSeconds(interval);
+            SpawnMonster();
         }
     }
 

@@ -17,6 +17,7 @@ public class VirusController : MonoBehaviour
 
     private Rigidbody rig;
 
+
     private void Start()
     {
         rig = GetComponent<Rigidbody>();
@@ -62,9 +63,9 @@ public class VirusController : MonoBehaviour
     }
     private IEnumerator DestroyAfterDelay(float delay)
     {
+        Counter.destroyCount++;
         yield return new WaitForSeconds(delay);
         Destroy(gameObject); // 销毁该物体
-        Counter.destroyCount++;
     }
 
     private void FixedUpdate()
