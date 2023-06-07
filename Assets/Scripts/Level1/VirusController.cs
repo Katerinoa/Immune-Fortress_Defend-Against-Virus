@@ -13,7 +13,7 @@ public class VirusController : MonoBehaviour
 
     private bool hasLanded = true;
 
-    private bool isStopped = false;
+    public  bool isStopped = false;// 复用对象池需要使用
 
     private Rigidbody rig;
 

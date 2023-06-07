@@ -159,7 +159,7 @@ Transform:
   - {fileID: 1066244464}
   - {fileID: 61213961}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &26808304
 GameObject:
@@ -495,7 +495,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2099369601712188480, guid: 1843338f5d315e74199f8b217e96ee4f, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2099369601712188480, guid: 1843338f5d315e74199f8b217e96ee4f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2660,7 +2660,7 @@ Transform:
   - {fileID: 1590106692}
   - {fileID: 343191784}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &975447582 stripped
 Transform:
@@ -4497,9 +4497,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1417016153}
-  - component: {fileID: 1417016154}
   - component: {fileID: 1417016156}
+  - component: {fileID: 1417016154}
   - component: {fileID: 1417016155}
+  - component: {fileID: 1417016157}
   m_Layer: 0
   m_Name: MainControll
   m_TagString: Untagged
@@ -4520,7 +4521,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1417016154
 MonoBehaviour:
@@ -4559,6 +4560,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0107802c44c084a44ba722ab98adcf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1417016157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417016152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3b83aa3317aa6b46a167ba2c175b297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Viruses:
+  - {fileID: 9143429346563588964, guid: 41fea7f8eb7eb1248bd8dc559aaf5389, type: 3}
+  - {fileID: 7593965632340958622, guid: 9c11ce27c57b25541a1fe1d2396313d1, type: 3}
+  pooledObjects: []
 --- !u!1001 &1437349156
 PrefabInstance:
   m_ObjectHideFlags: 0

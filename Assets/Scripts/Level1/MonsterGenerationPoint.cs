@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MonsterGenerationPoint : MonoBehaviour
 {
-    [Tooltip("怪物列表")]
-    public List<GameObject> Viruses;
     [Tooltip("生成位置")]
     public Transform TargetPos;
 
@@ -41,15 +39,14 @@ public class MonsterGenerationPoint : MonoBehaviour
             return;
         }
 
-        //int randomIndex = Random.Range(0, Viruses.Count);
-        //GameObject virus = Viruses[randomIndex];
-        //Instantiate(virus, TargetPos.position, TargetPos.rotation);
-        GameObject bullet = ObjectPool.SharedInstance.GetPooledObject();
-        if (bullet != null)
+        GameObject virus = ObjectPool.SharedInstance.GetPooledObject();
+        if (virus != null)
         {
-            bullet.transform.position = TargetPos.transform.position;
-            bullet.transform.rotation = TargetPos.transform.rotation;
-            bullet.SetActive(true);
+            virus.transform.position = TargetPos.transform.position;
+            virus.transform.rotation = TargetPos.transform.rotation;
+            virus.SetActive(true);
+            virus.GetComponent<VirusController>().isStopped = false;
+            virus.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             //Debug.Log("1");
         }
         Counter.generateCount++;

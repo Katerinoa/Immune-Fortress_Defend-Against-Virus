@@ -4,25 +4,28 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    public static ObjectPool SharedInstance;
-    public List<GameObject> pooledObjects;
-    public GameObject objectToPool;
-    public int amountToPool;
+    public static ObjectPool SharedInstance;// 对象池类实例
+    [Tooltip("怪物列表")]
+    public List<GameObject> Viruses;// 生成怪物列表
+    public List<GameObject> pooledObjects;// 对象池对象列表
+    private int amountToPool;// 对象池对象数
 
     void Awake()
     {
         SharedInstance = this;
+        amountToPool = Core.MaxGenerateNum / 2;
     }
 
     void Start()
     {
         pooledObjects = new List<GameObject>();
-        GameObject tmp;
         for (int i = 0; i < amountToPool; i++)
         {
-            tmp = Instantiate(objectToPool);
-            tmp.SetActive(false);
-            pooledObjects.Add(tmp);
+            GameObject virus;
+            int randomIndex = Random.Range(0, Viruses.Count);
+            virus = Instantiate(Viruses[randomIndex]);
+            virus.SetActive(false);
+            pooledObjects.Add(virus);
         }
         
     }
