@@ -8,7 +8,7 @@ public class game : MonoBehaviour
     GameObject prefab;
     GameObject pane;
     public GameObject wcell,Tcell,virus,Bcell,cell,macrophage;
-    public GameObject[] name=new GameObject[6];
+    public GameObject[] Name = new GameObject[6];
     GameObject start;
     public int if_start = 0;
     Camera mainCamera;
@@ -20,12 +20,12 @@ public class game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        name[0] = wcell;
-        name[1] =cell;
-        name[2] =Bcell;
-        name[3] =Tcell;
-        name[4] =macrophage;
-        name[5] =virus;
+        Name[0] = wcell;
+        Name[1] =cell;
+        Name[2] =Bcell;
+        Name[3] =Tcell;
+        Name[4] =macrophage;
+        Name[5] =virus;
         id = -1;
         id2 = -1;
         pane = GameObject.Find("Panel1");
@@ -56,7 +56,7 @@ public class game : MonoBehaviour
             if (id >= 0 && id < 6)
             {
                 Destroy(prefab);
-                prefab = Instantiate(name[id]);
+                prefab = Instantiate(Name[id]);
                 prefab.GetComponentInChildren<Collider>().enabled = false;
 
                 color = prefab.GetComponentInChildren<Renderer>().material.color;
@@ -82,7 +82,7 @@ public class game : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && !(Input.mousePosition.x > 174 && Input.mousePosition.x < 685 && Input.mousePosition.y < 74)&&!(Input.mousePosition.x>340&&Input.mousePosition.x<650&&Input.mousePosition.y>340)&& id != -1)
         {
-            GameObject prefab1 = Instantiate(name[id]);
+            GameObject prefab1 = Instantiate(Name[id]);
             Vector3 mouseScreenPosition = Input.mousePosition;
                 prefab1.GetComponentInChildren<Collider>().enabled = true;
                 mouseScreenPosition.z = 13f; // 设置到摄像机的距离，这个值会影响你获得的三维坐标，你可以根据需要自行设置
