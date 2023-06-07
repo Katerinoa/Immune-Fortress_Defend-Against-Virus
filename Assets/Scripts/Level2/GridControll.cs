@@ -8,9 +8,7 @@ public class GridControll : MonoBehaviour
     // public Button mpbutton;
     // public Button cellbutton;
     public GameObject macrophageprefab;
-    bool isClick = false;
     bool isSet = false;
-    bool isOpen = false;
     // Start is called before the first frame update
     void Start()
     {

@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
 
     private float mouseX, mouseY;
 
-    private float xRotation = 45f;
+    private float xRotation = 0f;
 
     private bool isLocked = true; // ³õÊ¼×´Ì¬ÎªËø¶¨
 
@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
         }
 
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, 15f, 75f);
+        xRotation = Mathf.Clamp(xRotation, -10f, 35f);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

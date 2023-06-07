@@ -11,7 +11,7 @@ public class VirusController : MonoBehaviour
 
     private float speed;
 
-    private bool hasLanded = true;
+    private bool hasLanded = false;
 
     private bool isStopped = false;
 
@@ -20,7 +20,6 @@ public class VirusController : MonoBehaviour
     private Vector3 swingDirection = Vector3.zero; // 摆动方向
     private float swingSpeed = 2f; // 摆动速度
     private float maxSwingAngle = 10f; // 最大摆动角度
-
 
     private void Start()
     {
