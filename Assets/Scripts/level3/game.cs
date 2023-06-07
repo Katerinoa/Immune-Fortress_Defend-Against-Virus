@@ -66,6 +66,7 @@ public class game : MonoBehaviour
 
 
         }
+        //    Debug.Log(Input.mousePosition);
         //创建一个物体跟着鼠标移动
         if (id != -1)
         {
@@ -76,17 +77,15 @@ public class game : MonoBehaviour
             mouseScreenPosition.z = 13f; // 设置到摄像机的距离，这个值会影响你获得的三维坐标，你可以根据需要自行设置
 
             Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(mouseScreenPosition); // 将屏幕空间坐标转换为世界空间坐标 (三维坐标)
-
-
             prefab.transform.position = mouseWorldPosition;
         }
 
-        if (Input.GetMouseButtonDown(0) && !(Input.mousePosition.x > 174 && Input.mousePosition.x < 685 && Input.mousePosition.y < 74) && id != -1)
+        if (Input.GetMouseButtonDown(0) && !(Input.mousePosition.x > 174 && Input.mousePosition.x < 685 && Input.mousePosition.y < 74)&&!(Input.mousePosition.x>340&&Input.mousePosition.x<650&&Input.mousePosition.y>340)&& id != -1)
         {
             GameObject prefab1 = Instantiate(name[id]);
             Vector3 mouseScreenPosition = Input.mousePosition;
-
-            mouseScreenPosition.z = 13f; // 设置到摄像机的距离，这个值会影响你获得的三维坐标，你可以根据需要自行设置
+                prefab1.GetComponentInChildren<Collider>().enabled = true;
+                mouseScreenPosition.z = 13f; // 设置到摄像机的距离，这个值会影响你获得的三维坐标，你可以根据需要自行设置
 
             Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(mouseScreenPosition); // 将屏幕空间坐标转换为世界空间坐标 (三维坐标)
             mouseWorldPosition.y = 1;
