@@ -68,7 +68,7 @@ public class VirusController : MonoBehaviour
     {
         Counter.destroyCount++;
         yield return new WaitForSeconds(delay);
-        Destroy(gameObject); // 销毁该物体
+        gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -88,7 +88,7 @@ public class VirusController : MonoBehaviour
 
         if (transform.position.y < -1)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             Counter.passCount++;
         }
     }

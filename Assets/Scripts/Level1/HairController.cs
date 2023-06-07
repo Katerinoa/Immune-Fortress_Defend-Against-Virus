@@ -18,7 +18,7 @@ public class HairController : MonoBehaviour
         {
             preventCount++;
         }
-        if(preventCount > preventMaxNum)
+        if (preventCount > preventMaxNum)
             Destroy(gameObject);
     }
 

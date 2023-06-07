@@ -6,11 +6,11 @@ public class Core : MonoBehaviour
 {
     private static int preventMaxNum = 10; //��ë����赲����
 
-    private static Vector2 spawnIntervalRange = new Vector2(2.5f, 5.0f);  //����ʱ����
+    private static Vector2 spawnIntervalRange = new Vector2(2.5f, 10.0f);  //����ʱ����
 
     private static float speed = 2.0f;  // �����ƶ��ٶ�
 
-    private static int maxGenerateNum = 300;  // ������ɲ�������
+    private static int maxGenerateNum = 1000;  // ������ɲ�������
 
     // �ṩpublic���������ڷ����������������������ⲿ�޸�
     public static int PreventMaxNum

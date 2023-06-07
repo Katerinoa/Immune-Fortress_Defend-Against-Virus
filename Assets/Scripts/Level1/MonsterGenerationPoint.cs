@@ -37,9 +37,17 @@ public class MonsterGenerationPoint : MonoBehaviour
             return;
         }
 
-        int randomIndex = Random.Range(0, Viruses.Count);
-        GameObject virus = Viruses[randomIndex];
-        Instantiate(virus, TargetPos.position, TargetPos.rotation);
+        //int randomIndex = Random.Range(0, Viruses.Count);
+        //GameObject virus = Viruses[randomIndex];
+        //Instantiate(virus, TargetPos.position, TargetPos.rotation);
+        GameObject bullet = ObjectPool.SharedInstance.GetPooledObject();
+        if (bullet != null)
+        {
+            bullet.transform.position = TargetPos.transform.position;
+            bullet.transform.rotation = TargetPos.transform.rotation;
+            bullet.SetActive(true);
+            //Debug.Log("1");
+        }
         Counter.generateCount++;
     }
 
