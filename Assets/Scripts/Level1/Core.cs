@@ -6,9 +6,9 @@ public class Core : MonoBehaviour
 {
     private static int preventMaxNum = 10; //绒毛最多阻挡数量
 
-    private static Vector2 spawnIntervalRange = new Vector2(0.5f, 1.5f);  //生成时间间隔
+    private static Vector2 spawnIntervalRange = new Vector2(2.5f, 5.0f);  //生成时间间隔
 
-    private static float speed = 10.0f;  // 病毒移动速度
+    private static float speed = 5.0f;  // 病毒移动速度
 
     private static int maxGenerateNum = 800;  // 最大生成病毒数量
 
