@@ -26,7 +26,7 @@ public class viruscontroller : MonoBehaviour
     private void Update()
     {
         // 检查附近是否有敌方物体
-        if (GameObject.Find("GameObject").GetComponent<game>().if_start ==1)
+        if (GameObject.Find("level3start") ==null)
         {
 
             Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
@@ -89,7 +89,7 @@ public class viruscontroller : MonoBehaviour
 
     public void TakeDamage(int damage)   //受到的伤害
     {
-        Debug.Log("进入了1");
+
         if (currentHealth > 0)
         {
             currentHealth -= damage;
