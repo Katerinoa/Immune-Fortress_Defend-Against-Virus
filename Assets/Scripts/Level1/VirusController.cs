@@ -29,14 +29,6 @@ public class VirusController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //if (!hasLanded)
-        //{
-        //    if (collision.contacts[0].normal == Vector3.up) // 判断是否落地
-        //    {
-        //        hasLanded = true; // 标记已经落地
-        //    }
-        //}
-
         if (collision.gameObject.CompareTag("hair") && !isStopped)
         {
             isStopped = true; // 标记已经停止

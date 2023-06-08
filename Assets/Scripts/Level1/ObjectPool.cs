@@ -7,7 +7,7 @@ public class ObjectPool : MonoBehaviour
     public static ObjectPool SharedInstance;// 对象池类实例
     [Tooltip("怪物列表")]
     public List<GameObject> Viruses;// 生成怪物列表
-    public List<GameObject> pooledObjects;// 对象池对象列表
+    private List<GameObject> pooledObjects;// 对象池对象列表
     private int amountToPool;// 对象池对象数
 
     void Awake()
@@ -35,7 +35,7 @@ public class ObjectPool : MonoBehaviour
         {
             if (!pooledObjects[i].activeInHierarchy)
             {
-                Debug.Log(i);
+                //Debug.Log(i);
                 return pooledObjects[i];
             }
         }
