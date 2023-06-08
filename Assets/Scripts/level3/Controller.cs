@@ -28,7 +28,7 @@ public class Controller : MonoBehaviour
     private void Update()
     {
         // 检查附近是否有敌方物体
-        if (GameObject.Find("GameObject").GetComponent<game>().if_start == 1)
+        if (GameObject.Find("level3start")==null)
         {
 
         
@@ -43,12 +43,11 @@ public class Controller : MonoBehaviour
                 break;
             }
         }
-
         if (foundEnemy)
         {
             if (!isAttacking && Time.time - lastAttackTime > attackInterval)
             {
-                Attack();
+                Attack();  //攻击行为
                 lastAttackTime = Time.time;
             }
         }
@@ -59,7 +58,7 @@ public class Controller : MonoBehaviour
         }
     }
 
-    private void Attack()
+    private void Attack() //攻击
     {
         // 检测攻击范围内的敌人
         Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
