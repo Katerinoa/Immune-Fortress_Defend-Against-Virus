@@ -10,6 +10,7 @@ public class Navigation : MonoBehaviour
      * 说明：对于单个物体，可以直接将targetObject拖进去作为目标物体（优先级更高）
      *      对于预制体，可以填入目标名称，自动寻找该名称物体作为目标物体
      */
+    public GameObject VirusPrefeb;
     public GameObject targetObject;
     public String ObjectName;
     public Vector2 floatHeightRange = new Vector2(3f, 5f);// 漂浮高度范围
@@ -17,12 +18,19 @@ public class Navigation : MonoBehaviour
     public float attackDistance = 10f; // 攻击范围
     public string Tag = "cell"; // 搜索标签
 
+    [SerializeField]
     private NavMeshAgent navMeshAgent;
+    [SerializeField]
     private GameObject targetCell; // 目标cell物体
+    [SerializeField]
     private float floatAmplitude; // 浮动幅度（随机）
+    [SerializeField]
     private float baseHeight; // 漂浮的基础高度
+    [SerializeField]
     private float floatStartTime;
+    [SerializeField]
     private Vector3 tempPosition;
+
 
     private void Awake()
     {
@@ -55,17 +63,20 @@ public class Navigation : MonoBehaviour
 
         if (targetCell == null)
         {
-            if(navMeshAgent.enabled == false)
+            if (navMeshAgent.enabled == false)
             {
                 navMeshAgent.enabled = true;
                 navMeshAgent.SetDestination(targetObject.transform.position);
                 transform.position = tempPosition; // 消除重新寻路时候的位置瞬移
                 floatStartTime = Time.time;
             }
-            //无目标时 上下浮动
-            float yPosition = Mathf.Sin((Time.time - floatStartTime) / floatAmplitude) * floatAmplitude;
-            transform.position = new Vector3(transform.position.x, transform.position.y + yPosition + baseHeight, transform.position.z); ;
-            tempPosition = transform.position;
+            else
+            {
+                float yPosition = Mathf.Sin((Time.time - floatStartTime) / floatAmplitude) * floatAmplitude;
+                transform.position = new Vector3(transform.position.x, transform.position.y + yPosition + baseHeight, transform.position.z);
+                tempPosition = transform.position;
+            }
+
 
             SelectTarget();
         }
@@ -90,29 +101,24 @@ public class Navigation : MonoBehaviour
             // 向目标移动
             transform.position += transform.forward * speed * Time.deltaTime;
             tempPosition = transform.position;
+            //transform.position = Vector3.MoveTowards(transform.position, targetCell.transform.position, speed * Time.deltaTime);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
         if (collision.gameObject.CompareTag("cell"))
         {
             for (int i = 0; i < 3; i++)
                 SpawnMonster();
             collision.gameObject.SetActive(false);
-            //gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 
     private void SpawnMonster()
     {
-        GameObject virus = ObjectPool.SharedInstance.GetPooledObject();
-        if (virus != null)
-        {
-            virus.transform.position = transform.position;
-            virus.SetActive(true);
-        }
+        Instantiate(VirusPrefeb, transform.position, transform.rotation);
         Counter.generateCount++;
     }
 
