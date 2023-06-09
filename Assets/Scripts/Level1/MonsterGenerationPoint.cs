@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class MonsterGenerationPoint : MonoBehaviour
 {
-    [Tooltip("生成位置")]
-    public Transform TargetPos;
+    public Vector2 SpawnIntervalRange = new Vector2(2.5f, 10.0f); // 生成时间间隔
 
-    private Vector2 SpawnIntervalRange; //生成时间间隔
+    private Transform TargetPos; //生成位置
     private int MaxGenerateNum; //最大生成数量
-
 
     private void Awake()
     {
-        SpawnIntervalRange = Core.SpawnIntervalRange;
         MaxGenerateNum = Core.MaxGenerateNum;
     }
     private void Start()
     {
+        TargetPos = transform;
         StartCoroutine("SpawnCoroutine");
     }
 
@@ -33,21 +31,17 @@ public class MonsterGenerationPoint : MonoBehaviour
 
     private void SpawnMonster()
     {
-        if (TargetPos == null)
-        {
-            Debug.LogError("Spawn point is not set!");
-            return;
-        }
-
         GameObject virus = ObjectPool.SharedInstance.GetPooledObject();
         if (virus != null)
         {
             virus.transform.position = TargetPos.transform.position;
             virus.transform.rotation = TargetPos.transform.rotation;
             virus.SetActive(true);
-            virus.GetComponent<VirusController>().isStopped = false;
             virus.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            //Debug.Log("1");
+
+            VirusController controller = virus.GetComponent<VirusController>();
+            if (controller != null)
+                controller.isStopped = false;
         }
         Counter.generateCount++;
     }
