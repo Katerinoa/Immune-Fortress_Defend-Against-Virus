@@ -8,7 +8,7 @@ public class Core : MonoBehaviour
 
     private static float speed = 2.0f;  // 病毒移动速度
 
-    private static int maxGenerateNum = 1000;  // 病毒最大生成数量
+    private static int maxGenerateNum = 100;  // 病毒最大生成数量
 
     public static int PreventMaxNum
     {

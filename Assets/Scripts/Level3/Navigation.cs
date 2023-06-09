@@ -18,7 +18,7 @@ public class Navigation : MonoBehaviour
     public string Tag = "cell"; // 搜索标签
 
     private NavMeshAgent navMeshAgent;
-    private GameObject targetCell; // 目标cell物体
+    public GameObject targetCell; // 目标cell物体
     private float floatAmplitude; // 浮动幅度（随机）
     private float baseHeight; // 漂浮的基础高度
     private float floatStartTime;
@@ -28,14 +28,15 @@ public class Navigation : MonoBehaviour
     {
         if (targetObject == null)
             targetObject = GameObject.Find(ObjectName);
+        // 获取寻路组件
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.enabled = true;
     }
 
     void Start()
     {
         floatAmplitude = UnityEngine.Random.Range(1f, 3.0f); // 初始化上下浮动的幅度
 
-        // 获取寻路组件
-        navMeshAgent = GetComponent<NavMeshAgent>();
         // 初始化寻路速度
         navMeshAgent.speed = speed;
         // 设置寻路的终点
@@ -50,28 +51,32 @@ public class Navigation : MonoBehaviour
     void Update()
     {
         // 判断当前目标是否已经死亡 
-        if (targetCell!=null && !targetCell.activeSelf)
+        if (targetCell != null && !targetCell.activeSelf)
             targetCell = null;
 
         if (targetCell == null)
         {
-            if(navMeshAgent.enabled == false)
+            if (navMeshAgent.enabled == false)
             {
                 navMeshAgent.enabled = true;
                 navMeshAgent.SetDestination(targetObject.transform.position);
-                transform.position = tempPosition; // 消除重新寻路时候的位置瞬移
-                floatStartTime = Time.time;
+                transform.position = tempPosition; // 消除取消寻路时候的位置瞬移
+
             }
-            //无目标时 上下浮动
-            float yPosition = Mathf.Sin((Time.time - floatStartTime) / floatAmplitude) * floatAmplitude;
-            transform.position = new Vector3(transform.position.x, transform.position.y + yPosition + baseHeight, transform.position.z); ;
-            tempPosition = transform.position;
+            else
+            {
+                float yPosition = Mathf.Sin((Time.time - floatStartTime) / floatAmplitude) * floatAmplitude;
+                transform.position = new Vector3(transform.position.x, transform.position.y + yPosition + baseHeight, transform.position.z);
+                tempPosition = transform.position;
+            }
 
             SelectTarget();
         }
-        //如果targetCell不为空，则向其移动
+
+        ////如果targetCell不为空，则向其移动
         else
         {
+
             if (navMeshAgent.enabled == true)
             {
                 navMeshAgent.enabled = false; // 停止寻路
@@ -98,7 +103,7 @@ public class Navigation : MonoBehaviour
         Debug.Log(collision.gameObject.name);
         if (collision.gameObject.CompareTag("cell"))
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 2; i++)
                 SpawnMonster();
             collision.gameObject.SetActive(false);
             //gameObject.SetActive(false);
