@@ -7,41 +7,47 @@ using UnityEngine.AI;
 public class Navigation : MonoBehaviour
 {
     /**
-     * ËµÃ÷£º¶ÔÓÚµ¥¸öÎïÌå£¬¿ÉÒÔÖ±½Ó½«targetObjectÍÏ½øÈ¥×÷ÎªÄ¿±êÎïÌå£¨ÓÅÏÈ¼¶¸ü¸ß£©
-     *      ¶ÔÓÚÔ¤ÖÆÌå£¬¿ÉÒÔÌîÈëÄ¿±êÃû³Æ£¬×Ô¶¯Ñ°ÕÒ¸ÃÃû³ÆÎïÌå×÷ÎªÄ¿±êÎïÌå
+     * Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å£¬ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó½ï¿½targetObjectï¿½Ï½ï¿½È¥ï¿½ï¿½ÎªÄ¿ï¿½ï¿½ï¿½ï¿½ï¿½å£¨ï¿½ï¿½ï¿½È¼ï¿½ï¿½ï¿½ï¿½ß£ï¿½
+     *      ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½å£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ï¿½Ô¶ï¿½Ñ°ï¿½Ò¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªÄ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
+    public GameObject VirusPrefeb;
     public GameObject targetObject;
     public String ObjectName;
-    public Vector2 floatHeightRange = new Vector2(3f, 5f);// Æ¯¸¡¸ß¶È·¶Î§
-    public float speed = 5f;// Ñ°Â·ËÙ¶È
-    public float attackDistance = 10f; // ¹¥»÷·¶Î§
-    public string Tag = "cell"; // ËÑË÷±êÇ©
+    public Vector2 floatHeightRange = new Vector2(3f, 5f);// Æ¯ï¿½ï¿½ï¿½ß¶È·ï¿½Î§
+    public float speed = 5f;// Ñ°Â·ï¿½Ù¶ï¿½
+    public float attackDistance = 10f; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§
+    public string Tag = "cell"; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç©
 
+    [SerializeField]
     private NavMeshAgent navMeshAgent;
-    public GameObject targetCell; // Ä¿±êcellÎïÌå
-    private float floatAmplitude; // ¸¡¶¯·ù¶È£¨Ëæ»ú£©
-    private float baseHeight; // Æ¯¸¡µÄ»ù´¡¸ß¶È
+    public GameObject targetCell; // Ä¿ï¿½ï¿½cellï¿½ï¿½ï¿½ï¿½
+    private float floatAmplitude; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField]
+    private float baseHeight; // Æ¯ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ß¶ï¿½
+    [SerializeField]
     private float floatStartTime;
+    [SerializeField]
     private Vector3 tempPosition;
+
 
     private void Awake()
     {
         if (targetObject == null)
             targetObject = GameObject.Find(ObjectName);
-        // »ñÈ¡Ñ°Â·×é¼þ
+        // ï¿½ï¿½È¡Ñ°Â·ï¿½ï¿½ï¿½
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.enabled = true;
     }
 
     void Start()
     {
-        floatAmplitude = UnityEngine.Random.Range(1f, 3.0f); // ³õÊ¼»¯ÉÏÏÂ¸¡¶¯µÄ·ù¶È
+        floatAmplitude = UnityEngine.Random.Range(1f, 3.0f); // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
 
-        // ³õÊ¼»¯Ñ°Â·ËÙ¶È
+        // ï¿½ï¿½Ê¼ï¿½ï¿½Ñ°Â·ï¿½Ù¶ï¿½
         navMeshAgent.speed = speed;
-        // ÉèÖÃÑ°Â·µÄÖÕµã
+        // ï¿½ï¿½ï¿½ï¿½Ñ°Â·ï¿½ï¿½ï¿½Õµï¿½
         navMeshAgent.SetDestination(targetObject.transform.position);
-        // ³õÊ¼»¯Æ¯¸¡¸ß¶È
+        // ï¿½ï¿½Ê¼ï¿½ï¿½Æ¯ï¿½ï¿½ï¿½ß¶ï¿½
         baseHeight = UnityEngine.Random.Range(floatHeightRange.x, floatHeightRange.y);
 
         floatStartTime = Time.time;
@@ -50,7 +56,7 @@ public class Navigation : MonoBehaviour
 
     void Update()
     {
-        // ÅÐ¶Ïµ±Ç°Ä¿±êÊÇ·ñÒÑ¾­ËÀÍö 
+        // ï¿½Ð¶Ïµï¿½Ç°Ä¿ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ 
         if (targetCell != null && !targetCell.activeSelf)
             targetCell = null;
 
@@ -60,7 +66,7 @@ public class Navigation : MonoBehaviour
             {
                 navMeshAgent.enabled = true;
                 navMeshAgent.SetDestination(targetObject.transform.position);
-                transform.position = tempPosition; // Ïû³ýÈ¡ÏûÑ°Â·Ê±ºòµÄÎ»ÖÃË²ÒÆ
+                transform.position = tempPosition; // ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ñ°Â·Ê±ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ë²ï¿½ï¿½
 
             }
             else
@@ -73,57 +79,52 @@ public class Navigation : MonoBehaviour
             SelectTarget();
         }
 
-        ////Èç¹ûtargetCell²»Îª¿Õ£¬ÔòÏòÆäÒÆ¶¯
+        ////ï¿½ï¿½ï¿½targetCellï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
         else
         {
 
             if (navMeshAgent.enabled == true)
             {
                 navMeshAgent.enabled = false; // Í£Ö¹Ñ°Â·
-                transform.position = tempPosition; // Ïû³ýÈ¡ÏûÑ°Â·Ê±ºòµÄÎ»ÖÃË²ÒÆ
+                transform.position = tempPosition; // ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ñ°Â·Ê±ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ë²ï¿½ï¿½
             }
 
-            // ¼ÆËãÐèÒªÐý×ªµ½µÄ½Ç¶È
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½×ªï¿½ï¿½ï¿½Ä½Ç¶ï¿½
             Vector3 targetDir = targetCell.transform.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(targetDir);
 
-            // Æ½»¬×ªÏò
-            float rotateSpeed = 100f; // Ðý×ªËÙ¶È
+            // Æ½ï¿½ï¿½×ªï¿½ï¿½
+            float rotateSpeed = 100f; // ï¿½ï¿½×ªï¿½Ù¶ï¿½
             Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
             transform.rotation = rotation;
 
-            // ÏòÄ¿±êÒÆ¶¯
+            // ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½Æ¶ï¿½
             transform.position += transform.forward * speed * Time.deltaTime;
             tempPosition = transform.position;
+            //transform.position = Vector3.MoveTowards(transform.position, targetCell.transform.position, speed * Time.deltaTime);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
         if (collision.gameObject.CompareTag("cell"))
         {
             for (int i = 0; i < 2; i++)
                 SpawnMonster();
             collision.gameObject.SetActive(false);
-            //gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 
     private void SpawnMonster()
     {
-        GameObject virus = ObjectPool.SharedInstance.GetPooledObject();
-        if (virus != null)
-        {
-            virus.transform.position = transform.position;
-            virus.SetActive(true);
-        }
+        Instantiate(VirusPrefeb, transform.position, transform.rotation);
         Counter.generateCount++;
     }
 
     private void SelectTarget()
     {
-        GameObject[] cells = GameObject.FindGameObjectsWithTag(Tag); // Ñ°ÕÒËùÓÐ±êÇ©ÎªcellµÄÎïÌå
+        GameObject[] cells = GameObject.FindGameObjectsWithTag(Tag); // Ñ°ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ç©Îªcellï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         List<GameObject> targetCells = new List<GameObject>();
 
         for (int i = 0; i < cells.Length; i++)
