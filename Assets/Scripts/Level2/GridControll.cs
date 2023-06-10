@@ -29,7 +29,7 @@ public class GridControll : MonoBehaviour
         // }
         if(isSet == false)
         {
-            Debug.Log("可以");
+            //Debug.Log("可以");
             isSet = true;
             if(TabCreatControll.currentObject == 1){
                   GameObject gripobj = Instantiate(cellprefab,this.transform.position,this.transform.rotation);

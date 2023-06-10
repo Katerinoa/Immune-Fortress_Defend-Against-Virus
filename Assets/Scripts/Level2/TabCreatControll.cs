@@ -78,7 +78,10 @@ public class TabCreatControll : MonoBehaviour
                     followmouseprefab = Instantiate(Name[currentObject]);
                    // followmouseprefab.GetComponentInChildren<Collider>().enabled = false;
                    //禁用脚本
-                    if(currentObject == 4) followmouseprefab.GetComponent<AttackUI>().enabled = false;
+                    if(currentObject == 4) {
+                        followmouseprefab.GetComponent<AttackUI>().enabled = false;
+                        followmouseprefab.transform.Find("bullet").gameObject.GetComponent<BulletControll>().enabled = false;
+                        }
                 }
 
             }

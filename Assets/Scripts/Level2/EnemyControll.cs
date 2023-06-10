@@ -30,15 +30,26 @@ public class EnemyControll : MonoBehaviour
         virusposition = this.gameObject.transform.position;
     }
 
-    //敌人生成
-    private void OnTriggerEnter(Collider other) {
-        if(other.name.Substring(0) == "bullet")
+    //敌人死亡(到底为什么会触发两次)
+    private void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log("子弹要碰到病毒了");
+        //bool flag = false;
+        if (other.name == "bullet")
         {
-            
+            //flag = true;
             // Debug.Log("病毒病毒病毒病毒病毒病毒病毒病毒病毒病毒病毒病毒病毒");
             //不知道要不要加动画
-            blood = blood - 5;
-            if(blood == 0)  Destroy(this.gameObject);
+            blood = blood - Core2.DamageValue;
+           // Debug.Log("blood: " + blood);
+            if (blood == 0)
+            {
+                blood = -1;
+                Core2.DestroyVirusNum = Core2.DestroyVirusNum + 1;
+                Debug.Log("当前消灭敌人数量： " + Core2.DestroyVirusNum);
+                Destroy(this.gameObject);
+            //    GetComponent<EnemyControll>().enabled = false;
+            }
         }
     }
 }

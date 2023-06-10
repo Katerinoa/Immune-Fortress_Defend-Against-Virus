@@ -182,6 +182,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bullet
       objectReference: {fileID: 0}
+    - target: {fileID: 715235141400789326, guid: ec019f42d1061ca4b88d529121dca07f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 863265994432445473, guid: ec019f42d1061ca4b88d529121dca07f, type: 3}
       propertyPath: m_RootOrder
       value: 2
