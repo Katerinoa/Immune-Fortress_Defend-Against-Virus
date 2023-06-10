@@ -7,19 +7,10 @@ public class GridControll : MonoBehaviour
 {
     // public Button mpbutton;
     // public Button cellbutton;
+    public GameObject cellprefab;
     public GameObject macrophageprefab;
     bool isSet = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     // 鼠标点击就添加
     private void OnMouseDown() {
@@ -38,8 +29,15 @@ public class GridControll : MonoBehaviour
         // }
         if(isSet == false)
         {
+            Debug.Log("可以");
             isSet = true;
-            GameObject gripobj = Instantiate(macrophageprefab,this.transform.position,this.transform.rotation);
+            if(TabCreatControll.createwho == 1){
+                  GameObject gripobj = Instantiate(cellprefab,this.transform.position,this.transform.rotation);
+            }
+            else if(TabCreatControll.createwho == 4)
+            {
+                GameObject gripobj = Instantiate(macrophageprefab,this.transform.position,this.transform.rotation);
+            }
         }
     }
 }

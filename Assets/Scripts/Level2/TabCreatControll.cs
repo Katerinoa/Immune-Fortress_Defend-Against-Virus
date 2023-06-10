@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-//����ű����ص�Panel1�ϣ�����Ʒ���Ľű�
-public class InventoryPanelscript : MonoBehaviour
+public class TabCreatControll : MonoBehaviour
 {
     Button button1, button2, button3, button4, button5, button6;
-    string[] buttonname = { "button1","button2" , "button3", "button4" , "button5", "button6" };
-    GameObject followmouseprefab;  //����Ǹ�����궯���Ǹ�
+    string[] buttonname = { "button1", "button2", "button3", "button4", "button5", "button6" };
+    public static GameObject followmouseprefab;  //����Ǹ�����궯���Ǹ�
     GameObject pane;
     public GameObject pane1, pane2, pane3, pane4, pane5, pane6;
     public GameObject[] Name = new GameObject[6];
     Camera mainCamera;
 
 
-    int currentObject, pastObject;  //currentObject���������ŵ�ǰѡ�еĸ�������һ����-1����δѡ��;pastobject��ʾ֮ǰѡ�е�����
+    int currentObject, pastObject;  
+    public static int createwho;
     void Start()
     {
         Name[0] = pane1;
@@ -26,6 +25,8 @@ public class InventoryPanelscript : MonoBehaviour
         Name[4] = pane5;
         Name[5] = pane6;
         currentObject = -1;
+        createwho = currentObject;
+
         pastObject = -1;
         pane = GameObject.Find("Panel1");
         mainCamera = Camera.main;
@@ -52,7 +53,7 @@ public class InventoryPanelscript : MonoBehaviour
 
     void Update()
     {
-        for (int i = 0; i < 6; i++)  //������������ѡ��Ч���Ƿ�ɼ�
+        for (int i = 0; i < 6; i++)  
         {
             if (currentObject == i)
             {
@@ -62,27 +63,27 @@ public class InventoryPanelscript : MonoBehaviour
             GameObject.Find(buttonname[i]).GetComponent<RawImage>().enabled = false;
         }
 
-        if (GameObject.Find("level3start") == null)  
-        {
-            Destroy(followmouseprefab); //��Ϸ�Ѿ���ʼ�ˣ��Ѹ�����궯������ɾ��
-        }
-        
-        if (GameObject.Find("level3start") != null)  //�Ǹ���ť���ڣ�˵����δ��ʼ��Ϸ
+        // if (GameObject.Find("level3start") == null)
+        // {
+        //     Destroy(followmouseprefab); 
+        // }
+
+        if (true)  
         {
             if (currentObject != pastObject)
             {
                 pastObject = currentObject;
-                if (currentObject >= 0 && currentObject < 6)
+                if (currentObject == 1 || currentObject == 4)
                 {
                     Destroy(followmouseprefab);
                     followmouseprefab = Instantiate(Name[currentObject]);
-                    followmouseprefab.GetComponentInChildren<Collider>().enabled = false;
+                   // followmouseprefab.GetComponentInChildren<Collider>().enabled = false;
                 }
 
             }
 
-            //����һ�������������ƶ�
-            if (currentObject != -1) //�������ԭ���������Լ�����Ч�������԰��±�ǰ���е�ע��ɾ��
+           
+            if (currentObject != -1) 
             {
                 //  prefab.GetComponentInChildren<Rigidbody>().useGravity = false;
                 //  prefab.GetComponentInChildren<Controller>().enabled = false;
@@ -94,43 +95,39 @@ public class InventoryPanelscript : MonoBehaviour
                     // ��ȡ��������
                     groundPoint = hit.point;
                 }
-                groundPoint += new Vector3(0,1,0);
-                followmouseprefab.transform.position = groundPoint;
-                 ;
-            }
-
-            //������������
-            if (Input.GetMouseButtonDown(0) && !(Input.mousePosition.x > 174 && Input.mousePosition.x < 685 && Input.mousePosition.y < 74) && !(Input.mousePosition.x > 340 && Input.mousePosition.x < 650 && Input.mousePosition.y > 340) && currentObject != -1)
-            {
-                //2、3此处不同
-                GameObject prefab1 = Instantiate(Name[currentObject]);
-             
-                prefab1.GetComponentInChildren<Collider>().enabled = true;
-               // prefab1.GetComponentInChildren<Rigidbody>().useGravity = true;
-
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                Vector3 groundPoint=new Vector3();
-                if (Physics.Raycast(ray, out hit))
-                {
-                    // ��ȡ��������
-                    groundPoint = hit.point;
-                }
                 groundPoint += new Vector3(0, 1, 0);
-                prefab1.transform.position = groundPoint;
+                followmouseprefab.transform.position = groundPoint;
             }
+
+            //这个不行，是只能放在特定格子里，所以判断条件不同，放在grid的脚本里更好操作，不用计算
+            //缺点：封装性不够
+            // if (Input.GetMouseButtonDown(0) && !(Input.mousePosition.x > 174 && Input.mousePosition.x < 685 && Input.mousePosition.y < 74) && !(Input.mousePosition.x > 340 && Input.mousePosition.x < 650 && Input.mousePosition.y > 340) && currentObject != -1)
+            // {
+            //     GameObject prefab1 = Instantiate(Name[currentObject]);
+
+            //     prefab1.GetComponentInChildren<Collider>().enabled = true;
+            //     // prefab1.GetComponentInChildren<Rigidbody>().useGravity = true;
+
+            //     //这个应该是摆放位置
+            //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //     RaycastHit hit;
+            //     Vector3 groundPoint = new Vector3();
+            //     if (Physics.Raycast(ray, out hit))
+            //     {
+            //         // ��ȡ��������
+            //         groundPoint = hit.point;
+            //     }
+            //     groundPoint += new Vector3(0, 1, 0);
+            //     prefab1.transform.position = groundPoint;
+            // }
         }
     }
 
-    //һ����Щfunc()�������������ж��Ƿ���ѡ��״̬����Щ���ֲ���������
+    
     void func1()
     {
-        if (currentObject != 0)
-        {
-            currentObject = 0;
-        }
-        else currentObject = -1;
-
+        currentObject = -1;
+        createwho = currentObject;
     }
     void func2()
     {
@@ -139,24 +136,19 @@ public class InventoryPanelscript : MonoBehaviour
             currentObject = 1;
         }
         else currentObject = -1;
+        createwho = currentObject;
 
     }
     void func3()
     {
-        if (currentObject != 2)
-        {
-            currentObject = 2;
-        }
-        else currentObject = -1;
+        currentObject = -1;
+        createwho = currentObject;
 
     }
     void func4()
     {
-        if (currentObject !=3)
-        {
-            currentObject = 3;
-        }
-        else currentObject = -1;
+        currentObject = -1;
+        createwho = currentObject;
     }
     void func5()
     {
@@ -165,6 +157,7 @@ public class InventoryPanelscript : MonoBehaviour
             currentObject = 4;
         }
         else currentObject = -1;
+        createwho = currentObject;
     }
     void func6()
     {
@@ -173,9 +166,9 @@ public class InventoryPanelscript : MonoBehaviour
             currentObject = 5;
         }
         else currentObject = -1;
+        createwho = currentObject;
     }
 
     // Update is called once per frame
-   
-}
 
+}
