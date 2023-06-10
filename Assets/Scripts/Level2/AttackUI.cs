@@ -13,6 +13,7 @@ public class AttackUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<AttackUI>().enabled = false;
         enemy = GameObject.Find("virus");
         if (enemy) StartCoroutine("shoot");
     }

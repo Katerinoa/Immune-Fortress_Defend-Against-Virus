@@ -31,13 +31,19 @@ public class GridControll : MonoBehaviour
         {
             Debug.Log("可以");
             isSet = true;
-            if(TabCreatControll.createwho == 1){
+            if(TabCreatControll.currentObject == 1){
                   GameObject gripobj = Instantiate(cellprefab,this.transform.position,this.transform.rotation);
+                  TabCreatControll.currentObject = -1;
+                  Destroy(TabCreatControll.followmouseprefab);
             }
-            else if(TabCreatControll.createwho == 4)
+            else if(TabCreatControll.currentObject == 4)
             {
-                GameObject gripobj = Instantiate(macrophageprefab,this.transform.position,this.transform.rotation);
+                GameObject gripobj = Instantiate(macrophageprefab,this.transform.position + Vector3.up * 1.5f,this.transform.rotation);
+                gripobj.GetComponent<AttackUI>().enabled = true;
+                TabCreatControll.currentObject = -1;
+                Destroy(TabCreatControll.followmouseprefab);
             }
+
         }
     }
 }

@@ -14,8 +14,8 @@ public class TabCreatControll : MonoBehaviour
     Camera mainCamera;
 
 
-    int currentObject, pastObject;  
-    public static int createwho;
+    int pastObject;  
+    public static int currentObject;  //改成公有静态，给GridControll用
     void Start()
     {
         Name[0] = pane1;
@@ -25,7 +25,6 @@ public class TabCreatControll : MonoBehaviour
         Name[4] = pane5;
         Name[5] = pane6;
         currentObject = -1;
-        createwho = currentObject;
 
         pastObject = -1;
         pane = GameObject.Find("Panel1");
@@ -78,11 +77,13 @@ public class TabCreatControll : MonoBehaviour
                     Destroy(followmouseprefab);
                     followmouseprefab = Instantiate(Name[currentObject]);
                    // followmouseprefab.GetComponentInChildren<Collider>().enabled = false;
+                   //禁用脚本
+                    if(currentObject == 4) followmouseprefab.GetComponent<AttackUI>().enabled = false;
                 }
 
             }
 
-           
+           //预点击后对象跟随鼠标
             if (currentObject != -1) 
             {
                 //  prefab.GetComponentInChildren<Rigidbody>().useGravity = false;
@@ -95,8 +96,8 @@ public class TabCreatControll : MonoBehaviour
                     // ��ȡ��������
                     groundPoint = hit.point;
                 }
-                groundPoint += new Vector3(0, 1, 0);
-                followmouseprefab.transform.position = groundPoint;
+                groundPoint += new Vector3(0, 0.2f, 0);
+                if(followmouseprefab != null) followmouseprefab.transform.position = groundPoint;
             }
 
             //这个不行，是只能放在特定格子里，所以判断条件不同，放在grid的脚本里更好操作，不用计算
@@ -127,7 +128,6 @@ public class TabCreatControll : MonoBehaviour
     void func1()
     {
         currentObject = -1;
-        createwho = currentObject;
     }
     void func2()
     {
@@ -136,19 +136,16 @@ public class TabCreatControll : MonoBehaviour
             currentObject = 1;
         }
         else currentObject = -1;
-        createwho = currentObject;
 
     }
     void func3()
     {
         currentObject = -1;
-        createwho = currentObject;
 
     }
     void func4()
     {
         currentObject = -1;
-        createwho = currentObject;
     }
     void func5()
     {
@@ -157,7 +154,6 @@ public class TabCreatControll : MonoBehaviour
             currentObject = 4;
         }
         else currentObject = -1;
-        createwho = currentObject;
     }
     void func6()
     {
@@ -166,7 +162,6 @@ public class TabCreatControll : MonoBehaviour
             currentObject = 5;
         }
         else currentObject = -1;
-        createwho = currentObject;
     }
 
     // Update is called once per frame

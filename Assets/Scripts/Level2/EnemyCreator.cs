@@ -27,7 +27,7 @@ public class EnemyCreator : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(6f);
+            yield return new WaitForSeconds(6.0f);
             virus = Instantiate(virusprefab,this.transform.position,this.transform.rotation,this.transform);
             //改名
             virus.name = "virus";

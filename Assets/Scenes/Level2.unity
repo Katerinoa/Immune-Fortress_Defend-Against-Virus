@@ -787,7 +787,7 @@ GameObject:
   - component: {fileID: 367688678}
   - component: {fileID: 367688677}
   - component: {fileID: 367688676}
-  - component: {fileID: 367688675}
+  - component: {fileID: 367688679}
   m_Layer: 5
   m_Name: Panel1
   m_TagString: Untagged
@@ -821,31 +821,6 @@ RectTransform:
   m_AnchoredPosition: {x: 15.931732, y: -254.94547}
   m_SizeDelta: {x: 512, y: 78.60419}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &367688675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 367688673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c79b9d06b7433774598d74c53d23550d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pane1: {fileID: 0}
-  pane2: {fileID: 8747675227337661686, guid: 7a88f346ae5639c4aa71afe7b61b1e07, type: 3}
-  pane3: {fileID: 0}
-  pane4: {fileID: 0}
-  pane5: {fileID: 6533904288011250349, guid: 40077eedce8a21048b720309ae25f3aa, type: 3}
-  pane6: {fileID: 0}
-  Name:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &367688676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,6 +880,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367688673}
   m_CullTransparentMesh: 1
+--- !u!114 &367688679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367688673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4034770de72eb54e8e8efa0bd54863d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pane1: {fileID: 4215844650020831068, guid: 27e4c59602bb59745b38b2a07e2bcd7a, type: 3}
+  pane2: {fileID: 8747675227337661686, guid: 7a88f346ae5639c4aa71afe7b61b1e07, type: 3}
+  pane3: {fileID: 5072255911423498526, guid: 157a548106389a44c9f52bb8015e27e1, type: 3}
+  pane4: {fileID: 5158364106536439044, guid: ff9215bc26fdf5c409f0ce8569d85f42, type: 3}
+  pane5: {fileID: 6533904288011250349, guid: 40077eedce8a21048b720309ae25f3aa, type: 3}
+  pane6: {fileID: 1629247715381884865, guid: 6ab7e610e77c87d4bb48729423939df8, type: 3}
+  Name:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &380823357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2149,7 +2149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2622,7 +2622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.21960784, g: 0.21960784, b: 0.21960784, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2841,7 +2841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.21960784, g: 0.21960784, b: 0.21960784, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3711,6 +3711,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9014411826292772859, guid: 6ab7e610e77c87d4bb48729423939df8, type: 3}
+      propertyPath: cellprefab
+      value: 
+      objectReference: {fileID: 8747675227337661686, guid: 7a88f346ae5639c4aa71afe7b61b1e07, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ab7e610e77c87d4bb48729423939df8, type: 3}
 --- !u!4 &1567458310 stripped
