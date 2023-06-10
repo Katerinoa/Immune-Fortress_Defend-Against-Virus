@@ -48,7 +48,7 @@ public class VirusController_Level3 : MonoBehaviour
         {
             isStoped = false;
             targetCell = null;
-            GetComponentInChildren<VirusBehaviour>().isStopped = false;
+            gameObject.GetComponent<VirusAttack>().virusEffect.Stop();
         }
 
         if (targetCell == null)
@@ -57,6 +57,7 @@ public class VirusController_Level3 : MonoBehaviour
             {
                 navMeshAgent.enabled = true; // 重新寻路
                 navMeshAgent.SetDestination(targetObject.transform.position);
+                gameObject.GetComponentInChildren<VirusBehaviour>().isStopped = false;
             }
             float yPosition = Mathf.Sin((Time.time - floatStartTime) / floatAmplitude) * floatAmplitude;
             navMeshAgent.baseOffset = yPosition + baseHeight;
@@ -76,10 +77,14 @@ public class VirusController_Level3 : MonoBehaviour
             float rotateSpeed = 100f; // 转向速度
             Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
 
-            if (!isStoped)
+            if (!isStoped && Vector3.Distance(targetCell.transform.position, transform.position) > 0.5f)
             {
                 transform.rotation = rotation;
                 transform.position += transform.forward * speed * Time.deltaTime;
+            }
+            if (Vector3.Distance(targetCell.transform.position, transform.position) <= 0.5f)
+            {
+                targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", new Color(0.71f, 0.92f, 0.62f, 1.0f)); //入侵变绿
             }
         }
 

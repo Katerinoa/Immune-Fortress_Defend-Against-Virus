@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1955609131987362243}
   - component: {fileID: 4168342900909524966}
-  - component: {fileID: 6859165143236273273}
+  - component: {fileID: 1559118725265129554}
   m_Layer: 0
   m_Name: cell
   m_TagString: cell
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1182309837475527545}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 94.495, y: -1.0797123, z: 43.544}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1392610737399058587}
@@ -43,12 +43,12 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182309837475527545}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.8708626, y: 0.9021268, z: 0.88592416}
   m_Center: {x: 0.0050273896, y: 0.00048718453, z: -0.220191}
---- !u!114 &6859165143236273273
+--- !u!114 &1559118725265129554
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,11 +57,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1182309837475527545}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ce9b8349b3699a4fb2bcada3696fd3c, type: 3}
+  m_Script: {fileID: 11500000, guid: dee952d6d769f544da55e354a402cdad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInfected: 0
-  virusEffect: {fileID: 7480039244494450450}
+  hasInfected: 0
+  virusCount: 0
+  infectedTime: 0
 --- !u!1 &5734076022789440086
 GameObject:
   m_ObjectHideFlags: 0
