@@ -35,6 +35,10 @@ public class VirusBehaviour : MonoBehaviour
         {
             isStopped = true; // 标记停止旋转
         }
+        if (collision.gameObject.CompareTag("cell") && !isStopped)
+        {
+            isStopped = true; // 标记停止旋转
+        }
     }
 
     private void OnTriggerEnter(Collider other)
