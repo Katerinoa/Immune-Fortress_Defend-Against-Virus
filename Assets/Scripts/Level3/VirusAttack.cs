@@ -37,8 +37,6 @@ public class VirusAttack : MonoBehaviour
                     GetComponentInChildren<VirusBehaviour>().isStopped = false;
                     other.gameObject.GetComponent<CellAffected>().virusCount++;
                     gameObject.GetComponent<VirusAttack>().virusEffect.Stop();
-                    //gameObject.SetActive(false);
-                    //other.gameObject.SetActive(false);
                 }
             }
         }
