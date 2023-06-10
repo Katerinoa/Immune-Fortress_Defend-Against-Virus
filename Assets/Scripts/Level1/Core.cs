@@ -11,10 +11,6 @@ public class Core : MonoBehaviour
     private static int maxGenerateNum = 100;  // 病毒最大生成数量
 
 
-    //第2关相关变量
-    private static float creatvirustime = 6.0f;  //间隔生成病毒的时间
-
-    private static float creatbulletstime = 1.0f;  //生成子弹间隔
 
     public static int PreventMaxNum
     {
@@ -34,15 +30,4 @@ public class Core : MonoBehaviour
         set { maxGenerateNum = value; }
     }
 
-    public static float CreatVirusTime
-    {
-        get {return creatvirustime;}
-        set {creatvirustime = value;}
-    }
-
-    public static float CreatBulletTime
-    {
-        get {return creatbulletstime;}
-        set {creatbulletstime = value;}
-    }
 }
