@@ -10,7 +10,7 @@ public class VirusController_Level3 : MonoBehaviour
     public String ObjectName;
     public Vector2 floatHeightRange = new Vector2(3f, 5f);// 浮动基础高度范围
     public float speed = 5f;// 移动速度
-    public float attackDistance = 10f; // 监测攻击范围
+    public float attackDistance = 20f; // 监测攻击范围
 
     private GameObject targetObject;
     private string Tag = "cell"; // 目标标签
@@ -19,7 +19,6 @@ public class VirusController_Level3 : MonoBehaviour
     private float floatAmplitude; // 浮动振幅
     private float baseHeight; // 浮动基础高度
     private float floatStartTime;
-    private Vector3 tempPosition;
 
     private void Awake()
     {
@@ -52,36 +51,31 @@ public class VirusController_Level3 : MonoBehaviour
             {
                 navMeshAgent.enabled = true; // 重新寻路
                 navMeshAgent.SetDestination(targetObject.transform.position);
-                transform.position = tempPosition; // 消除瞬移
             }
             else
             {
                 float yPosition = Mathf.Sin((Time.time - floatStartTime) / floatAmplitude) * floatAmplitude;
-                transform.position = new Vector3(transform.position.x, transform.position.y + yPosition + baseHeight, transform.position.z);
-                tempPosition = transform.position;
+                navMeshAgent.baseOffset = yPosition + baseHeight;
+
             }
 
             SelectTarget();
         }
         else
         {
-
             if (navMeshAgent.enabled == true)
             {
                 navMeshAgent.enabled = false; // 终止寻路
-                transform.position = tempPosition; // 消除瞬移
             }
 
             Vector3 targetDir = targetCell.transform.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(targetDir);
 
-            float rotateSpeed = 100f; // 转向速度
+            float rotateSpeed = 50f; // 转向速度
             Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
 
             transform.rotation = rotation;
             transform.position += transform.forward * speed * Time.deltaTime;
-            tempPosition = transform.position;
-
         }
 
     }

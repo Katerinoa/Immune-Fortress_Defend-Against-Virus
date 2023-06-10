@@ -31,7 +31,9 @@ public class CellController : MonoBehaviour
                 virusEffect.Stop();
                 SpawnMonster();
                 SpawnMonster();
+                SpawnMonster();
                 gameObject.SetActive(false);
+                collision.gameObject.SetActive(false);
             }
             else if (!gameObject.activeSelf)
             {
