@@ -9,16 +9,17 @@ public class VirusController_Level3 : MonoBehaviour
     public GameObject VirusPrefeb;
     public String ObjectName;
     public Vector2 floatHeightRange = new Vector2(3f, 5f);// 浮动基础高度范围
-    public float speed = 5f;// 移动速度
-    public float attackDistance = 20f; // 监测攻击范围
+    public float baseHeight = 0; // 浮动基础高度
+    public float speed = 0.05f;// 移动速度
+    public float attackDistance = 10f; // 监测攻击范围
 
     private GameObject targetObject;
     private string Tag = "cell"; // 目标标签
     private NavMeshAgent navMeshAgent;
     public GameObject targetCell; // 目标物体
-    private float floatAmplitude; // 浮动振幅
-    private float baseHeight; // 浮动基础高度
+    public float floatAmplitude; // 浮动振幅
     private float floatStartTime;
+    public bool isStoped = false;
 
     private void Awake()
     {
@@ -34,7 +35,8 @@ public class VirusController_Level3 : MonoBehaviour
 
         navMeshAgent.speed = speed;
         navMeshAgent.SetDestination(targetObject.transform.position);
-        baseHeight = UnityEngine.Random.Range(floatHeightRange.x, floatHeightRange.y);
+        if(baseHeight == 0)
+            baseHeight = UnityEngine.Random.Range(floatHeightRange.x, floatHeightRange.y);
 
         floatStartTime = Time.time;
     }
@@ -43,7 +45,11 @@ public class VirusController_Level3 : MonoBehaviour
     {
         /* 以下为病毒移动控制 */
         if (targetCell != null && !targetCell.activeSelf)
+        {
+            isStoped = false;
             targetCell = null;
+            GetComponentInChildren<VirusBehaviour>().isStopped = false;
+        }
 
         if (targetCell == null)
         {
@@ -52,12 +58,8 @@ public class VirusController_Level3 : MonoBehaviour
                 navMeshAgent.enabled = true; // 重新寻路
                 navMeshAgent.SetDestination(targetObject.transform.position);
             }
-            else
-            {
-                float yPosition = Mathf.Sin((Time.time - floatStartTime) / floatAmplitude) * floatAmplitude;
-                navMeshAgent.baseOffset = yPosition + baseHeight;
-
-            }
+            float yPosition = Mathf.Sin((Time.time - floatStartTime) / floatAmplitude) * floatAmplitude;
+            navMeshAgent.baseOffset = yPosition + baseHeight;
 
             SelectTarget();
         }
@@ -71,11 +73,14 @@ public class VirusController_Level3 : MonoBehaviour
             Vector3 targetDir = targetCell.transform.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(targetDir);
 
-            float rotateSpeed = 50f; // 转向速度
+            float rotateSpeed = 100f; // 转向速度
             Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
 
-            transform.rotation = rotation;
-            transform.position += transform.forward * speed * Time.deltaTime;
+            if (!isStoped)
+            {
+                transform.rotation = rotation;
+                transform.position += transform.forward * speed * Time.deltaTime;
+            }
         }
 
     }
@@ -94,4 +99,5 @@ public class VirusController_Level3 : MonoBehaviour
             targetCell = targetCells[UnityEngine.Random.Range(0, targetCells.Count)];
         }
     }
+
 }

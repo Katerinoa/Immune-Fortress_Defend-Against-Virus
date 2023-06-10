@@ -11,7 +11,7 @@ public class VirusBehaviour : MonoBehaviour
     public float rotationRange = 5.0f; // 旋转轴的变化幅度
 
     private Vector3 rotationAxis; // 旋转轴
-    private bool isStopped = false;
+    public bool isStopped = false;
 
     void Start()
     {
@@ -32,10 +32,6 @@ public class VirusBehaviour : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("hair") && !isStopped)
-        {
-            isStopped = true; // 标记停止旋转
-        }
-        if (collision.gameObject.CompareTag("cell") && !isStopped)
         {
             isStopped = true; // 标记停止旋转
         }

@@ -61,7 +61,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2719696976366051102}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.5
+  m_Radius: 0.6
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -70,7 +70,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.5
+  m_Height: 1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -89,9 +89,12 @@ MonoBehaviour:
   VirusPrefeb: {fileID: 2719696976366051102}
   ObjectName: destination
   floatHeightRange: {x: 3, y: 4}
+  baseHeight: 0
   speed: 5
   attackDistance: 10
   targetCell: {fileID: 0}
+  floatAmplitude: 0
+  isStoped: 0
 --- !u!65 &838253621828060614
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -100,7 +103,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2719696976366051102}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.91542435, y: 0.83531594, z: 0.6530609}
@@ -196,10 +199,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2719696976778887130}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5f89b4e4153c41468d26d5b47d4792d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 100
   rotationRange: 5
+  isStopped: 0
