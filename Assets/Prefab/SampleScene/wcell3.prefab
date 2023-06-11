@@ -134,9 +134,9 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.239018, y: 1.1730814, z: 0.8823872}
-  m_Center: {x: 0.00003194809, y: -0.027460366, z: 0.027837694}
---- !u!114 &842678516599142647
+  m_Size: {x: 0.95551294, y: 1.1730814, z: 0.8823872}
+  m_Center: {x: 0.078995675, y: -0.027460337, z: 0.027837694}
+--- !u!114 &7695742904157368727
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,3 +154,5 @@ MonoBehaviour:
   attackInterval: 1
   fadeDuration: 2
   bulletPrefab: {fileID: 7853681007270995463, guid: 35a271b492940ef46a98eb1266ff111d, type: 3}
+  moveSpeed: 3
+  rotationSpeed: 100

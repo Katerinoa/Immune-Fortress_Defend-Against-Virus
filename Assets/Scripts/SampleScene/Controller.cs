@@ -5,29 +5,36 @@ using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
-    public float attackRange = 5f;          // ¹¥»÷·¶Î§
-    public int maxHealth = 100;             // ×î´óÑªÁ¿
-    public int attackDamage = 10;           // ¹¥»÷ÉËº¦
-    public float attackInterval = 1f;       // ¹¥»÷¼ä¸ô
-    public float fadeDuration = 2f;         // Í¸Ã÷¶È½¥±äÊ±¼ä
+    public float attackRange = 5f;          // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§
+    public int maxHealth = 100;             // ï¿½ï¿½ï¿½Ñªï¿½ï¿½
+    public int attackDamage = 10;           // ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½
+    public float attackInterval = 1f;       // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float fadeDuration = 2f;         // Í¸ï¿½ï¿½ï¿½È½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 
-    private int currentHealth;              // µ±Ç°ÑªÁ¿
-    private bool isAttacking;               // ÊÇ·ñÕýÔÚ¹¥»÷
-    private float lastAttackTime;           // ÉÏ´Î¹¥»÷µÄÊ±¼ä
-    private Renderer objectRenderer;        // ÎïÌåµÄäÖÈ¾Æ÷
+    private int currentHealth;              // ï¿½ï¿½Ç°Ñªï¿½ï¿½
+    private bool isAttacking;               // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ú¹ï¿½ï¿½ï¿½
+    private float lastAttackTime;           // ï¿½Ï´Î¹ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    private Renderer objectRenderer;        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½
 
-    public GameObject bulletPrefab;  // ×Óµ¯µÄÔ¤ÖÆÌå
+    public GameObject bulletPrefab;  // ï¿½Óµï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½
+
+    public float moveSpeed = 0.05f;
+    public float rotationSpeed = 100f;
+
+    private Vector3 targetPosition;
 
 
     private void Start()
     {
         currentHealth = maxHealth;
         objectRenderer = GetComponent<Renderer>();
+        // ï¿½ï¿½Ê¼Ê±ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½ï¿½Ä¿ï¿½ï¿½Î»ï¿½ï¿½
+        targetPosition = GetRandomPosition();
     }
 
     private void Update()
     {
-        // ¼ì²é¸½½üÊÇ·ñÓÐµÐ·½ÎïÌå
+        // ï¿½ï¿½é¸½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ÐµÐ·ï¿½ï¿½ï¿½ï¿½ï¿½
         if (GameObject.Find("level3start")==null)
         {
 
@@ -40,14 +47,26 @@ public class Controller : MonoBehaviour
             if (collider.CompareTag("Enemy"))
             {
                 foundEnemy = true;
-                break;
+                    Vector3 direction = collider.gameObject.transform.position - transform.position;
+                    direction.y = 0f; // å¯é€‰ï¼šå°†Yè½´ç½®ä¸º0ï¼Œä½¿ç‰©ä½“åªåœ¨æ°´å¹³é¢ä¸Šè½¬åŠ¨
+
+                    if (direction != Vector3.zero)
+                    {
+                        // è®¡ç®—ç›®æ ‡æ—‹è½¬è§’åº¦
+                        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+                        // å¹³æ»‘åœ°è½¬å‘ç›®æ ‡è§’åº¦
+                        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                    }
+                    break;
             }
         }
         if (foundEnemy)
         {
-            if (!isAttacking && Time.time - lastAttackTime > attackInterval)
+               
+                if (!isAttacking && Time.time - lastAttackTime > attackInterval)
             {
-                Attack();  //¹¥»÷ÐÐÎª
+                Attack();  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª
                 lastAttackTime = Time.time;
             }
         }
@@ -58,29 +77,31 @@ public class Controller : MonoBehaviour
         }
     }
 
-    private void Attack() //¹¥»÷
+    private void Attack() //ï¿½ï¿½ï¿½ï¿½
     {
-        // ¼ì²â¹¥»÷·¶Î§ÄÚµÄµÐÈË
+        // ï¿½ï¿½â¹¥ï¿½ï¿½ï¿½ï¿½Î§ï¿½ÚµÄµï¿½ï¿½ï¿½
         Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
 
         foreach (Collider collider in colliders)
         {
             if (collider.CompareTag("Enemy"))
             {
-                // ÊµÀý»¯×Óµ¯²¢ÉèÖÃÎ»ÖÃºÍÐý×ª
+
+                
+                // Êµï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ãºï¿½ï¿½ï¿½×ª
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
-                // ÈÃ×Óµ¯³¯ÏòµÐ·½½ÇÉ«
+                // ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½É«
                 Vector3 direction = (collider.transform.position - transform.position).normalized;
                 bullet.transform.forward = direction;
 
-                // ¸ø×Óµ¯Ò»¸ö³õÊ¼ËÙ¶È£¬¿ÉÒÔ¸ù¾ÝÐèÒªµ÷Õû
+                // ï¿½ï¿½ï¿½Óµï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½Ù¶È£ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½
                 float bulletSpeed = 10f;
                 bullet.GetComponentInChildren<Rigidbody>().velocity = direction * bulletSpeed;
                 collider.gameObject.GetComponentInChildren<viruscontroller>().TakeDamage(attackDamage);
 
-                // Ïú»Ù×Óµ¯
-                Destroy(bullet, 0.8f);  // 2ÃëºóÏú»Ù×Óµ¯
+                // ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½
+                Destroy(bullet, 0.8f);  // 2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½
             }
         }
     }
@@ -90,11 +111,12 @@ public class Controller : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+        targetPosition = GetRandomPosition();
     }
 
-    public void TakeDamage(int damage)   //ÊÜµ½µÄÉËº¦
+    public void TakeDamage(int damage)   //ï¿½Üµï¿½ï¿½ï¿½ï¿½Ëºï¿½
     {
-        Debug.Log("½øÈëÁË2");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2");
         if (currentHealth > 0)
         {
             currentHealth -= damage;
@@ -109,13 +131,13 @@ public class Controller : MonoBehaviour
     private void Die()
     {
 
-        // Æô¶¯Í¸Ã÷¶È½¥±äÐ­³Ì
+        // ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½È½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½
         StartCoroutine(FadeAndDestroy());
     }
 
     IEnumerator FadeAndDestroy()
     {
-        // Öð½¥½«Í¸Ã÷¶È¼õÉÙÖÁ0
+        // ï¿½ð½¥½ï¿½Í¸ï¿½ï¿½ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½0
         float elapsedTime = 0f;
         float startAlpha = objectRenderer.material.color.a;
 
@@ -129,13 +151,52 @@ public class Controller : MonoBehaviour
             yield return null;
         }
 
-        // Ïú»ÙÎïÌå
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Destroy(gameObject);
     }
 
     private void MoveForward()
     {
-        // ÔÚXÖá·½ÏòÇ°½ø
-        transform.Translate(new Vector3(1,0,0) * Time.deltaTime,Space.World);
+        Debug.Log("hello");
+        
+        // ï¿½ï¿½ï¿½ãµ±Ç°Î»ï¿½Ãµï¿½Ä¿ï¿½ï¿½Î»ï¿½ÃµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        Vector3 direction = targetPosition - transform.position;
+        direction.Normalize();
+
+        // ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½×ªï¿½Ç¶ï¿½
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        // Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½å³¯ï¿½ï¿½Ä¿ï¿½ê·½ï¿½ï¿½
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        float angleDifference = Quaternion.Angle(transform.rotation, targetRotation);
+        if (angleDifference <= 1f)
+        {
+            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+        }
+
+        // ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½å³¯ï¿½ï¿½Ä¿ï¿½ï¿½Î»ï¿½ï¿½
+        
+        Debug.Log(Vector3.Distance(transform.position, targetPosition));
+        Debug.Log(transform.position);
+        Debug.Log(targetPosition);
+        // ï¿½Ð¶ï¿½ï¿½Ç·ñµ½´ï¿½Ä¿ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Âµï¿½Ä¿ï¿½ï¿½Î»ï¿½ï¿½
+        if (Vector3.Distance(transform.position, targetPosition) < 0.8f)
+        {
+            new WaitForSeconds(1000f);
+            targetPosition = GetRandomPosition();
+        }
     }
+
+    private Vector3 GetRandomPosition()
+    {
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Î»ï¿½ï¿½
+        float x = Random.Range(-5f, 5f);
+        float z = Random.Range(-5f, 5f);
+        Debug.Log("x="+x);
+        Debug.Log("z" + z);
+        Vector3 randomPosition = new Vector3(x+transform.position.x, transform.position.y, z+transform.position.z);
+
+        return randomPosition;
+    }
+    
 }

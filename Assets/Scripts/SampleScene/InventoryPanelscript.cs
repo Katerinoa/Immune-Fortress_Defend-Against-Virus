@@ -8,15 +8,15 @@ using UnityEngine.UI;
 public class InventoryPanelscript : MonoBehaviour
 {
     Button button1, button2, button3, button4, button5, button6;
-    string[] buttonname = { "button1","button2" , "button3", "button4" , "button5", "button6" };
-    GameObject followmouseprefab;  //����Ǹ�����궯���Ǹ�
+    string[] buttonname = { "button1", "button2", "button3", "button4", "button5", "button6" };
+    public GameObject followmouseprefab;  //����Ǹ�����궯���Ǹ�
     GameObject pane;
     public GameObject pane1, pane2, pane3, pane4, pane5, pane6;
     public GameObject[] Name = new GameObject[6];
     Camera mainCamera;
 
 
-    int currentObject, pastObject;  //currentObject���������ŵ�ǰѡ�еĸ�������һ����-1����δѡ��;pastobject��ʾ֮ǰѡ�е�����
+    public int currentObject, pastObject;  //currentObject���������ŵ�ǰѡ�еĸ�������һ����-1����δѡ��;pastobject��ʾ֮ǰѡ�е�����
     void Start()
     {
         Name[0] = pane1;
@@ -61,13 +61,13 @@ public class InventoryPanelscript : MonoBehaviour
             }
             GameObject.Find(buttonname[i]).GetComponent<RawImage>().enabled = false;
         }
-
+        /*
         if (GameObject.Find("level3start") == null)  
         {
             Destroy(followmouseprefab); //��Ϸ�Ѿ���ʼ�ˣ��Ѹ�����궯������ɾ��
-        }
-        
-        if (GameObject.Find("level3start") != null)  //�Ǹ���ť���ڣ�˵����δ��ʼ��Ϸ
+        }*/
+
+        if (GameObject.Find("level3start") == null)  //�Ǹ���ť���ڣ�˵����δ��ʼ��Ϸ
         {
             if (currentObject != pastObject)
             {
@@ -77,6 +77,7 @@ public class InventoryPanelscript : MonoBehaviour
                     Destroy(followmouseprefab);
                     followmouseprefab = Instantiate(Name[currentObject]);
                     followmouseprefab.GetComponentInChildren<Collider>().enabled = false;
+                    followmouseprefab.GetComponentInChildren<Controller>().enabled = false;
                 }
 
             }
@@ -94,9 +95,9 @@ public class InventoryPanelscript : MonoBehaviour
                     // ��ȡ��������
                     groundPoint = hit.point;
                 }
-                groundPoint += new Vector3(0,1,0);
+                groundPoint += new Vector3(0, 1, 0);
                 followmouseprefab.transform.position = groundPoint;
-                 ;
+                ;
             }
 
             //������������
@@ -104,13 +105,13 @@ public class InventoryPanelscript : MonoBehaviour
             {
                 //2、3此处不同
                 GameObject prefab1 = Instantiate(Name[currentObject]);
-             
+
                 prefab1.GetComponentInChildren<Collider>().enabled = true;
-               // prefab1.GetComponentInChildren<Rigidbody>().useGravity = true;
+                // prefab1.GetComponentInChildren<Rigidbody>().useGravity = true;
 
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-                Vector3 groundPoint=new Vector3();
+                Vector3 groundPoint = new Vector3();
                 if (Physics.Raycast(ray, out hit))
                 {
                     // ��ȡ��������
@@ -152,7 +153,7 @@ public class InventoryPanelscript : MonoBehaviour
     }
     void func4()
     {
-        if (currentObject !=3)
+        if (currentObject != 3)
         {
             currentObject = 3;
         }
@@ -176,6 +177,6 @@ public class InventoryPanelscript : MonoBehaviour
     }
 
     // Update is called once per frame
-   
+
 }
 
