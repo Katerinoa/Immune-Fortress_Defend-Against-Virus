@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2719696976366051096}
   - component: {fileID: 935896606353282812}
   - component: {fileID: 8594937219753078399}
-  - component: {fileID: 838253621828060614}
   - component: {fileID: 8160268471436867688}
   - component: {fileID: 1781580429374819811}
+  - component: {fileID: 2325132261599187398}
   m_Layer: 0
   m_Name: virus
   m_TagString: virus
@@ -81,19 +81,6 @@ MonoBehaviour:
   targetCell: {fileID: 0}
   floatAmplitude: 0
   isStoped: 0
---- !u!65 &838253621828060614
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2719696976366051102}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.91542435, y: 0.83531594, z: 0.6530609}
-  m_Center: {x: -0.0085811615, y: -0.021449089, z: 0.044456482}
 --- !u!114 &8160268471436867688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +112,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!136 &2325132261599187398
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2719696976366051102}
+  m_Material: {fileID: 13400000, guid: 4aa57f777f895c7498ef1bdc7315a131, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.6
+  m_Height: 1.5497932
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1 &2719696976778887130
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,7 +394,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -447,7 +448,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.5019608, g: 0.30980393, b: 0.57254905, a: 1}
+      maxColor: {r: 0.54178727, g: 0.27032152, b: 0.6415094, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -825,7 +826,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 2000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0

@@ -28,7 +28,7 @@ public class AttackUI : MonoBehaviour
         // enemy = GameObject.Find("virus");
         // if (enemy) StartCoroutine("shoot");
         firepoint = launchplace.transform;
-        InvokeRepeating("findmin",0.5f,1.0f);
+        InvokeRepeating("findmin", 0.5f, 1.0f);
     }
 
     // Update is called once per frame
@@ -93,7 +93,7 @@ public class AttackUI : MonoBehaviour
         nearenemy = mindistance(allenemies, firepoint);
         //    nearenemy.gameObject.GetComponent<Renderer>().material.color = Color.red;
         //应该放在这里发射
-        if(mindis <= 12.0f)
+        if (mindis <= 12.0f)
         {
             enemy = nearenemy.gameObject;
             launchvec = enemy.transform.position - firepoint.transform.position;

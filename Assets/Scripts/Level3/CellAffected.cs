@@ -6,29 +6,34 @@ public class CellAffected : MonoBehaviour
 {
     private string Tag = "virus";
     public bool hasInfected = false;
-    public int virusCount = 0;                  // ÇÖÈ¾ÊýÄ¿
-    public float infectedTime = 0;              // ÇÖÈ¾¿ªÊ¼Ê±¼ä
-    private float maxInfectedTime = 5f;         // ×î´óÇÖÈ¾Ê±¼ä
-    private int maxVirus = 3;                   // ×î´óÇÖÈ¾ÊýÄ¿
-
-    //B6EA9E
+    public int virusCount = 0;                  // ï¿½ï¿½È¾ï¿½ï¿½Ä¿
+    public float infectedTime = 0;              // ï¿½ï¿½È¾ï¿½ï¿½Ê¼Ê±ï¿½ï¿½
+    private float maxInfectedTime = 5f;         // ï¿½ï¿½ï¿½ï¿½ï¿½È¾Ê±ï¿½ï¿½
+    private int maxVirus = 3;                   // ï¿½ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½Ä¿
 
     void Update()
     {
         if (virusCount != 0)
         {
-            infectedTime += Time.deltaTime;
-            if (infectedTime > maxInfectedTime || virusCount > maxVirus)
-            {
-                SpawnMonster();
-                gameObject.SetActive(false);
-            }
+            StartCoroutine(InfectedTimer(maxInfectedTime));
         }
     }
 
+    IEnumerator InfectedTimer(float maxInfectedTime)
+    {
+        float infectedTime = 0f;
+        while (infectedTime <= maxInfectedTime)
+        {
+            infectedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        SpawnMonster();
+        gameObject.SetActive(false);
+    }
     private void SpawnMonster()
     {
-        for (int i = 0; i < virusCount; ++ i)
+        for (int i = 0; i < virusCount; ++i)
         {
             GameObject virus = ObjectPool.SharedInstance.GetPooledObject();
             if (virus != null)

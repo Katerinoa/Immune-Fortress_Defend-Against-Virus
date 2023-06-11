@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class VirusAttack : MonoBehaviour
 {
-    public bool isInfected = false; // ÇÖÈ¾±êÖ¾ ÓÃÓÚ¿ØÖÆ¼ÆÊ±Æ÷
-    public ParticleSystem virusEffect; // Á£×ÓÌØÐ§
+    public bool isInfected = false; // ï¿½ï¿½È¾ï¿½ï¿½Ö¾ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½Æ¼ï¿½Ê±ï¿½ï¿½
+    public ParticleSystem virusEffect; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§
 
-    private float timer = 0.0f; // ¼ÆÊ±Æ÷
-    public float infectTime = 5.0f; // ÇÖÈ¾Ê±¼ä
+    private float timer = 0.0f; // ï¿½ï¿½Ê±ï¿½ï¿½
+    public float infectTime = 5.0f; // ï¿½ï¿½È¾Ê±ï¿½ï¿½
 
     private void OnTriggerEnter(Collider other)
     {
@@ -37,8 +37,6 @@ public class VirusAttack : MonoBehaviour
                     GetComponentInChildren<VirusBehaviour>().isStopped = false;
                     other.gameObject.GetComponent<CellAffected>().virusCount++;
                     gameObject.GetComponent<VirusAttack>().virusEffect.Stop();
-                    //gameObject.SetActive(false);
-                    //other.gameObject.SetActive(false);
                 }
             }
         }
@@ -46,7 +44,7 @@ public class VirusAttack : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -60,7 +58,7 @@ public class VirusAttack : MonoBehaviour
                 timer = 0.0f;
                 virusEffect.Play();
                 isInfected = true;
-          
+
             }
         }
     }
@@ -78,11 +76,11 @@ public class VirusAttack : MonoBehaviour
                 {
                     isInfected = false;
                     virusEffect.Stop();
-                   /* SpawnMonster();
-                    SpawnMonster();
-                    SpawnMonster();
-                    gameObject.SetActive(false);
-                    collision.gameObject.SetActive(false);*/
+                    /* SpawnMonster();
+                     SpawnMonster();
+                     SpawnMonster();
+                     gameObject.SetActive(false);
+                     collision.gameObject.SetActive(false);*/
                 }
                 /*else if (!gameObject.activeSelf)
                 {

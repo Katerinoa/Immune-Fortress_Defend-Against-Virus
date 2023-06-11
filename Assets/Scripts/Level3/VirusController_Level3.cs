@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,6 +14,9 @@ public class VirusController_Level3 : MonoBehaviour
     public float speed = 0.05f;// 移动速度
     public float attackDistance = 10f; // 监测攻击范围
 
+    private Color targetColor = new Color(0.71f, 0.92f, 0.62f, 1.0f); // 被侵染颜色
+    private float duration = 1.5f; // 渐变时间
+    private float timeElapsed = 0.0f; // 已经过去的时间
     private GameObject targetObject;
     private string Tag = "cell"; // 目标标签
     private NavMeshAgent navMeshAgent;
@@ -24,18 +28,18 @@ public class VirusController_Level3 : MonoBehaviour
     private void Awake()
     {
         targetObject = GameObject.Find(ObjectName);
- 
+
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.enabled = true;
     }
 
     void Start()
     {
-        floatAmplitude = UnityEngine.Random.Range(1f, 3.0f); 
+        floatAmplitude = UnityEngine.Random.Range(1f, 3.0f);
 
         navMeshAgent.speed = speed;
         navMeshAgent.SetDestination(targetObject.transform.position);
-        if(baseHeight == 0)
+        if (baseHeight == 0)
             baseHeight = UnityEngine.Random.Range(floatHeightRange.x, floatHeightRange.y);
 
         floatStartTime = Time.time;
@@ -82,17 +86,39 @@ public class VirusController_Level3 : MonoBehaviour
                 transform.rotation = rotation;
                 transform.position += transform.forward * speed * Time.deltaTime;
             }
-            if (Vector3.Distance(targetCell.transform.position, transform.position) <= 0.5f)
+            if (Vector3.Distance(targetCell.transform.position, transform.position) <= 0.5f) // 被侵染变色
             {
-                targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", new Color(0.71f, 0.92f, 0.62f, 1.0f)); //入侵变绿
+                StartCoroutine(ChangeColor(targetCell, targetColor, duration)); // 变色
             }
         }
 
     }
 
+    // 渐变色
+    IEnumerator ChangeColor(GameObject targetCell, Color targetColor, float duration)
+    {
+        float timeElapsed = 0;
+        while (timeElapsed < duration)
+        {
+            Color currentColor = Color.Lerp(Color.white, targetColor, timeElapsed / duration);
+
+            // 改变材质的颜色
+            targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", currentColor);
+
+            // 更新已经过去的时间
+            timeElapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        // 时间到了就停止渐变
+        targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", targetColor);
+    }
+
+
     private void SelectTarget()
     {
-        GameObject[] cells = GameObject.FindGameObjectsWithTag(Tag); 
+        GameObject[] cells = GameObject.FindGameObjectsWithTag(Tag);
         List<GameObject> targetCells = new List<GameObject>();
 
         for (int i = 0; i < cells.Length; i++)
