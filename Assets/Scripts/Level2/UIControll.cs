@@ -5,21 +5,21 @@ using UnityEngine.UI;
 
 public class UIControll : MonoBehaviour
 {
-    public Button mpbutton;
-    public Button cellbutton;
-    public bool clickdown = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        mpbutton.gameObject.SetActive(false);
-        cellbutton.gameObject.SetActive(false);
-    }
+    //public Button mpbutton;
+    //public Button cellbutton;
+    //public bool clickdown = false;
+    //// Start is called before the first frame update
+    //void Start()
+    //{
+    //    mpbutton.gameObject.SetActive(false);
+    //    cellbutton.gameObject.SetActive(false);
+    //}
 
-    // Update is called once per frame
-    void Update()
-    {
+    //// Update is called once per frame
+    //void Update()
+    //{
 
-    }
+    //}
 
     /*
     点击逻辑：
@@ -29,7 +29,7 @@ public class UIControll : MonoBehaviour
     */
     // private void OnMouseDown()
     // {
-        
+
     //     if(mpbutton.IsActive())
     //     {
     //         mpbutton.gameObject.SetActive(false);
