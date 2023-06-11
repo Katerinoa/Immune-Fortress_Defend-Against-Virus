@@ -16,7 +16,6 @@ public class VirusController_Level3 : MonoBehaviour
 
     private Color targetColor = new Color(0.71f, 0.92f, 0.62f, 1.0f); // 被侵染颜色
     private float duration = 1.5f; // 渐变时间
-    private float timeElapsed = 0.0f; // 已经过去的时间
     private GameObject targetObject;
     private string Tag = "cell"; // 目标标签
     private NavMeshAgent navMeshAgent;
@@ -81,12 +80,12 @@ public class VirusController_Level3 : MonoBehaviour
             float rotateSpeed = 100f; // 转向速度
             Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
 
-            if (!isStoped && Vector3.Distance(targetCell.transform.position, transform.position) > 0.5f)
+            if (!isStoped && Vector3.Distance(targetCell.transform.position, transform.position) > 0.1f)
             {
                 transform.rotation = rotation;
                 transform.position += transform.forward * speed * Time.deltaTime;
             }
-            if (Vector3.Distance(targetCell.transform.position, transform.position) <= 0.5f) // 被侵染变色
+            if (Vector3.Distance(targetCell.transform.position, transform.position) <= 0.1f) // 被侵染变色
             {
                 StartCoroutine(ChangeColor(targetCell, targetColor, duration)); // 变色
             }

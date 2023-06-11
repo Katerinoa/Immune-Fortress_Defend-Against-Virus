@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8594937219753078399}
   - component: {fileID: 8160268471436867688}
   - component: {fileID: 1781580429374819811}
-  - component: {fileID: 2325132261599187398}
+  - component: {fileID: 1107290183230876507}
   m_Layer: 0
   m_Name: virus
   m_TagString: virus
@@ -112,20 +112,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!136 &2325132261599187398
-CapsuleCollider:
+--- !u!64 &1107290183230876507
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2719696976366051102}
-  m_Material: {fileID: 13400000, guid: 4aa57f777f895c7498ef1bdc7315a131, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.6
-  m_Height: 1.5497932
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.1, z: 0}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2432090755550338912, guid: cb0f2afc256a6b844b5f4f82376e9f19, type: 3}
 --- !u!1 &2719696976778887130
 GameObject:
   m_ObjectHideFlags: 0
