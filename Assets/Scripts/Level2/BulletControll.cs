@@ -50,7 +50,6 @@ public class BulletControll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //  Debug.Log(enemy.transform.position);
         this.transform.position += launchvec * speed * Time.deltaTime;
 
     }
@@ -59,10 +58,7 @@ public class BulletControll : MonoBehaviour
     {
         if (other.name == "virus")
         {
-            //Debug.Log("碰上啦");
             Destroy(this.gameObject);
-
-
         }
     }
 
