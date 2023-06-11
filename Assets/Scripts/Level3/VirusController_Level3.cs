@@ -28,18 +28,18 @@ public class VirusController_Level3 : MonoBehaviour
     private void Awake()
     {
         targetObject = GameObject.Find(ObjectName);
- 
+
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.enabled = true;
     }
 
     void Start()
     {
-        floatAmplitude = UnityEngine.Random.Range(1f, 3.0f); 
+        floatAmplitude = UnityEngine.Random.Range(1f, 3.0f);
 
         navMeshAgent.speed = speed;
         navMeshAgent.SetDestination(targetObject.transform.position);
-        if(baseHeight == 0)
+        if (baseHeight == 0)
             baseHeight = UnityEngine.Random.Range(floatHeightRange.x, floatHeightRange.y);
 
         floatStartTime = Time.time;
@@ -118,7 +118,7 @@ public class VirusController_Level3 : MonoBehaviour
 
     private void SelectTarget()
     {
-        GameObject[] cells = GameObject.FindGameObjectsWithTag(Tag); 
+        GameObject[] cells = GameObject.FindGameObjectsWithTag(Tag);
         List<GameObject> targetCells = new List<GameObject>();
 
         for (int i = 0; i < cells.Length; i++)

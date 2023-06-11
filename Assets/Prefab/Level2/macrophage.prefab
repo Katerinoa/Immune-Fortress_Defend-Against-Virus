@@ -163,6 +163,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletprefab: {fileID: 715235141400789326, guid: ec019f42d1061ca4b88d529121dca07f, type: 3}
   launchplace: {fileID: 4132180979321059367}
+  parent: {fileID: 6533904288011250349}
+  launchvec: {x: 0, y: 0, z: 0}
 --- !u!1001 &5880679536212050850
 PrefabInstance:
   m_ObjectHideFlags: 0

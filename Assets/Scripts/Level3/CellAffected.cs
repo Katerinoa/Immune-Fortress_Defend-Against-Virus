@@ -6,10 +6,10 @@ public class CellAffected : MonoBehaviour
 {
     private string Tag = "virus";
     public bool hasInfected = false;
-    public int virusCount = 0;                  // ÇÖÈ¾ÊýÄ¿
-    public float infectedTime = 0;              // ÇÖÈ¾¿ªÊ¼Ê±¼ä
-    private float maxInfectedTime = 5f;         // ×î´óÇÖÈ¾Ê±¼ä
-    private int maxVirus = 3;                   // ×î´óÇÖÈ¾ÊýÄ¿
+    public int virusCount = 0;                  // ï¿½ï¿½È¾ï¿½ï¿½Ä¿
+    public float infectedTime = 0;              // ï¿½ï¿½È¾ï¿½ï¿½Ê¼Ê±ï¿½ï¿½
+    private float maxInfectedTime = 5f;         // ï¿½ï¿½ï¿½ï¿½ï¿½È¾Ê±ï¿½ï¿½
+    private int maxVirus = 3;                   // ï¿½ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½Ä¿
 
     void Update()
     {
@@ -33,7 +33,7 @@ public class CellAffected : MonoBehaviour
     }
     private void SpawnMonster()
     {
-        for (int i = 0; i < virusCount; ++ i)
+        for (int i = 0; i < virusCount; ++i)
         {
             GameObject virus = ObjectPool.SharedInstance.GetPooledObject();
             if (virus != null)
