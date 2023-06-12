@@ -71,19 +71,6 @@ public class AttackUI : MonoBehaviour
         //     bullet.name = "bullet";
         // }
     }
-    // IEnumerator shoot()
-    // {
-
-    //     while (true)
-    //     {
-    //         yield return new WaitForSeconds(Core2.CreatBulletInterval);
-    //         bullet = Instantiate(bulletprefab, launchplace.transform.position, bulletprefab.transform.rotation, this.transform);
-    //         bullet.name = "bullet";
-    //         //    Debug.Log(bullet.transform.position);
-    //         //  Destroy(bullet,5.0f);        //在子弹预制体里面实现
-    //     }
-
-    // }
 
     //找距离最近者
     EnemyControll findmin()
@@ -104,7 +91,6 @@ public class AttackUI : MonoBehaviour
         return nearenemy;
     }
 
-
     EnemyControll mindistance(EnemyControll[] tararr, Transform ori)
     {
         if (tararr.Length <= 0) return null;
@@ -123,3 +109,18 @@ public class AttackUI : MonoBehaviour
         return lasttar;
     }
 }
+
+    // IEnumerator shoot()
+    // {
+
+    //     while (true)
+    //     {
+    //         yield return new WaitForSeconds(Core2.CreatBulletInterval);
+    //         bullet = Instantiate(bulletprefab, launchplace.transform.position, bulletprefab.transform.rotation, this.transform);
+    //         bullet.name = "bullet";
+    //         //    Debug.Log(bullet.transform.position);
+    //         //  Destroy(bullet,5.0f);        //在子弹预制体里面实现
+    //     }
+
+    // }
+

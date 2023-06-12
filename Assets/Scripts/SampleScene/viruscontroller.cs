@@ -17,6 +17,9 @@ public class viruscontroller : MonoBehaviour
 
     public GameObject bulletPrefab;  // 子弹的预制体
 
+    public float moveSpeed = 0.05f;
+    public float rotationSpeed = 100f;
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -39,6 +42,17 @@ public class viruscontroller : MonoBehaviour
                 {
                     
                     foundEnemy = true;
+                    Vector3 direction = collider.gameObject.transform.position - transform.position;
+                    direction.y = 0f; // 可选：将Y轴置为0，使物体只在水平面上转动
+
+                    if (direction != Vector3.zero)
+                    {
+                        // 计算目标旋转角度
+                        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+                        // 平滑地转向目标角度
+                        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                    }
                     break;
                 }
             }

@@ -164,7 +164,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.7658453, y: 1.6474932, z: 1.0363877}
   m_Center: {x: -0.040596873, y: -0.09980887, z: -0.028402895}
---- !u!114 &1105527883020793967
+--- !u!114 &4211533961636451572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,3 +182,5 @@ MonoBehaviour:
   attackInterval: 1
   fadeDuration: 2
   bulletPrefab: {fileID: 7853681007270995463, guid: 35a271b492940ef46a98eb1266ff111d, type: 3}
+  moveSpeed: 3
+  rotationSpeed: 100
