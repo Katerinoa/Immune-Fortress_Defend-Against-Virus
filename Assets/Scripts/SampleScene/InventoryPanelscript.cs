@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 //����ű����ص�Panel1�ϣ�����Ʒ���Ľű�
@@ -101,7 +102,7 @@ public class InventoryPanelscript : MonoBehaviour
             }
 
             //������������
-            if (Input.GetMouseButtonDown(0) && !(Input.mousePosition.x > 174 && Input.mousePosition.x < 685 && Input.mousePosition.y < 74) && !(Input.mousePosition.x > 340 && Input.mousePosition.x < 650 && Input.mousePosition.y > 340) && currentObject != -1)
+            if (Input.GetMouseButtonDown(0)&&!IsPointerOverUI())
             {
                 //2、3此处不同
                 GameObject prefab1 = Instantiate(Name[currentObject]);
@@ -177,6 +178,11 @@ public class InventoryPanelscript : MonoBehaviour
     }
 
     // Update is called once per frame
+    private bool IsPointerOverUI()
+    {
+        // 检查鼠标点击是否在UI上
+        return EventSystem.current.IsPointerOverGameObject();
+    }
 
 }
 
