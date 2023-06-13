@@ -13,16 +13,18 @@ public class VirusController_Level3 : MonoBehaviour
     public float baseHeight = 0; // 浮动基础高度
     public float speed = 0.05f;// 移动速度
     public float attackDistance = 10f; // 监测攻击范围
+    public GameObject targetCell; // 目标物体
+    public float floatAmplitude; // 浮动振幅
+    public bool isStopped = false;
+    public bool innerCell = false;
 
     private Color targetColor = new Color(0.71f, 0.92f, 0.62f, 1.0f); // 被侵染颜色
     private float duration = 1.5f; // 渐变时间
     private GameObject targetObject;
     private string Tag = "cell"; // 目标标签
     private NavMeshAgent navMeshAgent;
-    public GameObject targetCell; // 目标物体
-    public float floatAmplitude; // 浮动振幅
     private float floatStartTime;
-    public bool isStoped = false;
+
 
     private void Awake()
     {
@@ -49,8 +51,9 @@ public class VirusController_Level3 : MonoBehaviour
         /* 以下为病毒移动控制 */
         if (targetCell != null && !targetCell.activeSelf)
         {
-            isStoped = false;
+            isStopped = false;
             targetCell = null;
+            innerCell = false;
             gameObject.GetComponent<VirusAttack>().virusEffect.Stop();
         }
 
@@ -61,6 +64,10 @@ public class VirusController_Level3 : MonoBehaviour
                 navMeshAgent.enabled = true; // 重新寻路
                 navMeshAgent.SetDestination(targetObject.transform.position);
                 gameObject.GetComponentInChildren<VirusBehaviour>().isStopped = false;
+            }
+            else if(!navMeshAgent.hasPath)
+            {
+                navMeshAgent.SetDestination(targetObject.transform.position);
             }
             float yPosition = Mathf.Sin((Time.time - floatStartTime) / floatAmplitude) * floatAmplitude;
             navMeshAgent.baseOffset = yPosition + baseHeight;
@@ -80,7 +87,7 @@ public class VirusController_Level3 : MonoBehaviour
             float rotateSpeed = 100f; // 转向速度
             Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
 
-            if (!isStoped && Vector3.Distance(targetCell.transform.position, transform.position) > 0.1f)
+            if (!isStopped && Vector3.Distance(targetCell.transform.position, transform.position) > 0.1f)
             {
                 transform.rotation = rotation;
                 transform.position += transform.forward * speed * Time.deltaTime;
@@ -102,7 +109,8 @@ public class VirusController_Level3 : MonoBehaviour
             Color currentColor = Color.Lerp(Color.white, targetColor, timeElapsed / duration);
 
             // 改变材质的颜色
-            targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", currentColor);
+            if(targetCell != null)
+                targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", currentColor);
 
             // 更新已经过去的时间
             timeElapsed += Time.deltaTime;
@@ -111,7 +119,8 @@ public class VirusController_Level3 : MonoBehaviour
         }
 
         // 时间到了就停止渐变
-        targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", targetColor);
+        if (targetCell != null)
+            targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", targetColor);
     }
 
 

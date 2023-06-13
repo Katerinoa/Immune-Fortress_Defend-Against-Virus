@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MonsterGenerationPoint_Level3 : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class MonsterGenerationPoint_Level3 : MonoBehaviour
         {
             virus.transform.position = TargetPos.transform.position;
             virus.transform.rotation = TargetPos.transform.rotation;
-            virus.GetComponent<VirusController_Level3>().isStoped = false;
+            virus.GetComponent<VirusController_Level3>().isStopped = false;
             virus.SetActive(true);
         }
         Counter.generateCount++;
