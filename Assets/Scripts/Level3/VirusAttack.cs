@@ -15,7 +15,7 @@ public class VirusAttack : MonoBehaviour
     {
         if (other.gameObject.CompareTag("cell"))
         {
-            gameObject.GetComponent<VirusController_Level3>().isStopped = true;
+            GetComponent<VirusController_Level3>().isStopped = true;
             GetComponentInChildren<VirusBehaviour>().isStopped = true;
             virusEffect.Play();
             isInfected = true;
@@ -33,18 +33,14 @@ public class VirusAttack : MonoBehaviour
                 if (timer >= infectTime)
                 {
                     isInfected = false;
-                    gameObject.GetComponent<VirusController_Level3>().isStopped = false;
+                    GetComponent<VirusController_Level3>().isStopped = false;
+                    GetComponent<VirusController_Level3>().innerCell = true;
                     GetComponentInChildren<VirusBehaviour>().isStopped = false;
                     other.gameObject.GetComponent<CellAffected>().virusCount++;
                     gameObject.GetComponent<VirusAttack>().virusEffect.Stop();
                 }
             }
         }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -75,17 +71,9 @@ public class VirusAttack : MonoBehaviour
                 {
                     isInfected = false;
                     virusEffect.Stop();
-                    /* SpawnMonster();
-                     SpawnMonster();
-                     SpawnMonster();
-                     gameObject.SetActive(false);
-                     collision.gameObject.SetActive(false);*/
+
                 }
-                /*else if (!gameObject.activeSelf)
-                {
-                    virusEffect.Stop();
-                    isInfected = false;
-                }*/
+
             }
         }
     }

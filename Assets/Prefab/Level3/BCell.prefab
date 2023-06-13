@@ -43,8 +43,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ef91815d6294a164484a1657b84b4e0d, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_PlayOnAwake: 0
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -154,7 +154,7 @@ Transform:
   m_GameObject: {fileID: 4524818956599585076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4463214841119572694}
@@ -177,6 +177,9 @@ MonoBehaviour:
   antibodyPrefab: {fileID: 4754915920112856490, guid: 0def801e677dfe44e9d933f769e18bc9, type: 3}
   firePos: {fileID: 3676734985446137345}
   virusTag: virus
+  targetObject: {fileID: 0}
+  attackRange: 10
+  fireRate: 1
 --- !u!1 &4847748134223286765
 GameObject:
   m_ObjectHideFlags: 0
