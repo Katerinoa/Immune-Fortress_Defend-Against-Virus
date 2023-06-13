@@ -50,6 +50,8 @@ MonoBehaviour:
   hasInfected: 0
   virusCount: 0
   infectedTime: 0
+  breakClip: {fileID: 8300000, guid: e15e5302cf4361040896424e5042cff4, type: 3}
+  bombClip: {fileID: 8300000, guid: cde519fc709f28b4886f1c906575fbd6, type: 3}
 --- !u!136 &7815781902162731795
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -37,17 +37,18 @@ public class LymphokineController : MonoBehaviour
     {
         if (TargetBCell != null && Vector3.Distance(TargetBCell.transform.position, transform.position) < 1f)
         {
+            TargetBCell.GetComponent<EffectorBCellController>().crazy = true;
             Destroy(gameObject);
         }
     }
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject != TargetBCell)
-        {
-            Vector3 randomDirection = Random.insideUnitSphere.normalized * forceMagnitude;
-            rb.AddForce(randomDirection);
-        }
-    }
+    // void OnCollisionEnter(Collision collision)
+    // {
+    //     if (collision.gameObject != TargetBCell)
+    //     {
+    //         Vector3 randomDirection = Random.insideUnitSphere.normalized * forceMagnitude;
+    //         // rb.AddForce(randomDirection);
+    //     }
+    // }
 
     private void SelectTarget()
     {

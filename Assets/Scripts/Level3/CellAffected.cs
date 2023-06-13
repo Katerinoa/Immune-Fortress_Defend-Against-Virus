@@ -14,6 +14,9 @@ public class CellAffected : MonoBehaviour
     private Coroutine infectedTimerCoroutine;
     private AudioSource audiosource;
 
+    public AudioClip breakClip;
+    public AudioClip bombClip;
+
     private void Start()
     {
         audiosource = GameObject.Find("MainControl").GetComponent<AudioSource>();
@@ -30,8 +33,9 @@ public class CellAffected : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("EffectorTCell"))
+        if (other.CompareTag("EffectorTCell") && hasInfected)
         {
+            audiosource.clip = bombClip;
             audiosource.Play();
             if (infectedTimerCoroutine != null)
             {
@@ -53,6 +57,7 @@ public class CellAffected : MonoBehaviour
             yield return null;
         }
 
+        audiosource.clip = breakClip;
         audiosource.Play();
         SpawnMonster();
         gameObject.SetActive(false);
@@ -71,4 +76,5 @@ public class CellAffected : MonoBehaviour
             Counter.generateCount++;
         }
     }
+
 }
