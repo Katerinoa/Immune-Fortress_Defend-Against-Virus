@@ -22,7 +22,7 @@ public class VirusController_Level3 : MonoBehaviour
     public GameObject targetCell; // 目标物体
     public float floatAmplitude; // 浮动振幅
     private float floatStartTime;
-    public bool isStoped = false;
+    public bool isStopped = false;
 
     private void Awake()
     {
@@ -49,7 +49,7 @@ public class VirusController_Level3 : MonoBehaviour
         /* 以下为病毒移动控制 */
         if (targetCell != null && !targetCell.activeSelf)
         {
-            isStoped = false;
+            isStopped = false;
             targetCell = null;
             gameObject.GetComponent<VirusAttack>().virusEffect.Stop();
         }
@@ -80,7 +80,7 @@ public class VirusController_Level3 : MonoBehaviour
             float rotateSpeed = 100f; // 转向速度
             Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
 
-            if (!isStoped && Vector3.Distance(targetCell.transform.position, transform.position) > 0.1f)
+            if (!isStopped && Vector3.Distance(targetCell.transform.position, transform.position) > 0.1f)
             {
                 transform.rotation = rotation;
                 transform.position += transform.forward * speed * Time.deltaTime;
@@ -102,7 +102,8 @@ public class VirusController_Level3 : MonoBehaviour
             Color currentColor = Color.Lerp(Color.white, targetColor, timeElapsed / duration);
 
             // 改变材质的颜色
-            targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", currentColor);
+            if(targetCell != null)
+                targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", currentColor);
 
             // 更新已经过去的时间
             timeElapsed += Time.deltaTime;
@@ -111,7 +112,8 @@ public class VirusController_Level3 : MonoBehaviour
         }
 
         // 时间到了就停止渐变
-        targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", targetColor);
+        if (targetCell != null)
+            targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", targetColor);
     }
 
 
