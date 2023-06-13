@@ -74,7 +74,7 @@ public class VirusController : MonoBehaviour
         {
             if (agent.enabled == false)
                 agent.enabled = true;
-            agent.speed = Core.Speed * 0.3f;
+            agent.speed = Core.Speed * 0.6f;
         }
     }
     private IEnumerator DestroyAfterDelay(float delay)

@@ -13,6 +13,7 @@ TagManager:
   - hurt
   - Ground
   - EffectorTCell
+  - BCell
   layers:
   - Default
   - TransparentFX

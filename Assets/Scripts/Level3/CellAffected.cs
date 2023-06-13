@@ -12,6 +12,15 @@ public class CellAffected : MonoBehaviour
     private float maxInfectedTime = 5f;         // �����Ⱦʱ��
     //private int maxVirus = 3;                   // �����Ⱦ��Ŀ
     private Coroutine infectedTimerCoroutine;
+    private AudioSource audiosource;
+
+    public AudioClip breakClip;
+    public AudioClip bombClip;
+
+    private void Start()
+    {
+        audiosource = GameObject.Find("MainControl").GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -22,26 +31,12 @@ public class CellAffected : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("有碰撞!");
-        if (collision.gameObject.CompareTag("EffectorTCell"))
-        {
-            if (infectedTimerCoroutine != null)
-            {
-                StopCoroutine(infectedTimerCoroutine); // 终止携程
-                infectedTimerCoroutine = null;
-            }
-
-            Destroy(gameObject);
-            Destroy(collision.gameObject);
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("EffectorTCell"))
+        if (other.CompareTag("EffectorTCell") && hasInfected)
         {
+            audiosource.clip = bombClip;
+            audiosource.Play();
             if (infectedTimerCoroutine != null)
             {
                 StopCoroutine(infectedTimerCoroutine); // 终止携程
@@ -62,6 +57,8 @@ public class CellAffected : MonoBehaviour
             yield return null;
         }
 
+        audiosource.clip = breakClip;
+        audiosource.Play();
         SpawnMonster();
         gameObject.SetActive(false);
     }
@@ -79,4 +76,5 @@ public class CellAffected : MonoBehaviour
             Counter.generateCount++;
         }
     }
+
 }

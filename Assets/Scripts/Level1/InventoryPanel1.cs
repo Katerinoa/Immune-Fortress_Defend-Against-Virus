@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 
 //����ű����ص�Panel1�ϣ�����Ʒ���Ľű�
-public class InventoryPanelscript : MonoBehaviour
+public class InventoryPanel1 : MonoBehaviour
 {
     Button button1, button2, button3, button4, button5, button6;
     string[] buttonname = { "button1", "button2", "button3", "button4", "button5", "button6" };
@@ -16,8 +16,9 @@ public class InventoryPanelscript : MonoBehaviour
     public GameObject[] Name = new GameObject[6];
     Camera mainCamera;
 
-    int objectnum = 0;
+
     public int currentObject, pastObject;  //currentObject���������ŵ�ǰѡ�еĸ�������һ����-1����δѡ��;pastobject��ʾ֮ǰѡ�е�����
+    int objectnum=0;
     void Start()
     {
         Name[0] = pane1;
@@ -30,13 +31,13 @@ public class InventoryPanelscript : MonoBehaviour
         pastObject = -1;
         pane = GameObject.Find("Panel1");
         mainCamera = Camera.main;
-
         if (GameObject.Find("button1") != null)
         {
             button1 = GameObject.Find("button1").GetComponent<Button>();
             button1.onClick.AddListener(func1);
+            objectnum += 1;
         }
-        objectnum += 1;
+            
         if (GameObject.Find("button2") != null)
         {
             button2 = GameObject.Find("button2").GetComponent<Button>();
@@ -68,18 +69,21 @@ public class InventoryPanelscript : MonoBehaviour
             button6.onClick.AddListener(func6);
             objectnum += 1;
         }
+
     }
 
     void Update()
     {
-        for (int i = 0; i < objectnum; i++)  //������������ѡ��Ч���Ƿ�ɼ�
+        for (int i = 0; i < objectnum ; i++)  //������������ѡ��Ч���Ƿ�ɼ�
         {
+            Debug.Log(objectnum);
             if (currentObject == i)
             {
                 GameObject.Find(buttonname[i]).GetComponent<RawImage>().enabled = true;
                 continue;
             }
             GameObject.Find(buttonname[i]).GetComponent<RawImage>().enabled = false;
+            Debug.Log(i);
         }
         /*
         if (GameObject.Find("level3start") == null)  
@@ -97,7 +101,7 @@ public class InventoryPanelscript : MonoBehaviour
                     Destroy(followmouseprefab);
                     followmouseprefab = Instantiate(Name[currentObject]);
                     followmouseprefab.GetComponentInChildren<Collider>().enabled = false;
-                    followmouseprefab.GetComponentInChildren<Controller>().enabled = false;
+                   // followmouseprefab.GetComponentInChildren<Controller>().enabled = false;
                 }
 
             }
@@ -115,15 +119,19 @@ public class InventoryPanelscript : MonoBehaviour
                     // ��ȡ��������
                     groundPoint = hit.point;
                 }
-                groundPoint += new Vector3(0, 1, 0);
+                if (currentObject == 0)
+                {
+                    groundPoint += new Vector3(0, 10, 0);
+                }
                 followmouseprefab.transform.position = groundPoint;
                 ;
             }
 
             //������������
-            if (Input.GetMouseButtonDown(0)&&!IsPointerOverUI())
+            if (Input.GetMouseButtonDown(0) && !IsPointerOverUI()&&currentObject!=-1)
             {
                 //2、3此处不同
+                Debug.Log(currentObject);
                 GameObject prefab1 = Instantiate(Name[currentObject]);
 
                 prefab1.GetComponentInChildren<Collider>().enabled = true;
@@ -137,7 +145,11 @@ public class InventoryPanelscript : MonoBehaviour
                     // ��ȡ��������
                     groundPoint = hit.point;
                 }
-                groundPoint += new Vector3(0, 1, 0);
+                if (currentObject == 0)
+                {
+                    groundPoint += new Vector3(0,10, 0);
+                }
+                
                 prefab1.transform.position = groundPoint;
             }
         }
@@ -146,6 +158,7 @@ public class InventoryPanelscript : MonoBehaviour
     //һ����Щfunc()�������������ж��Ƿ���ѡ��״̬����Щ���ֲ���������
     void func1()
     {
+        Debug.Log("点击按钮1");
         if (currentObject != 0)
         {
             currentObject = 0;
@@ -200,7 +213,8 @@ public class InventoryPanelscript : MonoBehaviour
     private bool IsPointerOverUI()
     {
         // 检查鼠标点击是否在UI上
-        return EventSystem.current.IsPointerOverGameObject();
+          return EventSystem.current.IsPointerOverGameObject();
+        
     }
 
 }
