@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class LymphokineController : MonoBehaviour
 {
-    private string Tag = "BCell";
     public GameObject TargetBCell;
     public float forceMagnitude = 10f; // 推力大小
-    private Rigidbody rb;
 
+    private Rigidbody rb;
 
     void Start()
     {
@@ -52,7 +51,7 @@ public class LymphokineController : MonoBehaviour
 
     private void SelectTarget()
     {
-        GameObject[] Bcells = GameObject.FindGameObjectsWithTag(Tag).Where(obj => obj.activeSelf).ToArray();
+        GameObject[] Bcells = GameObject.FindGameObjectsWithTag("BCell").Where(obj => obj.activeSelf).ToArray();
 
         if (Bcells.Length > 0)
         {

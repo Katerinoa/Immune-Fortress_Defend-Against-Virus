@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class VirusAttack : MonoBehaviour
 {
-    public bool isInfected = false; // ��Ⱦ��־ ���ڿ��Ƽ�ʱ��
-    public ParticleSystem virusEffect; // ������Ч
+    public ParticleSystem virusEffect; // 粒子系统
 
-    private float timer = 0.0f; // ��ʱ��
-    public float infectTime = 5.0f; // ��Ⱦʱ��
+    private float timer = 0.0f; // 计时器
+    private float infectTime; // 侵染时间
+    private bool isInfecting = false; // 是否正在侵染
+
+    private void Awake()
+    {
+        infectTime = Core_Level3.infectTime;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,7 +23,7 @@ public class VirusAttack : MonoBehaviour
             GetComponent<VirusController_Level3>().isStopped = true;
             GetComponentInChildren<VirusBehaviour>().isStopped = true;
             virusEffect.Play();
-            isInfected = true;
+            isInfecting = true;
             timer = 0.0f;
         }
     }
@@ -26,13 +31,13 @@ public class VirusAttack : MonoBehaviour
     {
         if (other.gameObject.CompareTag("cell"))
         {
-            if (isInfected)
+            if (isInfecting)
             {
                 timer += Time.deltaTime;
 
-                if (timer >= infectTime)
+                if (timer >= infectTime)  // 到时间后病毒进入细胞
                 {
-                    isInfected = false;
+                    isInfecting = false;
                     GetComponent<VirusController_Level3>().isStopped = false;
                     GetComponent<VirusController_Level3>().innerCell = true;
                     GetComponentInChildren<VirusBehaviour>().isStopped = false;
@@ -48,11 +53,11 @@ public class VirusAttack : MonoBehaviour
         if (collision.gameObject.CompareTag("cell"))
         {
             gameObject.GetComponent<VirusController_Level3>().isStopped = true;
-            if (!isInfected)
+            if (!isInfecting)
             {
                 timer = 0.0f;
                 virusEffect.Play();
-                isInfected = true;
+                isInfecting = true;
 
             }
         }
@@ -62,14 +67,14 @@ public class VirusAttack : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("cell"))
         {
-            if (isInfected)
+            if (isInfecting)
             {
                 timer += Time.deltaTime;
                 Debug.Log(timer);
 
                 if (timer >= infectTime)
                 {
-                    isInfected = false;
+                    isInfecting = false;
                     virusEffect.Stop();
 
                 }

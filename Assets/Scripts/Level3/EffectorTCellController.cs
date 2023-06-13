@@ -4,14 +4,13 @@ using UnityEngine.AI;
 
 public class EffectorTCellController : MonoBehaviour
 {
-    public float speed;
+    public float speed;             //移动速度
+    public float attackRange = 20f; //攻击范围
 
-    private GameObject[] cells;
+    private GameObject[] cells;    // 所有细胞的集合
     private GameObject targetCell; // 目标细胞
-    private Vector3 startPos;          // 初始位置
-    public float attackRange = 20f;
-    NavMeshAgent agent;
-
+    private Vector3 startPos;      // 初始位置 用于浮动
+    private NavMeshAgent agent;     
 
     private void Start()
     {
