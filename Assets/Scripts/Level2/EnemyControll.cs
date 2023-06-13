@@ -37,8 +37,15 @@ public class EnemyControll : MonoBehaviour
         if (other.name == "bullet")
         {
             hpcontrol.nowHp -= Core2.DamageValue;
-            Core2.DestroyVirusNum = Core2.DestroyVirusNum + 1;
-            Debug.Log("当前消灭敌人数量： " + Core2.DestroyVirusNum);
+            //这里不能直接就销毁啊，要血量小于0病毒才能死亡
+            // Core2.DestroyVirusNum = Core2.DestroyVirusNum + 1;
+            // Debug.Log("当前消灭敌人数量： " + Core2.DestroyVirusNum);
+            if (hpcontrol.nowHp == 0)
+            {
+                Destroy(this.gameObject);
+                Core2.DestroyVirusNum = Core2.DestroyVirusNum + 1;
+                Debug.Log("当前消灭敌人数量： " + Core2.DestroyVirusNum);
+            }
         }
     }
 }
