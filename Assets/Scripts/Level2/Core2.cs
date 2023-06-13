@@ -9,7 +9,7 @@ public class Core2 : MonoBehaviour
 
     private static float creatbulletsinterval = 1.0f;  //生成子弹间隔
 
-    private static int[] viruscounts = {5,10,15};  //累计病毒数量之和
+    private static int[] viruscounts = {10,25,45};  //累计病毒数量之和
 
     private static int createvirusnum = 0;   //当前生成的敌人数量
     
@@ -19,6 +19,17 @@ public class Core2 : MonoBehaviour
 
     private static int damagevalue = 5;  //一颗子弹的伤害值
 
+
+    //金币相关
+    private static int originmoney = 60;     //初始额度
+    
+    private static int cellprice = 30;       //消炎因子的价格
+
+    private static int macrophageprice = 50;     //巨噬细胞的价格
+
+    private static int cellwage = 5;     //消炎因子的赚钱能力(每两秒)
+
+    private static int nowmoney = originmoney; //现在的额度
 
 
     public static float CreatVirusInterval(int i)
@@ -62,5 +73,35 @@ public class Core2 : MonoBehaviour
     {
         get { return damagevalue; }
         set { damagevalue = value; }
+    }
+
+    public static int OriginMoney
+    {
+        get { return originmoney; }
+        set { originmoney = value; }
+    }
+
+    public static int CellPrice
+    {
+        get {return cellprice; }
+        set { cellprice = value; } 
+    }
+
+    public static int MacrophagePrice
+    {
+        get { return macrophageprice; }
+        set { macrophageprice = value; }
+    }
+
+    public static int CellWage
+    {
+        get { return cellwage; }
+        set { cellwage = value; }
+    }
+
+    public static int NowMoney
+    {
+        get { return nowmoney; }
+        set { nowmoney = value; }
     }
 }
