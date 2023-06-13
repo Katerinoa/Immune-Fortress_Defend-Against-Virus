@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Hpcontrol : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float AllHp = 20.0f;
+    public float AllHp = 100.0f;
     public float nowHp;
     private Transform HpTransform;
     private Image HpImage;
@@ -14,6 +14,7 @@ public class Hpcontrol : MonoBehaviour
         HpTransform = this.gameObject.transform.Find("Hp");
         HpImage = HpTransform.Find("HpNow").gameObject.GetComponent<Image>();
         nowHp = AllHp;
+        Debug.Log("Ëµ∑ÂßãÁöÑË°ÄÈáèÔºö" + nowHp);
     }
 
     // Update is called once per frame
@@ -22,13 +23,14 @@ public class Hpcontrol : MonoBehaviour
         Vector3 cameraPos = Camera.main.transform.position;
         Vector3 target = new Vector3(cameraPos.x, HpTransform.position.y, cameraPos.z);
         HpTransform.LookAt(target);
-        if (nowHp <= 0.0f)
-        {
-            Destroy(this.gameObject);
-            Core2.DestroyVirusNum = Core2.DestroyVirusNum + 1;
-            Debug.Log("µ±«∞œ˚√µ–»À ˝¡ø£∫ " + Core2.DestroyVirusNum);
-        }
-        Debug.Log(nowHp);
+        //ÔºöÂÖ≥‰∫édestroyÁßªÂà∞enemyÈÇ£ÈáåÂéª‰∫Ü
+        // if (nowHp <= 0.0f)
+        // {
+        //     Destroy(this.gameObject);
+        //     Core2.DestroyVirusNum = Core2.DestroyVirusNum + 1;
+        //     Debug.Log("ÔøΩÔøΩ«∞ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ " + Core2.DestroyVirusNum);
+        // }
+        // Debug.Log(nowHp);
         float HpPercent = nowHp / AllHp;
         HpImage.fillAmount = HpPercent;
     }
