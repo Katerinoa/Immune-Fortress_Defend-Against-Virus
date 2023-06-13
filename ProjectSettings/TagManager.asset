@@ -12,6 +12,7 @@ TagManager:
   - mucous
   - hurt
   - Ground
+  - EffectorTCell
   layers:
   - Default
   - TransparentFX
