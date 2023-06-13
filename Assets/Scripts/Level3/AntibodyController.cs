@@ -7,6 +7,7 @@ public class AntibodyController : MonoBehaviour
     Rigidbody rb;  // 刚体组件
     public float speed = 20f;  // 控制飞行速度的变量
     public float rotateSpeed = 500f;   // 控制旋转速度的变量
+    public Transform targetTransform;
 
     void Start()
     {

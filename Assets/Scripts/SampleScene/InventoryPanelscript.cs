@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 //����ű����ص�Panel1�ϣ�����Ʒ���Ľű�
@@ -15,7 +16,7 @@ public class InventoryPanelscript : MonoBehaviour
     public GameObject[] Name = new GameObject[6];
     Camera mainCamera;
 
-
+    int objectnum = 0;
     public int currentObject, pastObject;  //currentObject���������ŵ�ǰѡ�еĸ�������һ����-1����δѡ��;pastobject��ʾ֮ǰѡ�е�����
     void Start()
     {
@@ -30,29 +31,48 @@ public class InventoryPanelscript : MonoBehaviour
         pane = GameObject.Find("Panel1");
         mainCamera = Camera.main;
 
-        button1 = GameObject.Find("button1").GetComponent<Button>();
-        button1.onClick.AddListener(func1);
+        if (GameObject.Find("button1") != null)
+        {
+            button1 = GameObject.Find("button1").GetComponent<Button>();
+            button1.onClick.AddListener(func1);
+        }
+        objectnum += 1;
+        if (GameObject.Find("button2") != null)
+        {
+            button2 = GameObject.Find("button2").GetComponent<Button>();
+            button2.onClick.AddListener(func2);
+            objectnum += 1;
+        }
+        if (GameObject.Find("button3") != null)
+        {
+            button3 = GameObject.Find("button3").GetComponent<Button>();
+            button3.onClick.AddListener(func3);
+            objectnum += 1;
+        }
 
-        button2 = GameObject.Find("button2").GetComponent<Button>();
-        button2.onClick.AddListener(func2);
-
-        button3 = GameObject.Find("button3").GetComponent<Button>();
-        button3.onClick.AddListener(func3);
-
-        button4 = GameObject.Find("button4").GetComponent<Button>();
-        button4.onClick.AddListener(func4);
-
-        button5 = GameObject.Find("button5").GetComponent<Button>();
-        button5.onClick.AddListener(func5);
-
-        button6 = GameObject.Find("button6").GetComponent<Button>();
-        button6.onClick.AddListener(func6);
-
+        if (GameObject.Find("button4") != null)
+        {
+            button4 = GameObject.Find("button4").GetComponent<Button>();
+            button4.onClick.AddListener(func4);
+            objectnum += 1;
+        }
+        if (GameObject.Find("button5") != null)
+        {
+            button5 = GameObject.Find("button5").GetComponent<Button>();
+            button5.onClick.AddListener(func5);
+            objectnum += 1;
+        }
+        if (GameObject.Find("button6") != null)
+        {
+            button6 = GameObject.Find("button6").GetComponent<Button>();
+            button6.onClick.AddListener(func6);
+            objectnum += 1;
+        }
     }
 
     void Update()
     {
-        for (int i = 0; i < 6; i++)  //������������ѡ��Ч���Ƿ�ɼ�
+        for (int i = 0; i < objectnum; i++)  //������������ѡ��Ч���Ƿ�ɼ�
         {
             if (currentObject == i)
             {
@@ -101,7 +121,7 @@ public class InventoryPanelscript : MonoBehaviour
             }
 
             //������������
-            if (Input.GetMouseButtonDown(0) && !(Input.mousePosition.x > 174 && Input.mousePosition.x < 685 && Input.mousePosition.y < 74) && !(Input.mousePosition.x > 340 && Input.mousePosition.x < 650 && Input.mousePosition.y > 340) && currentObject != -1)
+            if (Input.GetMouseButtonDown(0)&&!IsPointerOverUI())
             {
                 //2、3此处不同
                 GameObject prefab1 = Instantiate(Name[currentObject]);
@@ -177,6 +197,11 @@ public class InventoryPanelscript : MonoBehaviour
     }
 
     // Update is called once per frame
+    private bool IsPointerOverUI()
+    {
+        // 检查鼠标点击是否在UI上
+        return EventSystem.current.IsPointerOverGameObject();
+    }
 
 }
 

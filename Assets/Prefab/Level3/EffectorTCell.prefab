@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  cells: []
+  attackRange: 30
 --- !u!195 &852194193469420408
 NavMeshAgent:
   m_ObjectHideFlags: 0
