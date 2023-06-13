@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class LymphokineController : MonoBehaviour
 {
+    private string Tag = "BCell";
     public GameObject TargetBCell;
     public float moveSpeed = 10f;
     private Rigidbody rb;
+    public int maxCollision = 2;
+    public float timer = 10f;
 
 
     void Start()
@@ -39,7 +42,7 @@ public class LymphokineController : MonoBehaviour
     {
         Vector3 randomDirection = Random.insideUnitSphere.normalized;
         rb.AddForce(randomDirection);
-        maxCollision --;
+        maxCollision--;
         if (maxCollision == 0)
             Destroy(gameObject);
     }
@@ -55,7 +58,7 @@ public class LymphokineController : MonoBehaviour
 
     private void SelectTarget()
     {
-        GameObject[] Bcells = GameObject.FindGameObjectsWithTag("BCell").Where(obj => obj.activeSelf).ToArray();
+        GameObject[] Bcells = GameObject.FindGameObjectsWithTag(Tag).Where(obj => obj.activeSelf).ToArray();
 
         if (Bcells.Length > 0)
         {

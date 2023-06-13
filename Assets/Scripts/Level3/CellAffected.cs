@@ -49,6 +49,11 @@ public class CellAffected : MonoBehaviour
             gameObject.SetActive(false);
             Destroy(other.gameObject);
         }
+
+        if (other.CompareTag("antibody"))
+        {
+            Destroy(other);
+        }
     }
 
     IEnumerator InfectedTimer(float maxInfectedTime)

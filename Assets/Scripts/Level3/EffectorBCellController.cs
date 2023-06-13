@@ -99,7 +99,7 @@ public class EffectorBCellController : MonoBehaviour
     IEnumerator CrazyTime()
     {
         attackRange *= 2;
-        StartCoroutine(ChangeColor(gameObject, new Color(1.0f,0.8f,0.8f,1.0f), 1f)); // 变色
+        StartCoroutine(ChangeColor(gameObject, new Color(1.0f,0.5f,0.5f,1.0f), 1f)); // 变色
         CancelInvoke("GenerateAntibody");
         InvokeRepeating("GenerateAntibody",0, 0.2f);
 
