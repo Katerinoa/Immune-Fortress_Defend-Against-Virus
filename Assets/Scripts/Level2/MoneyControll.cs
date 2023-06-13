@@ -18,6 +18,8 @@ public class MoneyControll : MonoBehaviour
         //初始化
         info.text = "";
         moneytxt.text = Core2.OriginMoney.ToString();
+        //自动加点钱
+        InvokeRepeating("DefultMakeMoney",0.5f,1.0f);
     //    Debug.Log("金额： " + moneytxt.text);
     }
 
@@ -26,5 +28,11 @@ public class MoneyControll : MonoBehaviour
     {
         moneytxt.text = Core2.NowMoney.ToString();
         info.text = GridControll.moneyhint;
+    }
+
+
+    void DefultMakeMoney()
+    {
+        Core2.NowMoney += 1;
     }
 }
