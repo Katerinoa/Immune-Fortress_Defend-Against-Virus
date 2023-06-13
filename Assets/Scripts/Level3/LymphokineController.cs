@@ -6,14 +6,15 @@ using UnityEngine;
 public class LymphokineController : MonoBehaviour
 {
     public GameObject TargetBCell;
-    public float forceMagnitude = 10f; // 推力大小
-
+    public float moveSpeed = 10f;
     private Rigidbody rb;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
+
     void FixedUpdate()
     {
         if (TargetBCell == null)
@@ -25,29 +26,32 @@ public class LymphokineController : MonoBehaviour
             Vector3 targetDirection = TargetBCell.transform.position - transform.position;
             if (targetDirection != Vector3.zero)
             {
-                Vector3 forceDirection = targetDirection.normalized * forceMagnitude;
-                rb.AddForce(forceDirection);
-                transform.forward = rb.velocity.normalized;
+                Vector3 direction = (TargetBCell.transform.position - transform.position).normalized;
+                rb.velocity = direction * moveSpeed;
             }
         }
+        timer -= Time.deltaTime;
+        if (timer <= 0)
+            Destroy(gameObject);
     }
 
-    void Update()
+    void OnCollisionEnter(Collision collision)
     {
-        if (TargetBCell != null && Vector3.Distance(TargetBCell.transform.position, transform.position) < 1f)
+        Vector3 randomDirection = Random.insideUnitSphere.normalized;
+        rb.AddForce(randomDirection);
+        maxCollision --;
+        if (maxCollision == 0)
+            Destroy(gameObject);
+    }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject == TargetBCell)
         {
             TargetBCell.GetComponent<EffectorBCellController>().crazy = true;
             Destroy(gameObject);
         }
     }
-    // void OnCollisionEnter(Collision collision)
-    // {
-    //     if (collision.gameObject != TargetBCell)
-    //     {
-    //         Vector3 randomDirection = Random.insideUnitSphere.normalized * forceMagnitude;
-    //         // rb.AddForce(randomDirection);
-    //     }
-    // }
 
     private void SelectTarget()
     {

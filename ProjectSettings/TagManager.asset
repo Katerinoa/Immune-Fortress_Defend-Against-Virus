@@ -3,17 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - cell
-  - Enemy
-  - zidan
-  - hair
-  - virus
-  - mucous
-  - hurt
-  - Ground
-  - EffectorTCell
-  - BCell
+  tags: []
   layers:
   - Default
   - TransparentFX

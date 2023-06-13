@@ -424,6 +424,18 @@ PrefabInstance:
       propertyPath: MinDistance
       value: 0.05239868
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 848717f3e57c5d74caaac831244fbd4b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 848717f3e57c5d74caaac831244fbd4b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 848717f3e57c5d74caaac831244fbd4b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4987dc4c2c375445bb4182d91743c64, type: 3}
 --- !u!1 &331694996
