@@ -13,16 +13,18 @@ public class VirusController_Level3 : MonoBehaviour
     public float baseHeight = 0; // 浮动基础高度
     public float speed = 0.05f;// 移动速度
     public float attackDistance = 10f; // 监测攻击范围
+    public GameObject targetCell; // 目标物体
+    public float floatAmplitude; // 浮动振幅
+    public bool isStopped = false;
+    public bool innerCell = false;
 
     private Color targetColor = new Color(0.71f, 0.92f, 0.62f, 1.0f); // 被侵染颜色
     private float duration = 1.5f; // 渐变时间
     private GameObject targetObject;
     private string Tag = "cell"; // 目标标签
     private NavMeshAgent navMeshAgent;
-    public GameObject targetCell; // 目标物体
-    public float floatAmplitude; // 浮动振幅
     private float floatStartTime;
-    public bool isStopped = false;
+
 
     private void Awake()
     {
@@ -51,6 +53,7 @@ public class VirusController_Level3 : MonoBehaviour
         {
             isStopped = false;
             targetCell = null;
+            innerCell = false;
             gameObject.GetComponent<VirusAttack>().virusEffect.Stop();
         }
 
@@ -61,6 +64,10 @@ public class VirusController_Level3 : MonoBehaviour
                 navMeshAgent.enabled = true; // 重新寻路
                 navMeshAgent.SetDestination(targetObject.transform.position);
                 gameObject.GetComponentInChildren<VirusBehaviour>().isStopped = false;
+            }
+            else if(!navMeshAgent.hasPath)
+            {
+                navMeshAgent.SetDestination(targetObject.transform.position);
             }
             float yPosition = Mathf.Sin((Time.time - floatStartTime) / floatAmplitude) * floatAmplitude;
             navMeshAgent.baseOffset = yPosition + baseHeight;

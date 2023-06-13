@@ -6,9 +6,10 @@ public class EffectorTCellController : MonoBehaviour
 {
     public float speed;
 
-    public GameObject[] cells;
+    private GameObject[] cells;
     private GameObject targetCell; // 目标细胞
     private Vector3 startPos;          // 初始位置
+    public float attackRange = 20f;
     NavMeshAgent agent;
 
 
@@ -32,7 +33,7 @@ public class EffectorTCellController : MonoBehaviour
         if (targetCell == null)
         {
             SelectTarget();
-            float offset = Mathf.Sin(Time.time*5f) * 0.2f;
+            float offset = Mathf.Sin(Time.time * 5f + (startPos.x+startPos.y)*100) * 0.2f;
             Vector3 newPos = startPos + new Vector3(0f, offset, 0f);
             transform.position = newPos;
         }
@@ -48,7 +49,7 @@ public class EffectorTCellController : MonoBehaviour
         {
             CellAffected cellAffected = cell.GetComponent<CellAffected>();
 
-            if (cellAffected != null && cellAffected.hasInfected)
+            if (cellAffected != null && cellAffected.hasInfected && Vector3.Distance(transform.position, cell.transform.position) < attackRange)
             { 
                 targetCells.Add(cell);
             }
