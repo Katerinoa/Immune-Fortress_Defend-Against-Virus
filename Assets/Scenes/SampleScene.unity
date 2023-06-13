@@ -2056,7 +2056,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080322076}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c79b9d06b7433774598d74c53d23550d, type: 3}
   m_Name: 
@@ -2065,9 +2065,9 @@ MonoBehaviour:
   pane1: {fileID: 4215844650020831068, guid: 27e4c59602bb59745b38b2a07e2bcd7a, type: 3}
   pane2: {fileID: 8129603801023192442, guid: d816c8edbf431904999c2910d6593abd, type: 3}
   pane3: {fileID: 5072255911423498526, guid: 157a548106389a44c9f52bb8015e27e1, type: 3}
-  pane4: {fileID: 7415282054881824665, guid: a4a498de8e490544bb44d4aa47ca191a, type: 3}
-  pane5: {fileID: 5158364106536439044, guid: ff9215bc26fdf5c409f0ce8569d85f42, type: 3}
-  pane6: {fileID: 7853681007270995463, guid: 1e6a7a1edb130c34785e6e142d0786d5, type: 3}
+  pane4: {fileID: 5158364106536439044, guid: ff9215bc26fdf5c409f0ce8569d85f42, type: 3}
+  pane5: {fileID: 7415282054881824665, guid: a4a498de8e490544bb44d4aa47ca191a, type: 3}
+  pane6: {fileID: 4215844650020831068, guid: 27e4c59602bb59745b38b2a07e2bcd7a, type: 3}
   Name:
   - {fileID: 0}
   - {fileID: 0}
