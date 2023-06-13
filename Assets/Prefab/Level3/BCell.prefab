@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 8580182895472791122}
   m_Layer: 0
   m_Name: BCell
-  m_TagString: Untagged
+  m_TagString: BCell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   antibodyPrefab: {fileID: 4754915920112856490, guid: 0def801e677dfe44e9d933f769e18bc9, type: 3}
   firePos: {fileID: 3676734985446137345}
+  virusTag: virus
 --- !u!1 &4847748134223286765
 GameObject:
   m_ObjectHideFlags: 0
