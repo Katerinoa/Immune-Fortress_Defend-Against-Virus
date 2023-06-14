@@ -102,14 +102,14 @@ public class EffectorBCellController : MonoBehaviour
         attackRange *= 2;
         StartCoroutine(ChangeColor(gameObject, new Color(1.0f,0.5f,0.5f,1.0f), 1)); // 变色
         CancelInvoke("GenerateAntibody");
-        InvokeRepeating("GenerateAntibody",0, 1 / fireSpeed);
+        InvokeRepeating("GenerateAntibody", 0, 0.5f / fireSpeed);
 
         yield return new WaitForSeconds(crazyTime);
 
         isRunning = false;
         attackRange /= 2;
         CancelInvoke("GenerateAntibody");
-        InvokeRepeating("GenerateAntibody", 0, 0.5f / fireSpeed);
+        InvokeRepeating("GenerateAntibody", 0, 1f / fireSpeed);
         StartCoroutine(ChangeColor(gameObject, Color.white, 1)); // 变色
 
     }
