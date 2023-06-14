@@ -1,42 +1,31 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EffectorTCellController : MonoBehaviour
 {
-    public float speed;             //移动速度
-    public float attackRange = 20f; //攻击范围
+    public float speed;             // 移动速度
+    public float attackRange = 20f; // 攻击范围
 
-    private GameObject[] cells;    // 所有细胞的集合
-    private GameObject targetCell; // 目标细胞
-    private Vector3 startPos;      // 初始位置 用于浮动
+    private GameObject[] cells;     // 所有细胞的集合
+    private GameObject targetCell;  // 目标细胞
+    private Vector3 startPos;       // 初始位置，用于浮动
+    private bool isSleeping = false; // 是否处于休眠状态
+    private float sleepDuration = 10f; // 休眠持续时间
 
     private void Start()
     {
         startPos = transform.position;
     }
 
-    //void Update()
-    //{
-    //    if (targetCell != null && !targetCell.activeSelf)
-    //    {
-    //        startPos = transform.position;
-    //        targetCell = null;
-    //        agent.enabled = false;
-    //    }
-
-    //    if (targetCell == null)
-    //    {
-    //        SelectTarget();
-    //        float offset = Mathf.Sin(Time.time * 5f + (startPos.x+startPos.y)*100) * 0.2f;
-    //        Vector3 newPos = startPos + new Vector3(0f, offset, 0f);
-    //        transform.position = newPos;
-    //    }
-
-    //}
-
     void Update()
     {
+        if (isSleeping)
+        {
+            return; // 如果处于休眠状态，则不执行后续代码
+        }
+
         if (targetCell != null && !targetCell.activeSelf)
         {
             startPos = transform.position;
@@ -50,15 +39,15 @@ public class EffectorTCellController : MonoBehaviour
             transform.position = newPos;
             SelectTarget();
         }
+
         if (targetCell != null)
         {
             Vector3 direction = targetCell.transform.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3f * Time.deltaTime);// 转向目标物体
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3f * Time.deltaTime); // 转向目标物体
             transform.position += transform.forward * speed * Time.deltaTime;
         }
-
     }
 
     private void SelectTarget()
@@ -71,14 +60,52 @@ public class EffectorTCellController : MonoBehaviour
             CellAffected cellAffected = cell.GetComponent<CellAffected>();
 
             if (cellAffected != null && cellAffected.hasInfected && Vector3.Distance(transform.position, cell.transform.position) < attackRange)
-            { 
+            {
                 targetCells.Add(cell);
             }
         }
 
         if (targetCells.Count > 0)
         {
-            targetCell = targetCells[UnityEngine.Random.Range(0, targetCells.Count)];
+            targetCell = targetCells[Random.Range(0, targetCells.Count)];
         }
+    }
+
+    public void Sleep()
+    {
+        StartCoroutine(EnterSleepMode());
+    }
+
+    private IEnumerator EnterSleepMode()
+    {
+        isSleeping = true;
+        StartCoroutine(ChangeColor(gameObject, new Color(0f,0.75f,1f), 1)); // 变色
+
+        yield return new WaitForSeconds(sleepDuration);
+
+        StartCoroutine(ChangeColor(gameObject, Color.white, 1)); // 变色
+        isSleeping = false;
+    }
+
+    IEnumerator ChangeColor(GameObject targetCell, Color targetColor, float duration)
+    {
+        float timeElapsed = 0;
+        while (timeElapsed < duration)
+        {
+            Color currentColor = Color.Lerp(Color.white, targetColor, timeElapsed / duration);
+
+            // 改变材质的颜色
+            if (targetCell != null)
+                targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", currentColor);
+
+            // 更新已经过去的时间
+            timeElapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        // 时间到了就停止渐变
+        if (targetCell != null)
+            targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", targetColor);
     }
 }
