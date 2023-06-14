@@ -4,16 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - cell
-  - Enemy
-  - zidan
-  - hair
   - virus
-  - mucous
-  - hurt
-  - Ground
-  - EffectorTCell
+  - cell
   - BCell
+  - EffectorTCell
+  - antibody
   layers:
   - Default
   - TransparentFX

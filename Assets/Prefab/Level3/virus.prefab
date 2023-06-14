@@ -72,13 +72,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0debaa294e12854298839de2923fe63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VirusPrefeb: {fileID: 2719696976366051102}
   ObjectName: destination
   floatHeightRange: {x: 3, y: 4}
   baseHeight: 0
   speed: 5
   attackDistance: 10
-  targetCell: {fileID: 0}
   floatAmplitude: 0
   isStopped: 0
   innerCell: 0
@@ -94,9 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce9b8349b3699a4fb2bcada3696fd3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInfected: 0
   virusEffect: {fileID: 1555041125700988431}
-  infectTime: 5
 --- !u!54 &1781580429374819811
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -223,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f89b4e4153c41468d26d5b47d4792d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 100
+  rotationSpeed: 150
   rotationRange: 5
   isStopped: 0
 --- !u!1 &5472836469362848708
