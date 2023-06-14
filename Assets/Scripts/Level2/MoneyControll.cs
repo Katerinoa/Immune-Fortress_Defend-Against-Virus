@@ -19,7 +19,7 @@ public class MoneyControll : MonoBehaviour
         info.text = "";
         moneytxt.text = Core2.OriginMoney.ToString();
         //自动加点钱
-        InvokeRepeating("DefultMakeMoney",0.5f,1.0f);
+        InvokeRepeating("DefultMakeMoney",0.5f,2.0f);
     //    Debug.Log("金额： " + moneytxt.text);
     }
 

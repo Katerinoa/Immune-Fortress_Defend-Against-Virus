@@ -5,7 +5,7 @@ using UnityEngine;
 public class Core2 : MonoBehaviour
 {
         //第2关相关变量
-    private static float[] creatvirusinterval = {6.0f, 5.0f,4.0f};  //每波间隔生成病毒的时间
+    private static float[] creatvirusinterval = {4.0f, 3.0f,2.0f};  //每波当中生成病毒的时间
 
     private static float creatbulletsinterval = 1.0f;  //生成子弹间隔
 
@@ -17,17 +17,19 @@ public class Core2 : MonoBehaviour
 
     private static int maxvirusnum = viruscounts[2];   //最大生成的敌人数量
 
+    private static int waveinterval = 10;
+
     private static int damagevalue = 5;  //一颗子弹的伤害值
 
 
     //金币相关
-    private static int originmoney = 60;     //初始额度
+    private static int originmoney = 140;     //初始额度
     
     private static int cellprice = 30;       //消炎因子的价格
 
     private static int macrophageprice = 50;     //巨噬细胞的价格
 
-    private static int cellwage = 5;     //消炎因子的赚钱能力(每两秒)
+    private static int cellwage = 3;     //消炎因子的赚钱能力(每两秒)
 
     private static int nowmoney = originmoney; //现在的额度
 
@@ -103,5 +105,11 @@ public class Core2 : MonoBehaviour
     {
         get { return nowmoney; }
         set { nowmoney = value; }
+    }
+
+     public static int WaveInterval
+    {
+        get { return waveinterval; }
+        set { waveinterval = value; }
     }
 }

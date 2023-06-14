@@ -111,4 +111,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellprefab: {fileID: 8747675227337661686, guid: 7a88f346ae5639c4aa71afe7b61b1e07, type: 3}
-  macrophageprefab: {fileID: 6533904288011250349, guid: 40077eedce8a21048b720309ae25f3aa, type: 3}
+  macrophageprefab: {fileID: 5774169520247618503, guid: 4eb2200d360c2304890e5d028f2621b8, type: 3}

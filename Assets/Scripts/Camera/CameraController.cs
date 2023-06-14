@@ -10,6 +10,8 @@ public class CameraController : MonoBehaviour
     [Tooltip(" Û±Í¡È√Ù∂»")]
     public float mouseSensitivity = 100f;
 
+    public float baseRotationX = 0f;
+
     private float mouseX, mouseY;
 
     private float xRotation = 0f;
@@ -35,7 +37,7 @@ public class CameraController : MonoBehaviour
         if (!isLocked)
         {
             player.Rotate(Vector3.up * mouseX);
-            transform.localRotation = Quaternion.Euler(xRotation-15, 0, 0);
+            transform.localRotation = Quaternion.Euler(xRotation+ baseRotationX, 0, 0);
         }
     }
 }
