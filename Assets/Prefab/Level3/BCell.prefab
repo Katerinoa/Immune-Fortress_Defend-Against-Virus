@@ -178,10 +178,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   antibodyPrefab: {fileID: 4754915920112856490, guid: 0def801e677dfe44e9d933f769e18bc9, type: 3}
   firePos: {fileID: 3676734985446137345}
-  virusTag: virus
   crazy: 0
-  attackRange: 10
+  attackRange: 15
   isRunning: 0
+  fireSpeed: 0
 --- !u!54 &3702954490066904994
 Rigidbody:
   m_ObjectHideFlags: 0

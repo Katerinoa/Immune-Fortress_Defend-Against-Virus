@@ -52,7 +52,7 @@ public class CellAffected : MonoBehaviour
 
         if (other.CompareTag("antibody"))
         {
-            Destroy(other);
+            Destroy(other.gameObject);
         }
     }
 
