@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingControl : MonoBehaviour
+public class SetControl : MonoBehaviour
 {
     public GameObject main;
     public GameObject control;
@@ -13,6 +13,11 @@ public class SettingControl : MonoBehaviour
     private Toggle easy;
     private Toggle medium;
     private Toggle difficult;
+    private void Awake()
+    {
+        //Time.timeScale = 0;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,11 +35,18 @@ public class SettingControl : MonoBehaviour
         mainaudio.volume = audioslider.value;
     }
 
+    public void Click()
+    {
+        gameObject.SetActive(true);
+        main.SetActive(false);
+        Time.timeScale = 0;
+    }
 
     public void ClickCancel()
     {
         main.SetActive(true);
         gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
     public void ClickEasy()
     {
