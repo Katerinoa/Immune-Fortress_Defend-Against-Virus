@@ -16,4 +16,6 @@ public class Core_Level3 : MonoBehaviour
 
     public static float crazyTime = 5.0f;  // B细胞强化时长
 
+    public static float fireSpeed = 2f;    // T细胞攻击速度
+
 }

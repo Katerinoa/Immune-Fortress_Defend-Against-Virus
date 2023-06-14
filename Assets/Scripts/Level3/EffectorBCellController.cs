@@ -10,10 +10,10 @@ public class EffectorBCellController : MonoBehaviour
 {
     public GameObject antibodyPrefab;       // 需要生成的预制体
     public Transform firePos;               // 发射点位置
-    public string virusTag = "virus";       // 病毒标签名称
     public bool crazy;                      // 是否被强化
     public float attackRange = 20f;         // 攻击距离
     public bool isRunning;                 // 是否在强化中
+    public float fireSpeed;
 
 
     private GameObject targetObject;        // 目标物体
@@ -23,13 +23,14 @@ public class EffectorBCellController : MonoBehaviour
 
     private void Awake()
     {
+        fireSpeed = Core_Level3.fireSpeed;
         crazyTime = Core_Level3.crazyTime;
     }
 
     void Start()
     {
         startPos = transform.position;
-        InvokeRepeating("GenerateAntibody", UnityEngine.Random.Range(0,1f), 1f);
+        InvokeRepeating("GenerateAntibody", UnityEngine.Random.Range(0,1f), 1/fireSpeed);
         audiosource = GetComponentInChildren<AudioSource>();  // 获取音效组件
     }
 
@@ -99,7 +100,7 @@ public class EffectorBCellController : MonoBehaviour
     IEnumerator CrazyTime()
     {
         attackRange *= 2;
-        StartCoroutine(ChangeColor(gameObject, new Color(1.0f,0.5f,0.5f,1.0f), 1f)); // 变色
+        StartCoroutine(ChangeColor(gameObject, new Color(1.0f,0.5f,0.5f,1.0f), 1/fireSpeed)); // 变色
         CancelInvoke("GenerateAntibody");
         InvokeRepeating("GenerateAntibody",0, 0.2f);
 
@@ -109,7 +110,7 @@ public class EffectorBCellController : MonoBehaviour
         attackRange /= 2;
         CancelInvoke("GenerateAntibody");
         InvokeRepeating("GenerateAntibody", 0, 1f);
-        StartCoroutine(ChangeColor(gameObject, Color.white, 2f)); // 变色
+        StartCoroutine(ChangeColor(gameObject, Color.white, 0.5f/ fireSpeed)); // 变色
 
     }
 
