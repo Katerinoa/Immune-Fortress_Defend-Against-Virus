@@ -11,10 +11,10 @@ public class InventoryPanel1 : MonoBehaviour
     Button button1, button2, button3, button4, button5, button6;
     string[] buttonname = { "button1", "button2", "button3", "button4", "button5", "button6" };
     public GameObject followmouseprefab;  //����Ǹ�����궯���Ǹ�
+    public Camera mainCamera;
     GameObject pane;
     public GameObject pane1, pane2, pane3, pane4, pane5, pane6;
     public GameObject[] Name = new GameObject[6];
-    Camera mainCamera;
 
 
     public int currentObject, pastObject;  //currentObject���������ŵ�ǰѡ�еĸ�������һ����-1����δѡ��;pastobject��ʾ֮ǰѡ�е�����
@@ -30,7 +30,6 @@ public class InventoryPanel1 : MonoBehaviour
         currentObject = -1;
         pastObject = -1;
         pane = GameObject.Find("Panel1");
-        mainCamera = Camera.main;
         if (GameObject.Find("button1") != null)
         {
             button1 = GameObject.Find("button1").GetComponent<Button>();
@@ -111,7 +110,7 @@ public class InventoryPanel1 : MonoBehaviour
             {
                 //  prefab.GetComponentInChildren<Rigidbody>().useGravity = false;
                 //  prefab.GetComponentInChildren<Controller>().enabled = false;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 Vector3 groundPoint = new Vector3();
                 if (Physics.Raycast(ray, out hit))
@@ -137,7 +136,7 @@ public class InventoryPanel1 : MonoBehaviour
                 prefab1.GetComponentInChildren<Collider>().enabled = true;
                 // prefab1.GetComponentInChildren<Rigidbody>().useGravity = true;
 
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 Vector3 groundPoint = new Vector3();
                 if (Physics.Raycast(ray, out hit))

@@ -47,7 +47,8 @@ public class CellAffected : MonoBehaviour
             }
 
             gameObject.SetActive(false);
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
+            other.gameObject.GetComponent<EffectorTCellController>().Sleep();
         }
 
         if (other.CompareTag("antibody"))
