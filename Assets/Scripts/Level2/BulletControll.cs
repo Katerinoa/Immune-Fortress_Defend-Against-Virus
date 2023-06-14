@@ -9,7 +9,7 @@ public class BulletControll : MonoBehaviour
     public float speed = 5.0f;
     Vector3 launchvec;
     GameObject parent;
-    public GameObject controllbullet;
+   // public GameObject controllbullet;
     //Transform firepoint;
 
     //EnemyControll nearenemy;
@@ -44,7 +44,7 @@ public class BulletControll : MonoBehaviour
         // {
         //     Destroy(this.gameObject);
         // }
-        // Destroy(gameObject, 3.0f);
+        Destroy(gameObject, 3.0f);
     }
 
     // Update is called once per frame

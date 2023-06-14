@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyCreator : MonoBehaviour
 {
     public GameObject virusprefab;
     GameObject virus;
+    public Text virusinfo;
     
     //加上生成敌人间隔时间的机制
     int enemywave = 0;
@@ -19,8 +21,10 @@ public class EnemyCreator : MonoBehaviour
     //自动生成敌人
     void Start()
     {
+        virusinfo.text = "";
         Debug.Log(Core2.VirusCounts(enemywave) + " , " + Core2.VirusCounts(enemywave + 1) + " , " + Core2.VirusCounts(enemywave + 2));
-        StartCoroutine("creatvirus");
+        //StartCoroutine("creatvirus");
+        Invoke("VirusInfo",Core2.WaveInterval / 2 - 1);
     }
 
     // Update is called once per frame
@@ -38,12 +42,12 @@ public class EnemyCreator : MonoBehaviour
         if((Core2.DestroyVirusNum == Core2.VirusCounts(enemywave)) && !flag2)
         {
             Debug.Log("第 " + enemywave + " 波敌人已被全部消灭");
+            Invoke("VirusInfo",5.0f);
             //当前这一波消灭了，就要进入下一波
             enemywave++;
 
             //10秒后进入下一波
             Debug.Log("第 " + enemywave + " 波敌人即将来袭");
-            Invoke("nextWave",10.0f);
             flag2 = true;
         } 
     }
@@ -68,6 +72,21 @@ public class EnemyCreator : MonoBehaviour
     //进入下一波，波总数在这里判断
     void nextWave()
     {
+        Debug.Log("进来");
         if(enemywave < 3) StartCoroutine("creatvirus");
+    }
+
+    void VirusInfo()
+    {
+        if(enemywave == 0) virusinfo.text = "First Wave Virus Is Coming.";
+        else if(enemywave == 1) virusinfo.text = "Second Wave Virus Is Coming.";
+        else if(enemywave == 2) virusinfo.text = "The Last Wave Virus Is Coming.";
+        Invoke("CancelInfo",2.0f);
+        Invoke("nextWave",2.0f);
+    }
+
+    void CancelInfo()
+    {
+        virusinfo.text = "";
     }
 }
