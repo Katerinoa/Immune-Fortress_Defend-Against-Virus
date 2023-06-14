@@ -14,7 +14,7 @@ public class PreLevel1 : MonoBehaviour
     {
         videoPlayer.loopPointReached += OnVideoEnd; // 注册视频播放结束事件
         videoPlayer.Play(); // 开始播放视频
-
+        videoPlayer.isLooping = true;
         StartCoroutine(LoadSceneAsync()); // 异步加载场景
     }
 
