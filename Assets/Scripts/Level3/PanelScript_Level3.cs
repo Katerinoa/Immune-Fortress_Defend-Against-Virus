@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 
 //����ű����ص�Panel1�ϣ�����Ʒ���Ľű�
-public class InventoryPanelscript : MonoBehaviour
+public class PanelScript_Level3 : MonoBehaviour
 {
     Button button1, button2, button3, button4, button5, button6;
     string[] buttonname = { "button1", "button2", "button3", "button4", "button5", "button6" };
@@ -121,7 +121,7 @@ public class InventoryPanelscript : MonoBehaviour
             }
 
             //������������
-            if (Input.GetMouseButtonDown(0)&&!IsPointerOverUI())
+            if (Input.GetMouseButtonDown(0) && !IsPointerOverUI())
             {
                 //2、3此处不同
                 GameObject prefab1 = Instantiate(Name[currentObject]);
