@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4754915919950433669}
   m_Layer: 0
   m_Name: Capsule (1)
-  m_TagString: Untagged
+  m_TagString: antibody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 4754915920083723216}
   m_Layer: 0
   m_Name: Capsule (2)
-  m_TagString: Untagged
+  m_TagString: antibody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 4754915920112856488}
   m_Layer: 0
   m_Name: antibody
-  m_TagString: Untagged
+  m_TagString: antibody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,7 +223,7 @@ Transform:
   m_GameObject: {fileID: 4754915920112856490}
   m_LocalRotation: {x: -0.043705367, y: -0.7635509, z: 0.051373128, w: -0.6422155}
   m_LocalPosition: {x: 24.07, y: -0.9747207, z: 37.37796}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4754915920279034583}
@@ -260,8 +260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c966d4f9095c34db49c310b770a688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  rotateSpeed: 500
+  speed: 15
+  rotateSpeed: 800
   targetTransform: {fileID: 0}
 --- !u!1 &4754915920279034600
 GameObject:
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 4754915920279034582}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: antibody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/Game3.unity.meta
+guid: 7973738fa5f548e4f975f715bd22bc26
+========
 guid: 347af594126231b4e9c137a63c1632e3
 folderAsset: yes
+>>>>>>>> 588cb815644827b762d4df082382f28ebd18ea05:Assets/Resources.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

@@ -6,16 +6,19 @@ using UnityEngine;
 
 public class CellAffected : MonoBehaviour
 {
-    public bool hasInfected = false;
-    public int virusCount = 0;                  // ��Ⱦ��Ŀ
-    public float infectedTime = 0;              // ��Ⱦ��ʼʱ��
-    private float maxInfectedTime = 5f;         // �����Ⱦʱ��
-    //private int maxVirus = 3;                   // �����Ⱦ��Ŀ
+    public bool hasInfected = false;    // T细胞寻找目标使用
+    public int virusCount = 0;          // 侵染进入的细胞数量
+    public AudioClip breakClip;         // 病毒侵染破裂
+    public AudioClip bombClip;          // B细胞裂解
+
+    private float SplitTime;             // 裂解时间
     private Coroutine infectedTimerCoroutine;
     private AudioSource audiosource;
 
-    public AudioClip breakClip;
-    public AudioClip bombClip;
+    private void Awake()
+    {
+        SplitTime = Core_Level3.SplitTime;
+    }
 
     private void Start()
     {
@@ -27,7 +30,7 @@ public class CellAffected : MonoBehaviour
         if (virusCount != 0)
         {
             hasInfected = true;
-            infectedTimerCoroutine = StartCoroutine(InfectedTimer(maxInfectedTime));
+            infectedTimerCoroutine = StartCoroutine(InfectedTimer(SplitTime));
         }
     }
 
@@ -44,6 +47,11 @@ public class CellAffected : MonoBehaviour
             }
 
             gameObject.SetActive(false);
+            Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("antibody"))
+        {
             Destroy(other.gameObject);
         }
     }

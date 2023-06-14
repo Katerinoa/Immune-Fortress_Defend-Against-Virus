@@ -11,7 +11,8 @@ public class MonsterGenerationPoint : MonoBehaviour
 
     private void Awake()
     {
-        MaxGenerateNum = Core.MaxGenerateNum;
+        MaxGenerateNum = Core_Level3.maxGenerateNum;
+        SpawnIntervalRange = Core_Level3.SpawnIntervalRange;
     }
     private void Start()
     {
@@ -48,7 +49,7 @@ public class MonsterGenerationPoint : MonoBehaviour
 
     private void Update()
     {
-        if (Counter.generateCount > MaxGenerateNum)
+        if (Counter.generateCount >= MaxGenerateNum)
             StopCoroutine("SpawnCoroutine");
     }
 

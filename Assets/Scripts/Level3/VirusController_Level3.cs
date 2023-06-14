@@ -7,31 +7,28 @@ using UnityEngine.AI;
 
 public class VirusController_Level3 : MonoBehaviour
 {
-    public GameObject VirusPrefeb;
-    public String ObjectName;
-    public Vector2 floatHeightRange = new Vector2(3f, 5f);// 浮动基础高度范围
-    public float baseHeight = 0; // 浮动基础高度
-    public float speed = 0.05f;// 移动速度
-    public float attackDistance = 10f; // 监测攻击范围
-    public GameObject targetCell; // 目标物体
-    public float floatAmplitude; // 浮动振幅
+    public String ObjectName;                                       // 目标物体名
+    public Vector2 floatHeightRange = new Vector2(3f, 5f);          // 浮动基础高度范围
+    public float baseHeight = 0;                                    // 浮动基础高度
+    public float attackDistance = 10f;                              // 监测攻击范围
+    public float floatAmplitude;                                    // 浮动振幅
     public bool isStopped = false;
     public bool innerCell = false;
 
+    private float speed;                                              // 移动速度
+    private GameObject targetCell;                                    // 目标物体
     private Color targetColor = new Color(0.71f, 0.92f, 0.62f, 1.0f); // 被侵染颜色
-    private float duration = 1.5f; // 渐变时间
+    private float duration = 1.0f;                                    // 渐变时间
     private GameObject targetObject;
-    private string Tag = "cell"; // 目标标签
     private NavMeshAgent navMeshAgent;
     private float floatStartTime;
-
 
     private void Awake()
     {
         targetObject = GameObject.Find(ObjectName);
-
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.enabled = true;
+        speed = Core_Level3.virusSpeed;
     }
 
     void Start()
@@ -78,6 +75,7 @@ public class VirusController_Level3 : MonoBehaviour
         {
             if (navMeshAgent.enabled == true)
             {
+                transform.position = new Vector3(transform.position.x, navMeshAgent.baseOffset+1.9f, transform.position.z);
                 navMeshAgent.enabled = false; // 终止寻路
             }
 
@@ -126,7 +124,7 @@ public class VirusController_Level3 : MonoBehaviour
 
     private void SelectTarget()
     {
-        GameObject[] cells = GameObject.FindGameObjectsWithTag(Tag);
+        GameObject[] cells = GameObject.FindGameObjectsWithTag("cell");
         List<GameObject> targetCells = new List<GameObject>();
 
         for (int i = 0; i < cells.Length; i++)

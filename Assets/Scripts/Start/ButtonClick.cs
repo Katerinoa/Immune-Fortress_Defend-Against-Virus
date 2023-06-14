@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class ButtonClick : MonoBehaviour
 {
+    public GameObject setting;
     public void ChangeToLevel1()
     {
         SceneManager.LoadScene(1);
@@ -11,7 +12,9 @@ public class ButtonClick : MonoBehaviour
 
     public void ChangeToSetting()
     {
-        SceneManager.LoadScene(2);
+        setting.SetActive(true);
+        gameObject.SetActive(false);
+        //SceneManager.LoadScene(2);
     }
     public void Quit()
     {

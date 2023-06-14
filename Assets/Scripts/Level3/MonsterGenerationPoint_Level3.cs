@@ -9,11 +9,13 @@ public class MonsterGenerationPoint_Level3 : MonoBehaviour
 
     private Transform TargetPos; //生成位置
     private int MaxGenerateNum; //最大生成数量
+    private static int generateCount = 0;
 
     private void Awake()
     {
-        MaxGenerateNum = Core.MaxGenerateNum;
+        MaxGenerateNum = Core_Level3.maxGenerateNum;
     }
+
     private void Start()
     {
         TargetPos = transform;
@@ -40,6 +42,12 @@ public class MonsterGenerationPoint_Level3 : MonoBehaviour
             virus.GetComponent<VirusController_Level3>().isStopped = false;
             virus.SetActive(true);
         }
-        Counter.generateCount++;
+        generateCount++;
+    }
+
+    private void Update()
+    {
+        if (generateCount >= MaxGenerateNum)
+            StopCoroutine("SpawnCoroutine");
     }
 }
