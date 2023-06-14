@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     [Tooltip("鼠标灵敏度")]
     public float mouseSensitivity = 100f;
 
-    public bool needLock = true;
+    public float baseRotationX = 0f;
 
     private float mouseX, mouseY;
 
@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (!isLocked || !needLock)
+        if (!isLocked)
         {
             mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
@@ -34,10 +34,10 @@ public class CameraController : MonoBehaviour
             isLocked = !isLocked; // 按下空格键切换锁定状态
         }
 
-        if (!isLocked || !needLock)
+        if (!isLocked)
         {
             player.Rotate(Vector3.up * mouseX);
-            transform.localRotation = Quaternion.Euler(xRotation-15, 0, 0);
+            transform.localRotation = Quaternion.Euler(xRotation+ baseRotationX, 0, 0);
         }
     }
 }

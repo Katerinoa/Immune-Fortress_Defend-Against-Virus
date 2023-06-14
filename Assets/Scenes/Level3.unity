@@ -2368,6 +2368,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2706389652308048536, guid: 1843338f5d315e74199f8b217e96ee4f, type: 3}
+      propertyPath: baseRotationX
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706389652308048536, guid: 1843338f5d315e74199f8b217e96ee4f, type: 3}
       propertyPath: mouseSensitivity
       value: 75
       objectReference: {fileID: 0}
