@@ -75,8 +75,10 @@ public class VirusController_Level3 : MonoBehaviour
         {
             if (navMeshAgent.enabled == true)
             {
-                transform.position = new Vector3(transform.position.x, navMeshAgent.baseOffset+1.9f, transform.position.z);
+                Vector3 prePosition = transform.position;
+                //transform.position = new Vector3(transform.position.x, navMeshAgent.baseOffset+1.9f, transform.position.z);
                 navMeshAgent.enabled = false; // 终止寻路
+                transform.position = prePosition;
             }
 
             Vector3 targetDir = targetCell.transform.position - transform.position;

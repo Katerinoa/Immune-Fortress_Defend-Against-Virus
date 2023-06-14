@@ -21,18 +21,13 @@ public class EffectorTCellController : MonoBehaviour
 
     void Update()
     {
-        if (isSleeping)
-        {
-            return; // 如果处于休眠状态，则不执行后续代码
-        }
-
         if (targetCell != null && !targetCell.activeSelf)
         {
             startPos = transform.position;
             targetCell = null;
         }
 
-        if (targetCell == null)
+        if (targetCell == null || isSleeping)
         {
             float offset = Mathf.Sin(Time.time * 5f + (startPos.x + startPos.y) * 100) * 0.2f;
             Vector3 newPos = startPos + new Vector3(0f, offset, 0f);
@@ -42,6 +37,11 @@ public class EffectorTCellController : MonoBehaviour
 
         if (targetCell != null)
         {
+            if (isSleeping)
+            {
+                return; // 如果处于休眠状态，则不执行后续代码
+            }
+
             Vector3 direction = targetCell.transform.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
 
