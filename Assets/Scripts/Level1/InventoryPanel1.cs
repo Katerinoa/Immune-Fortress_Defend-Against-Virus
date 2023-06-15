@@ -1,42 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 
-//����ű����ص�Panel1�ϣ�����Ʒ���Ľű�
 public class InventoryPanel1 : MonoBehaviour
 {
     Button button1, button2, button3, button4, button5, button6;
-    string[] buttonname = { "button1", "button2", "button3", "button4", "button5", "button6" };
-    public GameObject followmouseprefab;  //����Ǹ�����궯���Ǹ�
+
+    public GameObject Panel; // 面板
+    public GameObject generatePoses;
     public Camera mainCamera;
-    GameObject pane;
-    public GameObject pane1, pane2, pane3, pane4, pane5, pane6;
+    public GameObject[] Pane = new GameObject[6];
     public GameObject[] Name = new GameObject[6];
+    public int[] Num = new int[6] { 5, 2, 0, 0, 0, 0 };
+    public LayerMask terrainLayer; // 地形的图层
+    public TextMeshProUGUI[] remainNum = new TextMeshProUGUI[6];
 
+    private int[] Count = new int[6];
+    private float placementOffset = 5f;
+    private bool gameStart = false;
+    private string[] buttonname = { "button1", "button2", "button3", "button4", "button5", "button6" };
+    private GameObject followmouseprefab;
+    private int objectnum = 0;
+    private int currentObject, pastObject;
 
-    public int currentObject, pastObject;  //currentObject���������ŵ�ǰѡ�еĸ�������һ����-1����δѡ��;pastobject��ʾ֮ǰѡ�е�����
-    int objectnum=0;
-    void Start()
+    private void Start()
     {
-        Name[0] = pane1;
-        Name[1] = pane2;
-        Name[2] = pane3;
-        Name[3] = pane4;
-        Name[4] = pane5;
-        Name[5] = pane6;
+
         currentObject = -1;
         pastObject = -1;
-        pane = GameObject.Find("Panel1");
+
         if (GameObject.Find("button1") != null)
         {
             button1 = GameObject.Find("button1").GetComponent<Button>();
             button1.onClick.AddListener(func1);
-            objectnum += 1;
         }
-            
+        objectnum += 1;
         if (GameObject.Find("button2") != null)
         {
             button2 = GameObject.Find("button2").GetComponent<Button>();
@@ -68,96 +70,87 @@ public class InventoryPanel1 : MonoBehaviour
             button6.onClick.AddListener(func6);
             objectnum += 1;
         }
-
     }
 
     void Update()
     {
-        for (int i = 0; i < objectnum ; i++)  //������������ѡ��Ч���Ƿ�ɼ�
+        for (int i = 0; i < objectnum; i++)
+            remainNum[i].text = (Num[i]-Count[i]).ToString();
+
+        if (Panel.activeSelf)
         {
-            Debug.Log(objectnum);
-            if (currentObject == i)
+            for (int i = 0; i < objectnum; i++)
             {
-                GameObject.Find(buttonname[i]).GetComponent<RawImage>().enabled = true;
-                continue;
+                if (currentObject == i)
+                {
+                    if (Count[currentObject] >= Num[currentObject])
+                        return;
+                    GameObject.Find(buttonname[i]).GetComponent<RawImage>().enabled = true;
+                    continue;
+                }
+                GameObject.Find(buttonname[i]).GetComponent<RawImage>().enabled = false;
             }
-            GameObject.Find(buttonname[i]).GetComponent<RawImage>().enabled = false;
-            Debug.Log(i);
         }
-        /*
-        if (GameObject.Find("level3start") == null)  
+
+        if (currentObject != pastObject)
         {
-            Destroy(followmouseprefab); //��Ϸ�Ѿ���ʼ�ˣ��Ѹ�����궯������ɾ��
-        }*/
+            pastObject = currentObject;
+            if (currentObject >= 0 && currentObject < 6)
+            {
+                Destroy(followmouseprefab);
+                if (Count[currentObject] >= Num[currentObject])
+                    return; 
+                followmouseprefab = Instantiate(Name[currentObject]);
+            }
 
-        if (GameObject.Find("level3start") == null)  //�Ǹ���ť���ڣ�˵����δ��ʼ��Ϸ
+        }
+
+        if (currentObject != -1)
         {
-            if (currentObject != pastObject)
-            {
-                pastObject = currentObject;
-                if (currentObject >= 0 && currentObject < 6)
-                {
-                    Destroy(followmouseprefab);
-                    followmouseprefab = Instantiate(Name[currentObject]);
-                    followmouseprefab.GetComponentInChildren<Collider>().enabled = false;
-                   // followmouseprefab.GetComponentInChildren<Controller>().enabled = false;
-                }
+            followmouseprefab.transform.position = getPlacePosition();
+        }
 
-            }
+        if (Input.GetMouseButtonDown(0) && !IsPointerOverUI() && currentObject != -1)
+        {
+            if (Count[currentObject] >= Num[currentObject])
+                return;
 
-            //����һ�������������ƶ�
-            if (currentObject != -1) //�������ԭ���������Լ�����Ч�������԰��±�ǰ���е�ע��ɾ��
-            {
-                //  prefab.GetComponentInChildren<Rigidbody>().useGravity = false;
-                //  prefab.GetComponentInChildren<Controller>().enabled = false;
-                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                Vector3 groundPoint = new Vector3();
-                if (Physics.Raycast(ray, out hit))
-                {
-                    // ��ȡ��������
-                    groundPoint = hit.point;
-                }
-                if (currentObject == 0)
-                {
-                    groundPoint += new Vector3(0, 10, 0);
-                }
-                followmouseprefab.transform.position = groundPoint;
-                ;
-            }
+            GameObject prefab1 = Instantiate(Pane[currentObject]);
 
-            //������������
-            if (Input.GetMouseButtonDown(0) && !IsPointerOverUI()&&currentObject!=-1)
-            {
-                //2、3此处不同
-                Debug.Log(currentObject);
-                GameObject prefab1 = Instantiate(Name[currentObject]);
+            Count[currentObject]++;
 
-                prefab1.GetComponentInChildren<Collider>().enabled = true;
-                // prefab1.GetComponentInChildren<Rigidbody>().useGravity = true;
+            prefab1.GetComponentInChildren<Collider>().enabled = true;
 
-                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                Vector3 groundPoint = new Vector3();
-                if (Physics.Raycast(ray, out hit))
-                {
-                    // ��ȡ��������
-                    groundPoint = hit.point;
-                }
-                if (currentObject == 0)
-                {
-                    groundPoint += new Vector3(0,10, 0);
-                }
-                
-                prefab1.transform.position = groundPoint;
-            }
+            prefab1.transform.position = getPlacePosition();
+
+            Destroy(followmouseprefab);
+            currentObject = -1;
         }
     }
 
-    //һ����Щfunc()�������������ж��Ƿ���ѡ��״̬����Щ���ֲ���������
-    void func1()
+    Vector3 getPlacePosition()
     {
-        Debug.Log("点击按钮1");
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, terrainLayer))
+        {
+            Debug.Log("finding");
+
+            Vector3 placementPosition = ray.origin + ray.direction * (hit.distance - placementOffset);
+            return placementPosition;
+        }
+        return Vector3.zero;    
+    }
+
+    public void StartGame()
+    {
+        Panel.SetActive(false);
+        generatePoses.SetActive(true);
+        gameStart = true;
+    }
+void func1()
+    {
         if (currentObject != 0)
         {
             currentObject = 0;
@@ -212,9 +205,7 @@ public class InventoryPanel1 : MonoBehaviour
     private bool IsPointerOverUI()
     {
         // 检查鼠标点击是否在UI上
-          return EventSystem.current.IsPointerOverGameObject();
-        
+        return EventSystem.current.IsPointerOverGameObject();
     }
-
 }
 
