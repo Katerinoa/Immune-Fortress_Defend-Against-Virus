@@ -23,7 +23,7 @@ public class Core2 : MonoBehaviour
 
 
     //金币相关
-    private static int originmoney = 140;     //初始额度
+    private static int originmoney = 40;     //初始额度
     
     private static int cellprice = 30;       //消炎因子的价格
 
