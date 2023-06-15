@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Core2 : MonoBehaviour
 {
+
         //第2关相关变量
     private static float[] creatvirusinterval = {4.0f, 3.0f,2.0f};  //每波当中生成病毒的时间
 

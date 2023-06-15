@@ -86,6 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a8aef9356556284b8220c39fbb5bc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  watermaterial: {fileID: 2100000, guid: 6572f8ca0e10a89478d80af339f6acbf, type: 2}
   virusposition: {x: 0, y: 0, z: 0}
 --- !u!114 &-4498469651246229610
 MonoBehaviour:

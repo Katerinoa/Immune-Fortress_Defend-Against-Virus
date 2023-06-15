@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyControll : MonoBehaviour
 {
 
+    public Material watermaterial;
     NavMeshAgent agent;
     GameObject target;
     Vector3 tarplace;
@@ -14,6 +16,7 @@ public class EnemyControll : MonoBehaviour
     private Hpcontrol hpcontrol;
     void Start()
     {
+        
         target = GameObject.Find("destination");
 
         //寻路系统
@@ -29,6 +32,16 @@ public class EnemyControll : MonoBehaviour
     void Update()
     {
         virusposition = this.gameObject.transform.position;
+        Debug.Log(agent.destination - agent.nextPosition);
+        if ((Mathf.Abs(agent.destination.x - agent.nextPosition.x) <= 0.5f)
+        && (Mathf.Abs(agent.destination.y - agent.nextPosition.y) <= 0.5f)
+        && (Mathf.Abs(agent.destination.z - agent.nextPosition.z) <= 0.5f))
+        {
+            Debug.Log("stop");
+            watermaterial.color += Color.red;
+            Destroy(this.gameObject);
+        }
+
     }
 
     //敌人死亡

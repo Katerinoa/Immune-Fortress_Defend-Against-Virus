@@ -7,6 +7,11 @@ using UnityEngine.UI;
 
 public class EnemyCreator : MonoBehaviour
 {
+
+    public Material watermaterial;
+
+
+
     public GameObject virusprefab;
     GameObject virus;
     public Text virusinfo;
@@ -25,6 +30,10 @@ public class EnemyCreator : MonoBehaviour
         Debug.Log(Core2.VirusCounts(enemywave) + " , " + Core2.VirusCounts(enemywave + 1) + " , " + Core2.VirusCounts(enemywave + 2));
         //StartCoroutine("creatvirus");
         Invoke("VirusInfo",Core2.WaveInterval / 2 - 1);
+
+        Color nowcolor;
+        UnityEngine.ColorUtility.TryParseHtmlString("008FDB", out nowcolor);
+        watermaterial.color = nowcolor;
     }
 
     // Update is called once per frame
