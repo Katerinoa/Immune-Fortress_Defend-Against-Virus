@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class MonsterGenerationPoint_Level3 : MonoBehaviour
 {
-    public Vector2 SpawnIntervalRange = new Vector2(2.5f, 10.0f); // 生成时间间隔
+    public Vector2 SpawnIntervalRange;// 生成时间间隔
 
     private Transform TargetPos; //生成位置
     private int MaxGenerateNum; //最大生成数量
@@ -14,6 +14,7 @@ public class MonsterGenerationPoint_Level3 : MonoBehaviour
     private void Awake()
     {
         MaxGenerateNum = Core_Level3.maxGenerateNum;
+        SpawnIntervalRange = Core_Level3.SpawnIntervalRange;
     }
 
     private void Start()

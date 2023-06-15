@@ -7,7 +7,7 @@ public class ButtonClick : MonoBehaviour
     public GameObject setting;
     public void ChangeToLevel1()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("prelevel1");
     }
 
     public void ChangeToSetting()

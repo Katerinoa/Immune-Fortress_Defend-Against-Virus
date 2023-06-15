@@ -9,26 +9,24 @@ using UnityEngine.EventSystems;
 public class PanelScript_Level3 : MonoBehaviour
 {
     Button button1, button2, button3, button4, button5, button6;
-    string[] buttonname = { "button1", "button2", "button3", "button4", "button5", "button6" };
-    public GameObject followmouseprefab;  //����Ǹ�����궯���Ǹ�
-    public Camera mainCamera;
-    GameObject pane;
-    public GameObject pane1, pane2, pane3, pane4, pane5, pane6;
-    public GameObject[] Name = new GameObject[6];
 
-    int objectnum = 0;
-    public int currentObject, pastObject;  //currentObject���������ŵ�ǰѡ�еĸ�������һ����-1����δѡ��;pastobject��ʾ֮ǰѡ�е�����
+    public GameObject Panel; // 面板
+    public Camera mainCamera;
+    public GameObject[] Pane = new GameObject[6];
+    public GameObject[] Name = new GameObject[6];
+    public LayerMask terrainLayer; // 地形的图层
+    public float placementOffset = 7f;
+    public float maxDistance = 40f; // 最大距离
+
+    private string[] buttonname = { "button1", "button2", "button3", "button4", "button5", "button6" };
+    private GameObject followmouseprefab; 
+    private int objectnum = 0;
+    private int currentObject, pastObject;
+
     void Start()
     {
-        Name[0] = pane1;
-        Name[1] = pane2;
-        Name[2] = pane3;
-        Name[3] = pane4;
-        Name[4] = pane5;
-        Name[5] = pane6;
         currentObject = -1;
         pastObject = -1;
-        pane = GameObject.Find("Panel1");
 
         if (GameObject.Find("button1") != null)
         {
@@ -71,22 +69,26 @@ public class PanelScript_Level3 : MonoBehaviour
 
     void Update()
     {
-        for (int i = 0; i < objectnum; i++)  //������������ѡ��Ч���Ƿ�ɼ�
+        if (Input.GetKeyDown(KeyCode.B))
         {
-            if (currentObject == i)
-            {
-                GameObject.Find(buttonname[i]).GetComponent<RawImage>().enabled = true;
-                continue;
-            }
-            GameObject.Find(buttonname[i]).GetComponent<RawImage>().enabled = false;
+            Panel.SetActive(!Panel.activeSelf);
         }
-        /*
-        if (GameObject.Find("level3start") == null)  
-        {
-            Destroy(followmouseprefab); //��Ϸ�Ѿ���ʼ�ˣ��Ѹ�����궯������ɾ��
-        }*/
 
-        if (GameObject.Find("level3start") == null)  //�Ǹ���ť���ڣ�˵����δ��ʼ��Ϸ
+        if (Panel.activeSelf)
+        {
+            for (int i = 0; i < objectnum; i++)
+            {
+                if (currentObject == i)
+                {
+                    GameObject.Find(buttonname[i]).GetComponent<RawImage>().enabled = true;
+                    continue;
+                }
+                GameObject.Find(buttonname[i]).GetComponent<RawImage>().enabled = false;
+            }
+        }
+
+
+        if (GameObject.Find("level3start") == null) 
         {
             if (currentObject != pastObject)
             {
@@ -95,55 +97,49 @@ public class PanelScript_Level3 : MonoBehaviour
                 {
                     Destroy(followmouseprefab);
                     followmouseprefab = Instantiate(Name[currentObject]);
-                    followmouseprefab.GetComponentInChildren<Collider>().enabled = false;
-                    Controller controller = followmouseprefab.GetComponent<Controller>();
-                    followmouseprefab.GetComponentInChildren<Controller>().enabled = false;
                 }
 
             }
 
-            //����һ�������������ƶ�
-            if (currentObject != -1) //�������ԭ���������Լ�����Ч�������԰��±�ǰ���е�ע��ɾ��
+            if (currentObject != -1) 
             {
-                //  prefab.GetComponentInChildren<Rigidbody>().useGravity = false;
-                //  prefab.GetComponentInChildren<Controller>().enabled = false;
-                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                Vector3 groundPoint = new Vector3();
-                if (Physics.Raycast(ray, out hit))
-                {
-                    // ��ȡ��������
-                    groundPoint = hit.point;
-                }
-                groundPoint += new Vector3(0, 1, 0);
-                followmouseprefab.transform.position = groundPoint;
-                ;
+                followmouseprefab.transform.position = getPlacePosition();
             }
 
-            //������������
-            if (Input.GetMouseButtonDown(0) && !IsPointerOverUI())
+            if (Input.GetMouseButtonDown(0) && !IsPointerOverUI() && currentObject !=-1)
             {
-                //2、3此处不同
-                GameObject prefab1 = Instantiate(Name[currentObject]);
+                GameObject prefab1 = Instantiate(Pane[currentObject]);
 
                 prefab1.GetComponentInChildren<Collider>().enabled = true;
-                // prefab1.GetComponentInChildren<Rigidbody>().useGravity = true;
 
-                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                Vector3 groundPoint = new Vector3();
-                if (Physics.Raycast(ray, out hit))
-                {
-                    // ��ȡ��������
-                    groundPoint = hit.point;
-                }
-                groundPoint += new Vector3(0, 1, 0);
-                prefab1.transform.position = groundPoint;
+                prefab1.transform.position = getPlacePosition();
+
+                Destroy(followmouseprefab);
+                currentObject = -1;
             }
         }
     }
 
-    //һ����Щfunc()�������������ж��Ƿ���ѡ��״̬����Щ���ֲ���������
+    Vector3 getPlacePosition()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, maxDistance, terrainLayer))
+        {
+            // 计算放置位置
+            Vector3 placementPosition = ray.origin + ray.direction * (hit.distance - placementOffset);
+
+            return placementPosition;
+        }
+        else
+        {
+            // 超过最大距离时，将物体放置在射线的最远位置处
+            Vector3 placementPosition = ray.origin + ray.direction * maxDistance;
+            return placementPosition;
+        }
+    }
+
     void func1()
     {
         if (currentObject != 0)

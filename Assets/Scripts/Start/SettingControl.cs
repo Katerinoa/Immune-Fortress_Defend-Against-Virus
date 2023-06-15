@@ -30,6 +30,7 @@ public class SettingControl : MonoBehaviour
         mainaudio.volume = audioslider.value;
     }
 
+
     public void ClickCancel()
     {
         main.SetActive(true);

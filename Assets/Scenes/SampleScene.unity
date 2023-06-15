@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17286918, g: 0.21603116, b: 0.2979882, a: 1}
+  m_IndirectSpecularColor: {r: 0.43681002, g: 0.48444086, b: 0.5646965, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1057,7 +1057,7 @@ GameObject:
   - component: {fileID: 707820138}
   - component: {fileID: 707820137}
   m_Layer: 5
-  m_Name: Image
+  m_Name: RawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2062,6 +2062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followmouseprefab: {fileID: 0}
+  mainCamera: {fileID: 0}
   pane1: {fileID: 4215844650020831068, guid: 27e4c59602bb59745b38b2a07e2bcd7a, type: 3}
   pane2: {fileID: 8129603801023192442, guid: d816c8edbf431904999c2910d6593abd, type: 3}
   pane3: {fileID: 5072255911423498526, guid: 157a548106389a44c9f52bb8015e27e1, type: 3}
@@ -2926,6 +2927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 117434063}
   mouseSensitivity: 100
+  baseRotationX: 0
 --- !u!81 &1618957405
 AudioListener:
   m_ObjectHideFlags: 0
