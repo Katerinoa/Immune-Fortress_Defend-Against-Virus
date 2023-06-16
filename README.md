@@ -19,8 +19,6 @@
 
 > 人体的第一道防线是物理层面的免疫，在这里皮肤上的纤毛和黏膜成为关键的防御屏障
 
-![image](https://github.com/Katerinoa/Immune-Fortress_Defend-Against-Virus/assets/101270226/065721f1-0bea-4a3c-866b-8c4ded5d5caf) style="zoom:33%;"
-
 玩家需合理布置有限数量的**绒毛**和**黏膜**，阻止病毒进入伤口或者鼻腔
 
 布置结束后，点击Start按钮，病毒会不断产生降落到皮肤上，并向鼻腔移动，入侵成功的病毒会进入第二道防线
@@ -32,11 +30,13 @@
 | 纤毛 |  10  | 左右摆动，粘住触碰到的病毒 |
 | 黏膜 |  3   |          减速病毒          |
 
+**场景图片**
+
+<img src="https://github.com/Katerinoa/Immune-Fortress_Defend-Against-Virus/assets/101270226/065721f1-0bea-4a3c-866b-8c4ded5d5caf" alt="image" style="zoom:50%;" />
+
 ### 第二道防线
 
-> 第一道防线入侵成功的病毒会进入到第二道防线中，第二道防线是与生俱来的非特异性防御机制，主要发挥作用的是吞噬细胞
-
-![image](https://github.com/Katerinoa/Immune-Fortress_Defend-Against-Virus/assets/101270226/24eded98-b241-47ad-ace7-9f5cf24ee75d) style="zoom:33%;"
+> 第一道防线入侵成功的病毒会进入到第二道防线中，第二道防线是与生俱来的非特异性防御机制，主要发挥作用的是吞噬细胞 
 
 本关卡的道具放置需要消耗**体力值**，体力值随时间自动补充
 
@@ -53,11 +53,13 @@
 | 吞噬细胞 |     40     | 持续攻击病毒 |
 | 消炎因子 |     20     | 缓解炎症反应 |
 
+**场景图片**
+
+<img src="https://github.com/Katerinoa/Immune-Fortress_Defend-Against-Virus/assets/101270226/24eded98-b241-47ad-ace7-9f5cf24ee75d" alt="image" style="zoom:50%;" />
+
 ### 第三道防线
 
-> 如果第一道防线和第二道防线都失守，玩家需要集中精力在第三道防线阻止病原体感染普通细胞，以保护人体免受进一步伤害
-
-![image](https://github.com/Katerinoa/Immune-Fortress_Defend-Against-Virus/assets/101270226/2b712b3c-ab2e-42da-bbed-8a013f1e73a9) style="zoom:33%;"
+> 如果第一道防线和第二道防线都失守，玩家需要集中精力在第三道防线阻止病原体感染普通细胞，以保护人体免受进一步伤害 
 
 本关卡的道具放置需要消耗**体力值**，体力值随时间自动补充
 
@@ -73,6 +75,10 @@
 | 效应T细胞 |     10     | 准确找到已经被病毒入侵的细胞，移动过去将其裂解，阻止病毒繁殖 |
 | 效应B细胞 |     40     | 向未侵入细胞的病毒发射抗体 受到淋巴因子刺激后攻击范围增大，射速大幅增加 |
 | 吞噬细胞  |     10     |          缓慢移动 吞噬周围的病毒 并在吞噬后增大体型          |
+
+**场景图片**
+
+<img src="https://github.com/Katerinoa/Immune-Fortress_Defend-Against-Virus/assets/101270226/2b712b3c-ab2e-42da-bbed-8a013f1e73a9" alt="image" style="zoom:50%;" />
 
 ## 胜利条件
 
