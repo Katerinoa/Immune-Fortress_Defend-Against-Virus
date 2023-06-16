@@ -452,7 +452,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 105.679, z: 0}
 --- !u!1001 &240347370
 PrefabInstance:
@@ -621,7 +621,7 @@ Transform:
   - {fileID: 614390256}
   - {fileID: 920521935}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &336693072 stripped
 Transform:
@@ -864,7 +864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1806930792354234973, guid: 4650cd10f1fa2334b8f5bf4f0e810f94, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1806930792354234973, guid: 4650cd10f1fa2334b8f5bf4f0e810f94, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1647,7 +1647,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2099369601712188480, guid: 1843338f5d315e74199f8b217e96ee4f, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2099369601712188480, guid: 1843338f5d315e74199f8b217e96ee4f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2167,7 +2167,6 @@ GameObject:
   - component: {fileID: 1395024743}
   - component: {fileID: 1395024742}
   - component: {fileID: 1395024741}
-  - component: {fileID: 1395024740}
   m_Layer: 5
   m_Name: Panel1
   m_TagString: Untagged
@@ -2199,35 +2198,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 8}
   m_SizeDelta: {x: -288, y: 78.60419}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &1395024740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395024738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c79b9d06b7433774598d74c53d23550d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followmouseprefab: {fileID: 0}
-  mainCamera: {fileID: 1441589631}
-  pane1: {fileID: 4215844650020831068, guid: 27e4c59602bb59745b38b2a07e2bcd7a, type: 3}
-  pane2: {fileID: 8129603801023192442, guid: d816c8edbf431904999c2910d6593abd, type: 3}
-  pane3: {fileID: 5072255911423498526, guid: 157a548106389a44c9f52bb8015e27e1, type: 3}
-  pane4: {fileID: 5158364106536439044, guid: ff9215bc26fdf5c409f0ce8569d85f42, type: 3}
-  pane5: {fileID: 7415282054881824665, guid: a4a498de8e490544bb44d4aa47ca191a, type: 3}
-  pane6: {fileID: 4215844650020831068, guid: 27e4c59602bb59745b38b2a07e2bcd7a, type: 3}
-  Name:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  currentObject: 0
-  pastObject: 0
 --- !u!114 &1395024741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2675,7 +2645,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1496245455
 AudioSource:
@@ -2806,7 +2776,6 @@ MonoBehaviour:
     m_Bits: 64
   placementOffset: 6
   maxDistance: 40
-  objectnum: 4
 --- !u!4 &1509991749 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7408725517330607633, guid: 324f3b831f2edd1479fd03859b98c2fe, type: 3}

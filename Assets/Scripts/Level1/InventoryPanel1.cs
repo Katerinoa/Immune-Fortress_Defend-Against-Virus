@@ -33,7 +33,6 @@ public class InventoryPanel1 : MonoBehaviour
         currentObject = -1;
         pastObject = -1;
 
-        // 统计使用的道具格数量
         if (GameObject.Find("button1") != null)
         {
             button1 = GameObject.Find("button1").GetComponent<Button>();

@@ -18,14 +18,54 @@ public class PanelScript_Level3 : MonoBehaviour
 
     private string[] buttonname = { "button1", "button2", "button3", "button4", "button5", "button6" };
     private GameObject followmouseprefab;
-    public int objectnum = 4;
+    private int objectnum = 0;
     private int currentObject, pastObject;
+    private Button button1, button2, button3, button4, button5, button6;
+
 
     void Start()
     {
         currentObject = -1;
         pastObject = -1;
 
+        // 统计使用的道具格数量
+        if (GameObject.Find("button1") != null)
+        {
+            button1 = GameObject.Find("button1").GetComponent<Button>();
+            button1.onClick.AddListener(func1);
+        }
+        objectnum += 1;
+        if (GameObject.Find("button2") != null)
+        {
+            button2 = GameObject.Find("button2").GetComponent<Button>();
+            button2.onClick.AddListener(func2);
+            objectnum += 1;
+        }
+        if (GameObject.Find("button3") != null)
+        {
+            button3 = GameObject.Find("button3").GetComponent<Button>();
+            button3.onClick.AddListener(func3);
+            objectnum += 1;
+        }
+
+        if (GameObject.Find("button4") != null)
+        {
+            button4 = GameObject.Find("button4").GetComponent<Button>();
+            button4.onClick.AddListener(func4);
+            objectnum += 1;
+        }
+        if (GameObject.Find("button5") != null)
+        {
+            button5 = GameObject.Find("button5").GetComponent<Button>();
+            button5.onClick.AddListener(func5);
+            objectnum += 1;
+        }
+        if (GameObject.Find("button6") != null)
+        {
+            button6 = GameObject.Find("button6").GetComponent<Button>();
+            button6.onClick.AddListener(func6);
+            objectnum += 1;
+        }
     }
 
     void Update()
