@@ -12,12 +12,18 @@ public class MoneyControll : MonoBehaviour
 
     private Text moneytxt;      //金币数量显示
     private Text info;          //金币数量不足提示语
+    private int sign = 0;
     void Start()
     {
         //体力值初始化
         moneytxt = this.gameObject.transform.Find("text").gameObject.GetComponent<Text>();
-        info = this.gameObject.transform.Find("hint").gameObject.GetComponent<Text>();
-        info.text = "";
+        if (this.gameObject.transform.Find("hint") != null)
+            sign = 1;
+        if (sign==1)
+        {
+            info = this.gameObject.transform.Find("hint").gameObject.GetComponent<Text>();
+            info.text = "";
+        }
         moneytxt.text = Core2.OriginMoney.ToString();
         InvokeRepeating("DefultMakeMoney",0.5f,2.0f);
 
@@ -27,7 +33,8 @@ public class MoneyControll : MonoBehaviour
     {
         //实时监测当前体力值
         moneytxt.text = Core2.NowMoney.ToString();
-        info.text = GridControll.moneyhint;
+        if (sign == 1)
+            info.text = GridControll.moneyhint;
         if(Core2.NowMoney >= Core2.MaxMoney) Core2.NowMoney = Core2.MaxMoney;  //体力修复则停止
     }
 
