@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/**
+ * 该脚本用于3D放置 
+ * 详细注释请看level1中的InventoryPanel1
+ */
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-
-//����ű����ص�Panel1�ϣ�����Ʒ���Ľű�
 public class PanelScript_Level3 : MonoBehaviour
 {
-    Button button1, button2, button3, button4, button5, button6;
-
     public GameObject Panel; // 面板
     public Camera mainCamera;
     public GameObject[] Pane = new GameObject[6];
@@ -22,6 +20,7 @@ public class PanelScript_Level3 : MonoBehaviour
     private GameObject followmouseprefab; 
     private int objectnum = 0;
     private int currentObject, pastObject;
+    private Button button1, button2, button3, button4, button5, button6;
 
     void Start()
     {
@@ -192,7 +191,6 @@ public class PanelScript_Level3 : MonoBehaviour
         else currentObject = -1;
     }
 
-    // Update is called once per frame
     private bool IsPointerOverUI()
     {
         // 检查鼠标点击是否在UI上

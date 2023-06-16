@@ -1,5 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+/**
+ * 该脚本用于控制第三关的整体难度
+ */
 using UnityEngine;
 
 public class Core_Level3 : MonoBehaviour

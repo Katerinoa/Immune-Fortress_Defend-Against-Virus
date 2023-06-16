@@ -1,7 +1,9 @@
+/**
+ * 该脚本用于控制第三关的刷怪点 
+ * 详细注释请看Level1中的MonsterGenerationPoint
+ */
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MonsterGenerationPoint_Level3 : MonoBehaviour
 {

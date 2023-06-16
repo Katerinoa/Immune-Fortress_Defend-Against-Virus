@@ -1,10 +1,8 @@
-using System.Collections.Generic;
+/**
+ * 该脚本用于控制效应B细胞的行为
+ */
 using UnityEngine;
-using System;
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine.AI;
-
 
 public class EffectorBCellController : MonoBehaviour
 {
@@ -19,10 +17,11 @@ public class EffectorBCellController : MonoBehaviour
     private GameObject targetObject;        // 目标物体
     private AudioSource audiosource;        // 音效组件
     private Vector3 startPos;               // 初始位置
-    private float crazyTime;
+    private float crazyTime;                // 强化时长
 
     private void Awake()
     {
+        // 从Core中获取数值
         fireSpeed = Core_Level3.fireSpeed;
         crazyTime = Core_Level3.crazyTime;
     }
@@ -36,11 +35,11 @@ public class EffectorBCellController : MonoBehaviour
 
     void GenerateAntibody()
     {
+        // 生成抗体
         if (targetObject == null)
             return;
         GameObject antibody = Instantiate(antibodyPrefab, firePos.position, Quaternion.identity);
         antibody.transform.LookAt(targetObject.transform.position);
-        antibody.GetComponent<AntibodyController>().targetTransform = targetObject.transform;
         audiosource.Play();  // 播放音效
     }
 
@@ -69,22 +68,24 @@ public class EffectorBCellController : MonoBehaviour
                 return;
             }
 
+            // 顺滑转向目标病毒
             Vector3 direction = targetObject.transform.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3f*Time.deltaTime);// 转向目标物体
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3f*Time.deltaTime);
 
         }
 
         if (targetObject == null)
         {
-            SelectTarget();
+            SelectTarget(); // 寻找目标
         }
 
+        // 上下浮动效果
         float offset = Mathf.Sin(Time.time * 5f + (startPos.x + startPos.y) * 100) * 0.2f;
         Vector3 newPos = startPos + new Vector3(0f, offset, 0f);
         transform.position = newPos;
 
+        // 强化控制
         if (crazy && !isRunning)
         {
             isRunning = true;
@@ -97,26 +98,28 @@ public class EffectorBCellController : MonoBehaviour
         }
     }
 
+    // 强化状态
     IEnumerator CrazyTime()
     {
-        attackRange *= 2;
+        attackRange *= 2; // 增加射程
         StartCoroutine(ChangeColor(gameObject, new Color(1.0f,0.5f,0.5f,1.0f), 1)); // 变色
         CancelInvoke("GenerateAntibody");
-        InvokeRepeating("GenerateAntibody", 0, 0.5f / fireSpeed);
+        InvokeRepeating("GenerateAntibody", 0, 0.5f / fireSpeed); //提高射速
 
         yield return new WaitForSeconds(crazyTime);
 
         isRunning = false;
-        attackRange /= 2;
+        attackRange /= 2; // 增加恢复
         CancelInvoke("GenerateAntibody");
-        InvokeRepeating("GenerateAntibody", 0, 1f / fireSpeed);
+        InvokeRepeating("GenerateAntibody", 0, 1f / fireSpeed); //恢复射速
         StartCoroutine(ChangeColor(gameObject, Color.white, 1)); // 变色
 
     }
 
+    // 寻找目标
     private void SelectTarget()
     {
-        GameObject[] viruses = GameObject.FindGameObjectsWithTag("virus");
+        GameObject[] viruses = GameObject.FindGameObjectsWithTag("virus"); // 找到所有病毒
 
         if (viruses.Length > 0)
         {
@@ -127,23 +130,22 @@ public class EffectorBCellController : MonoBehaviour
             {
                 float distance = Vector3.Distance(transform.position, virus.transform.position);
 
-                if (virus.GetComponent<VirusController_Level3>().innerCell)
+                if (virus.GetComponent<VirusController_Level3>().innerCell) //排除进入细胞的
                     continue;
-                if (Vector3.Distance(transform.position, virus.transform.position) > attackRange)
+                if (Vector3.Distance(transform.position, virus.transform.position) > attackRange) // 排除攻击范围之外的
                     continue;
 
-                if (distance < minDistance)
+                if (distance < minDistance) // 寻找符合要求的最近的病毒
                 {
                     closestVirus = virus;
                     minDistance = distance;
                 }
             }
-
             targetObject = closestVirus;
-
         }
     }
 
+    // 颜色渐变
     IEnumerator ChangeColor(GameObject targetCell, Color targetColor, float duration)
     {
         float timeElapsed = 0;
