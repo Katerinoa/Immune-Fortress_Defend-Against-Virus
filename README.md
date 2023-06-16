@@ -79,7 +79,7 @@
 **场景图片**
 
 <img src="https://github.com/Katerinoa/Immune-Fortress_Defend-Against-Virus/assets/101270226/2b712b3c-ab2e-42da-bbed-8a013f1e73a9" alt="image" style="zoom:50%;" />
-![image](https://github.com/Katerinoa/Immune-Fortress_Defend-Against-Virus/assets/101270226/84ed37dd-2f5b-4c18-aefe-9b57c389cff1)
+<img src="https://github.com/Katerinoa/Immune-Fortress_Defend-Against-Virus/assets/101270226/84ed37dd-2f5b-4c18-aefe-9b57c389cff1" alt="image" style="zoom:50%;" />
 
 
 ## 胜利条件
