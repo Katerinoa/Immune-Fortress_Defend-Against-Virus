@@ -1,3 +1,6 @@
+/*
+*  下方Tab栏UI——点击预生成对象
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,19 +8,20 @@ using UnityEngine.UI;
 
 public class TabCreatControll : MonoBehaviour
 {
-    Button button1, button2, button3, button4, button5, button6;
-    string[] buttonname = { "button1", "button2", "button3", "button4", "button5", "button6" };
-    public static GameObject followmouseprefab;  //����Ǹ�����궯���Ǹ�
-    GameObject pane;
-    public GameObject pane1, pane2, pane3, pane4, pane5, pane6;
-    public GameObject[] Name = new GameObject[6];
-    Camera mainCamera;
+    private Button button1, button2, button3, button4, button5, button6;                                        //细胞贴图放置的按钮
+    private string[] buttonname = { "button1", "button2", "button3", "button4", "button5", "button6" };         //细胞对应编号
+    public static GameObject followmouseprefab;                                                                 //预生成的细胞预制体
+    private GameObject pane;                                                                                    //选择栏
+    public GameObject pane1, pane2, pane3, pane4, pane5, pane6;                                                 //细胞对象
+    public GameObject[] Name = new GameObject[6];                                                               //细胞对象数组
+    private Camera mainCamera;                                                                                  //主相机
 
 
-    int pastObject;  
+    private int pastObject;  
     public static int currentObject;  //改成公有静态，给GridControll用
     void Start()
     {
+        //初始化确定栏中的各种细胞
         Name[0] = pane1;
         Name[1] = pane2;
         Name[2] = pane3;
@@ -50,8 +54,10 @@ public class TabCreatControll : MonoBehaviour
 
     }
 
+
     void Update()
     {
+        //判断点击的对象
         for (int i = 0; i < 6; i++)  
         {
             if (currentObject == i)
@@ -61,14 +67,9 @@ public class TabCreatControll : MonoBehaviour
             }
             GameObject.Find(buttonname[i]).GetComponent<RawImage>().enabled = false;
         }
-
-        // if (GameObject.Find("level3start") == null)
-        // {
-        //     Destroy(followmouseprefab); 
-        // }
-
         if (true)  
         {
+            //预生成对象
             if (currentObject != pastObject)
             {
                 pastObject = currentObject;
@@ -76,58 +77,32 @@ public class TabCreatControll : MonoBehaviour
                 {
                     Destroy(followmouseprefab);
                     followmouseprefab = Instantiate(Name[currentObject]);
-                   // followmouseprefab.GetComponentInChildren<Collider>().enabled = false;
-                   //禁用脚本
                     if(currentObject == 4) {
-                        followmouseprefab.GetComponent<AttackUI>().enabled = false;
+                        followmouseprefab.GetComponent<AttackUI>().enabled = false;  //禁用脚本，此时还无法攻击或修复
                         followmouseprefab.transform.Find("bullet").gameObject.GetComponent<BulletControll>().enabled = false;
                         }
                 }
 
             }
 
-           //预点击后对象跟随鼠标
+           //预点击后要生成的对象跟随鼠标
             if (currentObject != -1) 
             {
-                //  prefab.GetComponentInChildren<Rigidbody>().useGravity = false;
-                //  prefab.GetComponentInChildren<Controller>().enabled = false;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 Vector3 groundPoint = new Vector3();
                 if (Physics.Raycast(ray, out hit))
                 {
-                    // ��ȡ��������
                     groundPoint = hit.point;
                 }
                 groundPoint += new Vector3(0, 0.2f, 0);
                 if(followmouseprefab != null) followmouseprefab.transform.position = groundPoint;
             }
-
-            //这个不行，是只能放在特定格子里，所以判断条件不同，放在grid的脚本里更好操作，不用计算
-            //缺点：封装性不够
-            // if (Input.GetMouseButtonDown(0) && !(Input.mousePosition.x > 174 && Input.mousePosition.x < 685 && Input.mousePosition.y < 74) && !(Input.mousePosition.x > 340 && Input.mousePosition.x < 650 && Input.mousePosition.y > 340) && currentObject != -1)
-            // {
-            //     GameObject prefab1 = Instantiate(Name[currentObject]);
-
-            //     prefab1.GetComponentInChildren<Collider>().enabled = true;
-            //     // prefab1.GetComponentInChildren<Rigidbody>().useGravity = true;
-
-            //     //这个应该是摆放位置
-            //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //     RaycastHit hit;
-            //     Vector3 groundPoint = new Vector3();
-            //     if (Physics.Raycast(ray, out hit))
-            //     {
-            //         // ��ȡ��������
-            //         groundPoint = hit.point;
-            //     }
-            //     groundPoint += new Vector3(0, 1, 0);
-            //     prefab1.transform.position = groundPoint;
-            // }
         }
     }
 
     
+    //各个对象对应的下标值
     void func1()
     {
         currentObject = -1;
@@ -166,7 +141,5 @@ public class TabCreatControll : MonoBehaviour
         }
         else currentObject = -1;
     }
-
-    // Update is called once per frame
 
 }

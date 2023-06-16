@@ -1,86 +1,41 @@
+/*
+*  巨噬细胞攻击机制——寻找攻击范围内距离最近的敌人并发射子弹
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackUI : MonoBehaviour
 {
-    public GameObject bulletprefab;
-    public GameObject launchplace;
-    GameObject bullet;
-    GameObject enemy;
-
-    public Vector3 launchvec;
-
-    //int flag = 0;
-
-
-
-
-    Transform firepoint;
-
-    EnemyControll nearenemy;
-    public static float mindis = 100;
+    public GameObject bulletprefab;   //子弹预制体
+    public GameObject launchplace;   //发射点对象
+    private GameObject bullet;       //子弹生成
+    private GameObject enemy;        //距离最近的病毒
+    public Vector3 launchvec;         //发射方向
+    private Transform firepoint;      //发射点组件
+    private EnemyControll nearenemy;  //寻找的最小病毒的脚本
+    public static float mindis = 100;  //最小距离
 
     // Start is called before the first frame update
     void Start()
     {
-        // GetComponent<AttackUI>().enabled = false;
-        // enemy = GameObject.Find("virus");
-        // if (enemy) StartCoroutine("shoot");
         firepoint = launchplace.transform;
+        //每秒寻找一次距离最近者
         InvokeRepeating("findmin", 0.5f, 1.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //开始和停止射击机制
-        // if (enemy == null)
-        // {
-        //     if (flag == 0) StopCoroutine("shoot");
-        //     enemy = GameObject.Find("virus");
-        //     if (enemy == null) flag = -1;
-        //     else flag = 1;
-        // }
-        // else if (flag == 1)
-        // {
-        //     // StartCoroutine("shoot");
-        //     // flag = 0;
-        //     if (BulletControll.mindis <= 12.0f)
-        //     {
-        //         StartCoroutine("shoot");
-        //         flag = 0;
-        //     }
-        // }
-
-        //不能，因为还要进去才能判断距离，否则midis不更新，死锁
-        // else if(flag == 0 && BulletControll.mindis > 12.0f)
-        // {
-        //     StopCoroutine("shoot");
-        //     flag = 1;
-        // }
-        //生成子弹
-        // if(mindis <= 12.0f)
-        // {
-        //     mindis = 100.0f;
-        //     enemy = nearenemy.gameObject;
-        //     launchvec = enemy.transform.position - firepoint.transform.position;
-        //     transform.LookAt(enemy.transform,Vector3.up);
-        //     bullet = Instantiate(bulletprefab, launchplace.transform.position, bulletprefab.transform.rotation, this.transform);
-        //     bullet.name = "bullet";
-        // }
     }
 
-    //找距离最近者
+    //找距离最近者并生成子弹
     EnemyControll findmin()
     {
         EnemyControll[] allenemies = FindObjectsOfType<EnemyControll>();
         if (allenemies.Length < 1) return null;
-        nearenemy = mindistance(allenemies, firepoint);
-        //    nearenemy.gameObject.GetComponent<Renderer>().material.color = Color.red;
-        //应该放在这里发射
-        if (mindis <= 12.0f)
+        nearenemy = mindistance(allenemies, firepoint);  //计算最近的敌人
+        if (mindis <= 12.0f)  //监测到12m范围内有敌人即生成子弹
         {
             enemy = nearenemy.gameObject;
             launchvec = enemy.transform.position - firepoint.transform.position;
@@ -91,6 +46,7 @@ public class AttackUI : MonoBehaviour
         return nearenemy;
     }
 
+    //寻找所有病毒中最小距离
     EnemyControll mindistance(EnemyControll[] tararr, Transform ori)
     {
         if (tararr.Length <= 0) return null;
@@ -105,22 +61,7 @@ public class AttackUI : MonoBehaviour
                 mindis = nextdis;
             }
         }
-        //    Debug.Log("最小距离：" +mindis);
         return lasttar;
     }
 }
-
-    // IEnumerator shoot()
-    // {
-
-    //     while (true)
-    //     {
-    //         yield return new WaitForSeconds(Core2.CreatBulletInterval);
-    //         bullet = Instantiate(bulletprefab, launchplace.transform.position, bulletprefab.transform.rotation, this.transform);
-    //         bullet.name = "bullet";
-    //         //    Debug.Log(bullet.transform.position);
-    //         //  Destroy(bullet,5.0f);        //在子弹预制体里面实现
-    //     }
-
-    // }
 

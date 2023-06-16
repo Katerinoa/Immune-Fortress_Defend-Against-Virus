@@ -1,11 +1,13 @@
+/*
+*  第2关卡核心控制变量
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Core2 : MonoBehaviour
 {
-
-        //第2关相关变量
+    //攻击相关
     private static float[] creatvirusinterval = {4.0f, 3.0f,2.0f};  //每波当中生成病毒的时间
 
     private static float creatbulletsinterval = 1.0f;  //生成子弹间隔
@@ -23,17 +25,18 @@ public class Core2 : MonoBehaviour
     private static int damagevalue = 5;  //一颗子弹的伤害值
 
 
-    //金币相关
+    //体力机制相关
     private static int originmoney = 40;     //初始额度
     
-    private static int cellprice = 30;       //消炎因子的价格
+    private static int cellprice = 30;       //消炎因子需要的体力值
 
-    private static int macrophageprice = 50;     //巨噬细胞的价格
+    private static int macrophageprice = 50;     //巨噬细胞需要的体力值
 
-    private static int cellwage = 3;     //消炎因子的赚钱能力(每两秒)
+    private static int cellwage = 3;     //消炎因子的修复能力(每两秒)
 
     private static int nowmoney = originmoney; //现在的额度
 
+    private static int maxmoney =  200;   //体力最大值
 
     public static float CreatVirusInterval(int i)
     {
@@ -112,5 +115,11 @@ public class Core2 : MonoBehaviour
     {
         get { return waveinterval; }
         set { waveinterval = value; }
+    }
+
+     public static int MaxMoney
+    {
+        get { return maxmoney; }
+        set { maxmoney = value; }
     }
 }
