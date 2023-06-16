@@ -16,7 +16,7 @@ public class EnemyCreator : MonoBehaviour
     private GameObject virus;          //生成的病毒对象
     public Text virusinfo;             //生成病毒提示语
     private int enemywave = 0;         //当前的病毒波次
-    private bool flag1 = false,flag2 = false;       //判断是否开始新的生成
+    private bool flag1 = false;       //判断是否开始新的生成
 
 
     void Start()
@@ -44,7 +44,6 @@ public class EnemyCreator : MonoBehaviour
             Invoke("VirusInfo",45.0f);
             enemywave++;
             Debug.Log("第 " + enemywave + " 波敌人即将来袭");
-            flag2 = true;
         }
     }
 
@@ -58,8 +57,6 @@ public class EnemyCreator : MonoBehaviour
             virus.name = "virus";   //统一修改名称
             Core2.CreateVirusNum = Core2.CreateVirusNum + 1;
             Debug.Log("生成敌人的数量： " + Core2.CreateVirusNum);
-            flag1 = false;
-            flag2 = false;
         }
     }
 
