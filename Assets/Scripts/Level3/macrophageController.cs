@@ -1,29 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
+/**
+ * ï¿½Ä½Å±ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½
+ */
 using UnityEngine;
 
 public class macrophageController : MonoBehaviour
 {
-    public float maxSize = 2f; // ÌåÐÍµÄ×î´ó±¶Êý
+    public float maxSize = 2f;      // ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    private Vector3 startPos;  // ³õÊ¼Î»ÖÃ
-    private Vector3 startScale;// ³õÊ¼ÌåÐÍ
-    private float currentSize = 1f; // µ±Ç°ÌåÐÍ
-    private float targetSize = 1f;  // Ä¿±êÌåÐÍ
+    private Vector3 startPos;       // ï¿½ï¿½Ê¼Î»ï¿½ï¿½
+    private Vector3 startScale;     // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+    private float currentSize = 1f; // ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
+    private float targetSize = 1f;  // Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
     private void Start()
     {
         startPos = transform.position;
-        startScale = transform.localScale;
+        startScale = transform.localScale; // ï¿½ï¿½È¡ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
     }
 
     private void Update()
     {
+        // ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½
         float offset = Mathf.Sin(Time.time + (startPos.x + startPos.y) * 100) * 0.2f;
         Vector3 newPos = startPos + new Vector3(0f, offset, 0f);
         transform.position = newPos;
 
+        // ï¿½ï¿½ï¿½Í½ï¿½ï¿½ï¿½
         if (currentSize < targetSize)
         {
             float newSize = Mathf.Lerp(currentSize, targetSize, 2f * Time.deltaTime);
@@ -36,11 +39,11 @@ public class macrophageController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // ï¿½ï¿½ï¿½É²ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (other.CompareTag("virus"))
         {
-            // Åö×²µ½²¡¶¾Ê±½«ÆäÉèÖÃÎª²»»îÔ¾
             other.gameObject.SetActive(false);
-            targetSize = maxSize < targetSize * 1.2f ? maxSize : targetSize * 1.1f ; // Ä¿±êÌåÐÍÔö´ó
+            targetSize = maxSize < targetSize * 1.2f ? maxSize : targetSize * 1.1f ; // Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         }
     }
 }

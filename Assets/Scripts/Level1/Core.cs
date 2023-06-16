@@ -1,4 +1,7 @@
-﻿using System.Collections;
+/*
+ * 该脚本用于控制关卡一的整体难度
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +12,6 @@ public class Core : MonoBehaviour
     private static float speed = 2.0f;  // 病毒移动速度
 
     private static int maxGenerateNum = 1000;  // 病毒最大生成数量
-
 
 
     public static int PreventMaxNum

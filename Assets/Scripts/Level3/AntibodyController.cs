@@ -1,34 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
+/**
+ * ï¿½Ã½Å±ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½Æ¿ï¿½ï¿½ï¿½
+ */
 using UnityEngine;
 
 public class AntibodyController : MonoBehaviour
 {
-    Rigidbody rb;  // ¸ÕÌå×é¼þ
-    public float speed = 20f;  // ¿ØÖÆ·ÉÐÐËÙ¶ÈµÄ±äÁ¿
-    public float rotateSpeed = 500f;   // ¿ØÖÆÐý×ªËÙ¶ÈµÄ±äÁ¿
-    public Transform targetTransform;
+    Rigidbody rb;
+    public float speed = 20f;           // ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½Ù¶ÈµÄ±ï¿½ï¿½ï¿½
+    public float rotateSpeed = 500f;    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½Ù¶ÈµÄ±ï¿½ï¿½ï¿½
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();  // »ñÈ¡¸ÕÌå×é¼þ
+        rb = GetComponent<Rigidbody>();  // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
 
     void Update()
     {
-        // »ñÈ¡ÎïÌåµÄÇ°·½Ïò²¢¸³Öµ¸øvelocityÏòÁ¿
+        // ï¿½ï¿½Ç°ï¿½Æ¶ï¿½
         Vector3 velocity = transform.forward * speed;
-        rb.velocity = velocity;  // ÐÞ¸Ä¸ÕÌåËÙ¶È´ïµ½ÔÈËÙ·ÉÐÐµÄÐ§¹û
+        rb.velocity = velocity;
         transform.Rotate(0, 0, rotateSpeed * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject);
+        Destroy(gameObject);// ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ï¿½å¶¼ï¿½ï¿½ï¿½ï¿½
 
         if (collision.gameObject.CompareTag("virus"))
         {
-            collision.gameObject.SetActive(false);
+            collision.gameObject.SetActive(false); // ï¿½ï¿½É±ï¿½ï¿½ï¿½ï¿½
         }
     }
 }

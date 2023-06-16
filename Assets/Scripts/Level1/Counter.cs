@@ -1,28 +1,21 @@
+/*
+ * ï¿½Ã½Å±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Counter : MonoBehaviour
 {
-    public static int generateCount;
-    public static int destroyCount;
-    public static int passCount;
+    public static int generateCount;  //ï¿½ï¿½ï¿½É²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public static int destroyCount;   //ï¿½èµ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public static int passCount;      //ï¿½ï¿½ï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    // Start is called before the first frame update
     void Awake()
     {
+        // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         generateCount = 0;
         destroyCount = 0;
         passCount = 0;
-        InvokeRepeating("PrintCount", 3f, 3f);
-    }
-
-    // ´òÓ¡Éú³É²¡¶¾ÊýÁ¿ºÍÀ¹½Ø²¡¶¾ÊýÁ¿
-    private void PrintCount()
-    {
-        Debug.Log("Éú³É²¡¶¾ÊýÁ¿:" + generateCount + "¸ö");
-        Debug.Log("À¹½Ø²¡¶¾ÊýÁ¿:" + destroyCount + "¸ö");
-        Debug.Log("ÌÓÒÝ²¡¶¾ÊýÁ¿:" + passCount + "¸ö");
-
     }
 }

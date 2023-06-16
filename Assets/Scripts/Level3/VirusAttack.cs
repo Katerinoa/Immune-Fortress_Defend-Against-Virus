@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+/** 
+ * 该脚本主要用于控制病毒的侵染
+ */
 using UnityEngine;
 
 public class VirusAttack : MonoBehaviour
@@ -18,17 +18,19 @@ public class VirusAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // 碰到细胞
         if (other.gameObject.CompareTag("cell"))
         {
             GetComponent<VirusController_Level3>().isStopped = true;
-            GetComponentInChildren<VirusBehaviour>().isStopped = true;
-            virusEffect.Play();
-            isInfecting = true;
+            GetComponentInChildren<VirusBehaviour>().isStopped = true; //停止移动
+            virusEffect.Play(); //打开粒子效果 
+            isInfecting = true; //开始侵染
             timer = 0.0f;
         }
     }
     private void OnTriggerStay(Collider other)
     {
+        // 始终停留在病毒表面
         if (other.gameObject.CompareTag("cell"))
         {
             if (isInfecting)
@@ -37,6 +39,7 @@ public class VirusAttack : MonoBehaviour
 
                 if (timer >= infectTime)  // 到时间后病毒进入细胞
                 {
+                    // 设置病毒的状态 与其他脚本交互
                     isInfecting = false;
                     GetComponent<VirusController_Level3>().isStopped = false;
                     GetComponent<VirusController_Level3>().innerCell = true;
@@ -44,41 +47,6 @@ public class VirusAttack : MonoBehaviour
                     other.gameObject.GetComponent<CellAffected>().virusCount++;
                     gameObject.GetComponent<VirusAttack>().virusEffect.Stop();
                 }
-            }
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("cell"))
-        {
-            gameObject.GetComponent<VirusController_Level3>().isStopped = true;
-            if (!isInfecting)
-            {
-                timer = 0.0f;
-                virusEffect.Play();
-                isInfecting = true;
-
-            }
-        }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("cell"))
-        {
-            if (isInfecting)
-            {
-                timer += Time.deltaTime;
-                Debug.Log(timer);
-
-                if (timer >= infectTime)
-                {
-                    isInfecting = false;
-                    virusEffect.Stop();
-
-                }
-
             }
         }
     }

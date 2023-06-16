@@ -1,21 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+/**
+ * ï¿½Ã½Å±ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¶ï¿½
+ */
 using UnityEngine;
 
 public class Core_Level3 : MonoBehaviour
 {
-    public static int maxGenerateNum = 100;  // ²¡¶¾×î´óÉú³ÉÊýÁ¿
+    public static int maxGenerateNum = 100;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    public static Vector2 SpawnIntervalRange = new Vector2(2.5f, 5.0f); // Éú³É¼ä¸ô
+    public static Vector2 SpawnIntervalRange = new Vector2(2.5f, 5.0f); // ï¿½ï¿½ï¿½É¼ï¿½ï¿½
 
-    public static float infectTime = 3.0f; // ÇÖÈ¾Ê±¼ä
+    public static float infectTime = 3.0f; // ï¿½ï¿½È¾Ê±ï¿½ï¿½
 
-    public static float SplitTime = 5.0f;  // ÁÑ½âÊ±¼ä
+    public static float SplitTime = 5.0f;  // ï¿½Ñ½ï¿½Ê±ï¿½ï¿½
 
-    public static float virusSpeed = 4.0f; // ²¡¶¾ÒÆËÙ
+    public static float virusSpeed = 4.0f; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    public static float crazyTime = 5.0f;  // BÏ¸°ûÇ¿»¯Ê±³¤
+    public static float crazyTime = 5.0f;  // BÏ¸ï¿½ï¿½Ç¿ï¿½ï¿½Ê±ï¿½ï¿½
 
-    public static float fireSpeed = 2f;    // TÏ¸°û¹¥»÷ËÙ¶È
+    public static float fireSpeed = 2f;    // TÏ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
 
 }

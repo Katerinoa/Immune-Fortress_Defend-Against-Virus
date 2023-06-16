@@ -1,28 +1,27 @@
-using System.Collections.Generic;
+/**
+ * ï¿½Ã½Å±ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½Ð§Ó¦BÏ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª
+ */
 using UnityEngine;
-using System;
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine.AI;
-
 
 public class EffectorBCellController : MonoBehaviour
 {
-    public GameObject antibodyPrefab;       // ÐèÒªÉú³ÉµÄÔ¤ÖÆÌå
-    public Transform firePos;               // ·¢ÉäµãÎ»ÖÃ
-    public bool crazy;                      // ÊÇ·ñ±»Ç¿»¯
-    public float attackRange = 20f;         // ¹¥»÷¾àÀë
-    public bool isRunning;                 // ÊÇ·ñÔÚÇ¿»¯ÖÐ
+    public GameObject antibodyPrefab;       // ï¿½ï¿½Òªï¿½ï¿½ï¿½Éµï¿½Ô¤ï¿½ï¿½ï¿½ï¿½
+    public Transform firePos;               // ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+    public bool crazy;                      // ï¿½Ç·ï¿½Ç¿ï¿½ï¿½
+    public float attackRange = 20f;         // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public bool isRunning;                 // ï¿½Ç·ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ï¿½
     public float fireSpeed;
 
 
-    private GameObject targetObject;        // Ä¿±êÎïÌå
-    private AudioSource audiosource;        // ÒôÐ§×é¼þ
-    private Vector3 startPos;               // ³õÊ¼Î»ÖÃ
-    private float crazyTime;
+    private GameObject targetObject;        // Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private AudioSource audiosource;        // ï¿½ï¿½Ð§ï¿½ï¿½ï¿½
+    private Vector3 startPos;               // ï¿½ï¿½Ê¼Î»ï¿½ï¿½
+    private float crazyTime;                // Ç¿ï¿½ï¿½Ê±ï¿½ï¿½
 
     private void Awake()
     {
+        // ï¿½ï¿½Coreï¿½Ð»ï¿½È¡ï¿½ï¿½Öµ
         fireSpeed = Core_Level3.fireSpeed;
         crazyTime = Core_Level3.crazyTime;
     }
@@ -31,17 +30,17 @@ public class EffectorBCellController : MonoBehaviour
     {
         startPos = transform.position;
         InvokeRepeating("GenerateAntibody", UnityEngine.Random.Range(0,1f), 1/fireSpeed);
-        audiosource = GetComponentInChildren<AudioSource>();  // »ñÈ¡ÒôÐ§×é¼þ
+        audiosource = GetComponentInChildren<AudioSource>();  // ï¿½ï¿½È¡ï¿½ï¿½Ð§ï¿½ï¿½ï¿½
     }
 
     void GenerateAntibody()
     {
+        // ï¿½ï¿½ï¿½É¿ï¿½ï¿½ï¿½
         if (targetObject == null)
             return;
         GameObject antibody = Instantiate(antibodyPrefab, firePos.position, Quaternion.identity);
         antibody.transform.LookAt(targetObject.transform.position);
-        antibody.GetComponent<AntibodyController>().targetTransform = targetObject.transform;
-        audiosource.Play();  // ²¥·ÅÒôÐ§
+        audiosource.Play();  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§
     }
 
 
@@ -49,42 +48,44 @@ public class EffectorBCellController : MonoBehaviour
     {
         if (targetObject != null)
         {
-            /* ÖØÐÂËÑË÷Âß¼­ */
-            // Ä¿±êËÀÍö
+            /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ */
+            // Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (!targetObject.activeSelf)
             {
                 targetObject = null;
                 return;
             }
-            // Ä¿±ê½øÈëÏ¸°û
+            // Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½
             else if (targetObject.GetComponent<VirusController_Level3>().innerCell)
             {
                 targetObject = null;
                 return;
             }
-            // Ä¿±êÌ«Ô¶
+            // Ä¿ï¿½ï¿½Ì«Ô¶
             else if (Vector3.Distance(transform.position, targetObject.transform.position) > attackRange)
             {
                 targetObject = null;
                 return;
             }
 
+            // Ë³ï¿½ï¿½×ªï¿½ï¿½Ä¿ï¿½ê²¡ï¿½ï¿½
             Vector3 direction = targetObject.transform.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3f*Time.deltaTime);// ×ªÏòÄ¿±êÎïÌå
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3f*Time.deltaTime);
 
         }
 
         if (targetObject == null)
         {
-            SelectTarget();
+            SelectTarget(); // Ñ°ï¿½ï¿½Ä¿ï¿½ï¿½
         }
 
+        // ï¿½ï¿½ï¿½Â¸ï¿½ï¿½ï¿½Ð§ï¿½ï¿½
         float offset = Mathf.Sin(Time.time * 5f + (startPos.x + startPos.y) * 100) * 0.2f;
         Vector3 newPos = startPos + new Vector3(0f, offset, 0f);
         transform.position = newPos;
 
+        // Ç¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (crazy && !isRunning)
         {
             isRunning = true;
@@ -97,26 +98,28 @@ public class EffectorBCellController : MonoBehaviour
         }
     }
 
+    // Ç¿ï¿½ï¿½×´Ì¬
     IEnumerator CrazyTime()
     {
-        attackRange *= 2;
-        StartCoroutine(ChangeColor(gameObject, new Color(1.0f,0.5f,0.5f,1.0f), 1)); // ±äÉ«
+        attackRange *= 2; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        StartCoroutine(ChangeColor(gameObject, new Color(1.0f,0.5f,0.5f,1.0f), 1)); // ï¿½ï¿½É«
         CancelInvoke("GenerateAntibody");
-        InvokeRepeating("GenerateAntibody", 0, 0.5f / fireSpeed);
+        InvokeRepeating("GenerateAntibody", 0, 0.5f / fireSpeed); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
         yield return new WaitForSeconds(crazyTime);
 
         isRunning = false;
-        attackRange /= 2;
+        attackRange /= 2; // ï¿½ï¿½ï¿½Ó»Ö¸ï¿½
         CancelInvoke("GenerateAntibody");
-        InvokeRepeating("GenerateAntibody", 0, 1f / fireSpeed);
-        StartCoroutine(ChangeColor(gameObject, Color.white, 1)); // ±äÉ«
+        InvokeRepeating("GenerateAntibody", 0, 1f / fireSpeed); //ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½
+        StartCoroutine(ChangeColor(gameObject, Color.white, 1)); // ï¿½ï¿½É«
 
     }
 
+    // Ñ°ï¿½ï¿½Ä¿ï¿½ï¿½
     private void SelectTarget()
     {
-        GameObject[] viruses = GameObject.FindGameObjectsWithTag("virus");
+        GameObject[] viruses = GameObject.FindGameObjectsWithTag("virus"); // ï¿½Òµï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½
 
         if (viruses.Length > 0)
         {
@@ -127,23 +130,22 @@ public class EffectorBCellController : MonoBehaviour
             {
                 float distance = Vector3.Distance(transform.position, virus.transform.position);
 
-                if (virus.GetComponent<VirusController_Level3>().innerCell)
+                if (virus.GetComponent<VirusController_Level3>().innerCell) //ï¿½Å³ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½
                     continue;
-                if (Vector3.Distance(transform.position, virus.transform.position) > attackRange)
+                if (Vector3.Distance(transform.position, virus.transform.position) > attackRange) // ï¿½Å³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§Ö®ï¿½ï¿½ï¿½
                     continue;
 
-                if (distance < minDistance)
+                if (distance < minDistance) // Ñ°ï¿½Ò·ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½
                 {
                     closestVirus = virus;
                     minDistance = distance;
                 }
             }
-
             targetObject = closestVirus;
-
         }
     }
 
+    // ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½
     IEnumerator ChangeColor(GameObject targetCell, Color targetColor, float duration)
     {
         float timeElapsed = 0;
@@ -151,17 +153,17 @@ public class EffectorBCellController : MonoBehaviour
         {
             Color currentColor = Color.Lerp(Color.white, targetColor, timeElapsed / duration);
 
-            // ¸Ä±ä²ÄÖÊµÄÑÕÉ«
+            // ï¿½Ä±ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½É«
             if(targetCell != null)
                 targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", currentColor);
 
-            // ¸üÐÂÒÑ¾­¹ýÈ¥µÄÊ±¼ä
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½È¥ï¿½ï¿½Ê±ï¿½ï¿½
             timeElapsed += Time.deltaTime;
 
             yield return null;
         }
 
-        // Ê±¼äµ½ÁË¾ÍÍ£Ö¹½¥±ä
+        // Ê±ï¿½äµ½ï¿½Ë¾ï¿½Í£Ö¹ï¿½ï¿½ï¿½ï¿½
         if (targetCell != null)
             targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", targetColor);
     }

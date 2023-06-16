@@ -1,5 +1,5 @@
 /*
- * ¸Ã½Å±¾ÓÃÓÚ¿ØÖÆ²¡¶¾µÄÔË¶¯ ÒÆ¶¯¡¢¸¡¶¯¡¢Ðý×ªµÈ
+ * ï¿½Ã½Å±ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª
  * */
 using System;
 using UnityEngine;
@@ -7,21 +7,21 @@ using UnityEngine.AI;
 
 public class VirusBehaviour : MonoBehaviour
 {
-    public float rotationSpeed = 100.0f; // Ðý×ªËÙ¶È
-    public float rotationRange = 5.0f; // Ðý×ªÖáµÄ±ä»¯·ù¶È
+    public float rotationSpeed = 100.0f; // ï¿½ï¿½×ªï¿½Ù¶ï¿½
+    public float rotationRange = 5.0f; // ï¿½ï¿½×ªï¿½ï¿½Ä±ä»¯ï¿½ï¿½ï¿½ï¿½
 
-    private Vector3 rotationAxis; // Ðý×ªÖá
+    private Vector3 rotationAxis; // ï¿½ï¿½×ªï¿½ï¿½
     public bool isStopped = false;
 
     void Start()
     {
-        // ³õÊ¼»¯Ðý×ªÖá
+        // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
         rotationAxis = UnityEngine.Random.onUnitSphere;
     }
 
     void Update()
     {
-        // Ìí¼ÓËæ»úÆ«ÒÆÁ¿
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½ï¿½ï¿½
         rotationAxis += UnityEngine.Random.insideUnitSphere * rotationRange * Time.deltaTime;
         rotationAxis.Normalize();
 
@@ -33,7 +33,7 @@ public class VirusBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("hair") && !isStopped)
         {
-            isStopped = true; // ±ê¼ÇÍ£Ö¹Ðý×ª
+            isStopped = true; // ï¿½ï¿½ï¿½Í£Ö¹ï¿½ï¿½×ª
         }
     }
 
@@ -41,7 +41,7 @@ public class VirusBehaviour : MonoBehaviour
     {
         if (other.CompareTag("mucous") && !isStopped)
         {
-            isStopped = true; // ±ê¼ÇÍ£Ö¹Ðý×ª
+            isStopped = true; // ï¿½ï¿½ï¿½Í£Ö¹ï¿½ï¿½×ª
         }
     }
 }

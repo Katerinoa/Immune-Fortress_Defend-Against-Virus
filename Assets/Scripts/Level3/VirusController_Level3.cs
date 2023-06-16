@@ -1,3 +1,6 @@
+/**
+ * 该脚本用于控制病毒的移动
+ */
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,14 +41,14 @@ public class VirusController_Level3 : MonoBehaviour
         navMeshAgent.speed = speed;
         navMeshAgent.SetDestination(targetObject.transform.position);
         if (baseHeight == 0)
-            baseHeight = UnityEngine.Random.Range(floatHeightRange.x, floatHeightRange.y);
+            baseHeight = UnityEngine.Random.Range(floatHeightRange.x, floatHeightRange.y); //设置一个随机高度
 
         floatStartTime = Time.time;
     }
 
     void Update()
     {
-        /* 以下为病毒移动控制 */
+        // 目标死亡 重新选择
         if (targetCell != null && !targetCell.activeSelf)
         {
             isStopped = false;
@@ -54,6 +57,7 @@ public class VirusController_Level3 : MonoBehaviour
             gameObject.GetComponent<VirusAttack>().virusEffect.Stop();
         }
 
+        // 没有目标时 使用寻路系统
         if (targetCell == null)
         {
             if (navMeshAgent.enabled == false)
@@ -69,8 +73,9 @@ public class VirusController_Level3 : MonoBehaviour
             float yPosition = Mathf.Sin((Time.time - floatStartTime) / floatAmplitude) * floatAmplitude;
             navMeshAgent.baseOffset = yPosition + baseHeight;
 
-            SelectTarget();
+            SelectTarget(); // 寻找附近目标
         }
+        // 找到目标后 直接向目标移动
         else
         {
             if (navMeshAgent.enabled == true)
@@ -123,7 +128,7 @@ public class VirusController_Level3 : MonoBehaviour
             targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", targetColor);
     }
 
-
+    // 寻找目标
     private void SelectTarget()
     {
         GameObject[] cells = GameObject.FindGameObjectsWithTag("cell");

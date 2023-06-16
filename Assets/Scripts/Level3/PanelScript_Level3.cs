@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+/**
+ * 该脚本用于3D放置 
+ * 详细注释请看level1中的InventoryPanel1
+ */
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-
-//����ű����ص�Panel1�ϣ�����Ʒ���Ľű�
 public class PanelScript_Level3 : MonoBehaviour
 {
-    Button button1, button2, button3, button4, button5, button6;
-
     public GameObject Panel; // 面板
     public Camera mainCamera;
     public GameObject[] Pane = new GameObject[6];
@@ -19,9 +17,10 @@ public class PanelScript_Level3 : MonoBehaviour
     public float maxDistance = 40f; // 最大距离
 
     private string[] buttonname = { "button1", "button2", "button3", "button4", "button5", "button6" };
-    private GameObject followmouseprefab; 
+    private GameObject followmouseprefab;
     private int objectnum = 0;
     private int currentObject, pastObject;
+    private Button button1, button2, button3, button4, button5, button6;
 
     void Start()
     {
@@ -88,7 +87,7 @@ public class PanelScript_Level3 : MonoBehaviour
         }
 
 
-        if (GameObject.Find("level3start") == null) 
+        if (GameObject.Find("level3start") == null)
         {
             if (currentObject != pastObject)
             {
@@ -101,12 +100,12 @@ public class PanelScript_Level3 : MonoBehaviour
 
             }
 
-            if (currentObject != -1) 
+            if (currentObject != -1)
             {
                 followmouseprefab.transform.position = getPlacePosition();
             }
 
-            if (Input.GetMouseButtonDown(0) && !IsPointerOverUI() && currentObject !=-1)
+            if (Input.GetMouseButtonDown(0) && !IsPointerOverUI() && currentObject != -1)
             {
                 GameObject prefab1 = Instantiate(Pane[currentObject]);
 
@@ -192,7 +191,6 @@ public class PanelScript_Level3 : MonoBehaviour
         else currentObject = -1;
     }
 
-    // Update is called once per frame
     private bool IsPointerOverUI()
     {
         // 检查鼠标点击是否在UI上

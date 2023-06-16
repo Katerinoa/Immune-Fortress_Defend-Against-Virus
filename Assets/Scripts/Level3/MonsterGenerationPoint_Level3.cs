@@ -1,14 +1,16 @@
+/**
+ * ï¿½Ã½Å±ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½Øµï¿½Ë¢ï¿½Öµï¿½ 
+ * ï¿½ï¿½Ï¸×¢ï¿½ï¿½ï¿½ë¿´Level1ï¿½Ðµï¿½MonsterGenerationPoint
+ */
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MonsterGenerationPoint_Level3 : MonoBehaviour
 {
-    public Vector2 SpawnIntervalRange;// Éú³ÉÊ±¼ä¼ä¸ô
+    public Vector2 SpawnIntervalRange;// ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
 
-    private Transform TargetPos; //Éú³ÉÎ»ÖÃ
-    private int MaxGenerateNum; //×î´óÉú³ÉÊýÁ¿
+    private Transform TargetPos; //ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+    private int MaxGenerateNum; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private static int generateCount = 0;
 
     private void Awake()

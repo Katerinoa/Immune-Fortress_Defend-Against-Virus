@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+/**
+ * �Ľű����ڿ����ܰ����ӳ���ЧӦBϸ���ƶ�
+ */
 using System.Linq;
 using UnityEngine;
 
 public class LymphokineController : MonoBehaviour
 {
-    private string Tag = "BCell";
-    public GameObject TargetBCell;
-    public float moveSpeed = 10f;
+    private string Tag = "BCell";           // ЧӦBϸ���ı�ǩ
+    public GameObject TargetBCell;          // �ܰ����ӵ�Ŀ��Bϸ��
+    public float moveSpeed = 10f;           // �ܰ����ӵ��ƶ��ٶ�
     private Rigidbody rb;
-    public int maxCollision = 2;
-    public float timer = 10f;
+    public int maxCollision = 2;            // �����ײ����
+    public float timer = 10f;               // �����ʱ��
 
 
     void Start()
@@ -20,19 +21,23 @@ public class LymphokineController : MonoBehaviour
 
     void FixedUpdate()
     {
+        // ѡ��Ŀ��ЧӦBϸ��
         if (TargetBCell == null)
         {
             SelectTarget();
         }
         else
         {
+            // ����ǰ������
             Vector3 targetDirection = TargetBCell.transform.position - transform.position;
+            // δ�ƶ����յ�
             if (targetDirection != Vector3.zero)
             {
                 Vector3 direction = (TargetBCell.transform.position - transform.position).normalized;
-                rb.velocity = direction * moveSpeed;
+                rb.velocity = direction * moveSpeed;    // �����յ���ٶ�
             }
         }
+        // ����ʱ��̫�����ܰ�������ʧ
         timer -= Time.deltaTime;
         if (timer <= 0)
             Destroy(gameObject);
@@ -40,15 +45,18 @@ public class LymphokineController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        // �������ʹ�ܰ������ܹ������ƶ�
         Vector3 randomDirection = Random.insideUnitSphere.normalized;
         rb.AddForce(randomDirection);
         maxCollision--;
+        // ��ײ��������
         if (maxCollision == 0)
             Destroy(gameObject);
     }
 
     void OnTriggerEnter(Collider collision)
     {
+        // ����ЧӦBϸ��������ʱ����ЧӦBϸ������crazy״̬
         if (collision.gameObject == TargetBCell)
         {
             TargetBCell.GetComponent<EffectorBCellController>().crazy = true;
@@ -56,10 +64,13 @@ public class LymphokineController : MonoBehaviour
         }
     }
 
+    // Ѱ��Ŀ��ЧӦBϸ��
     private void SelectTarget()
     {
+        // �ҵ��ڳ������Ҵ���ЧӦBϸ��
         GameObject[] Bcells = GameObject.FindGameObjectsWithTag(Tag).Where(obj => obj.activeSelf).ToArray();
 
+        // ���ѡ��һ��ЧӦBϸ����ΪĿ��
         if (Bcells.Length > 0)
         {
             TargetBCell = Bcells[UnityEngine.Random.Range(0, Bcells.Length)];

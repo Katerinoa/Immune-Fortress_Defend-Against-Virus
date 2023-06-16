@@ -1,18 +1,18 @@
+/* ï¿½Ã½Å±ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½Ð§Ó¦TÏ¸ï¿½ï¿½ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EffectorTCellController : MonoBehaviour
 {
-    public float speed;             // ÒÆ¶¯ËÙ¶È
-    public float attackRange = 20f; // ¹¥»÷·¶Î§
+    public float speed;                     // ï¿½Æ¶ï¿½ï¿½Ù¶ï¿½
+    public float attackRange = 20f;         // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§
 
-    private GameObject[] cells;     // ËùÓÐÏ¸°ûµÄ¼¯ºÏ
-    private GameObject targetCell;  // Ä¿±êÏ¸°û
-    private Vector3 startPos;       // ³õÊ¼Î»ÖÃ£¬ÓÃÓÚ¸¡¶¯
-    private bool isSleeping = false; // ÊÇ·ñ´¦ÓÚÐÝÃß×´Ì¬
-    private float sleepDuration = 10f; // ÐÝÃß³ÖÐøÊ±¼ä
+    private GameObject[] cells;             // ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
+    private GameObject targetCell;          // Ä¿ï¿½ï¿½Ï¸ï¿½ï¿½
+    private Vector3 startPos;               // ï¿½ï¿½Ê¼Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½
+    private bool isSleeping = false;        // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
+    private float sleepDuration = 10f;      // ï¿½ï¿½ï¿½ß³ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 
     private void Start()
     {
@@ -21,6 +21,7 @@ public class EffectorTCellController : MonoBehaviour
 
     void Update()
     {
+        // Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (targetCell != null && !targetCell.activeSelf)
         {
             startPos = transform.position;
@@ -29,27 +30,30 @@ public class EffectorTCellController : MonoBehaviour
 
         if (targetCell == null || isSleeping)
         {
+            // ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½
             float offset = Mathf.Sin(Time.time * 5f + (startPos.x + startPos.y) * 100) * 0.2f;
             Vector3 newPos = startPos + new Vector3(0f, offset, 0f);
             transform.position = newPos;
-            SelectTarget();
+
+            SelectTarget(); //Ñ°ï¿½ï¿½Ä¿ï¿½ï¿½
         }
 
         if (targetCell != null)
         {
             if (isSleeping)
             {
-                return; // Èç¹û´¦ÓÚÐÝÃß×´Ì¬£¬Ôò²»Ö´ÐÐºóÐø´úÂë
+                return; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
             }
 
             Vector3 direction = targetCell.transform.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3f * Time.deltaTime); // ×ªÏòÄ¿±êÎïÌå
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3f * Time.deltaTime); // ×ªï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             transform.position += transform.forward * speed * Time.deltaTime;
         }
     }
 
+    // Ñ°ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
     private void SelectTarget()
     {
         cells = GameObject.FindGameObjectsWithTag("cell");
@@ -71,22 +75,25 @@ public class EffectorTCellController : MonoBehaviour
         }
     }
 
+    // ï¿½ï¿½È´
     public void Sleep()
     {
         StartCoroutine(EnterSleepMode());
     }
 
+    // ï¿½ï¿½È´ï¿½ï¿½Ê±
     private IEnumerator EnterSleepMode()
     {
         isSleeping = true;
-        StartCoroutine(ChangeColor(gameObject, new Color(0f,0.75f,1f), 1)); // ±äÉ«
+        StartCoroutine(ChangeColor(gameObject, new Color(0f,0.75f,1f), 1)); // ï¿½ï¿½É«
 
         yield return new WaitForSeconds(sleepDuration);
 
-        StartCoroutine(ChangeColor(gameObject, Color.white, 1)); // ±äÉ«
+        StartCoroutine(ChangeColor(gameObject, Color.white, 1)); // ï¿½ï¿½É«
         isSleeping = false;
     }
 
+    // ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½
     IEnumerator ChangeColor(GameObject targetCell, Color targetColor, float duration)
     {
         float timeElapsed = 0;
@@ -94,17 +101,17 @@ public class EffectorTCellController : MonoBehaviour
         {
             Color currentColor = Color.Lerp(Color.white, targetColor, timeElapsed / duration);
 
-            // ¸Ä±ä²ÄÖÊµÄÑÕÉ«
+            // ï¿½Ä±ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½É«
             if (targetCell != null)
                 targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", currentColor);
 
-            // ¸üÐÂÒÑ¾­¹ýÈ¥µÄÊ±¼ä
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½È¥ï¿½ï¿½Ê±ï¿½ï¿½
             timeElapsed += Time.deltaTime;
 
             yield return null;
         }
 
-        // Ê±¼äµ½ÁË¾ÍÍ£Ö¹½¥±ä
+        // Ê±ï¿½äµ½ï¿½Ë¾ï¿½Í£Ö¹ï¿½ï¿½ï¿½ï¿½
         if (targetCell != null)
             targetCell.GetComponentInChildren<Renderer>().material.SetColor("_Color", targetColor);
     }

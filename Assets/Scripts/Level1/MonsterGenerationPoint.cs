@@ -1,25 +1,25 @@
+/* ï¿½Ã½Å±ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½Ë¢ï¿½Öµï¿½ */
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterGenerationPoint : MonoBehaviour
 {
-    public Vector2 SpawnIntervalRange = new Vector2(2.5f, 10.0f); // Éú³ÉÊ±¼ä¼ä¸ô
+    public Vector2 SpawnIntervalRange = new Vector2(2.5f, 10.0f); // ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
 
-    private Transform TargetPos; //Éú³ÉÎ»ÖÃ
-    private int MaxGenerateNum; //×î´óÉú³ÉÊýÁ¿
+    private Transform TargetPos; //ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+    private int MaxGenerateNum; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     private void Awake()
     {
-        MaxGenerateNum = Core_Level3.maxGenerateNum;
-        SpawnIntervalRange = Core_Level3.SpawnIntervalRange;
+        MaxGenerateNum = Core.MaxGenerateNum; // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
     private void Start()
     {
         TargetPos = transform;
-        StartCoroutine("SpawnCoroutine");
+        StartCoroutine("SpawnCoroutine"); // ï¿½ï¿½Ò»ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½É²ï¿½ï¿½ï¿½
     }
 
+    // ï¿½ï¿½ï¿½É²ï¿½ï¿½ï¿½Ð­ï¿½ï¿½
     private IEnumerator SpawnCoroutine()
     {
         while (true)
@@ -30,6 +30,7 @@ public class MonsterGenerationPoint : MonoBehaviour
         }
     }
 
+    // ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private void SpawnMonster()
     {
         GameObject virus = ObjectPool.SharedInstance.GetPooledObject();
@@ -50,7 +51,7 @@ public class MonsterGenerationPoint : MonoBehaviour
     private void Update()
     {
         if (Counter.generateCount >= MaxGenerateNum)
-            StopCoroutine("SpawnCoroutine");
+            StopCoroutine("SpawnCoroutine"); // ï¿½ïµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹Ð­ï¿½ï¿½ Í£Ö¹ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½
     }
 
 
