@@ -1,18 +1,18 @@
+/* 该脚本用于控制效应T细胞 */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EffectorTCellController : MonoBehaviour
 {
-    public float speed;             // 移动速度
-    public float attackRange = 20f; // 攻击范围
+    public float speed;                     // 移动速度
+    public float attackRange = 20f;         // 攻击范围
 
-    private GameObject[] cells;     // 所有细胞的集合
-    private GameObject targetCell;  // 目标细胞
-    private Vector3 startPos;       // 初始位置，用于浮动
-    private bool isSleeping = false; // 是否处于休眠状态
-    private float sleepDuration = 10f; // 休眠持续时间
+    private GameObject[] cells;             // 所有细胞的集合
+    private GameObject targetCell;          // 目标细胞
+    private Vector3 startPos;               // 初始位置，用于浮动
+    private bool isSleeping = false;        // 是否处于休眠状态
+    private float sleepDuration = 10f;      // 休眠持续时间
 
     private void Start()
     {
@@ -21,6 +21,7 @@ public class EffectorTCellController : MonoBehaviour
 
     void Update()
     {
+        // 目标死亡
         if (targetCell != null && !targetCell.activeSelf)
         {
             startPos = transform.position;
@@ -29,17 +30,19 @@ public class EffectorTCellController : MonoBehaviour
 
         if (targetCell == null || isSleeping)
         {
+            // 浮动效果
             float offset = Mathf.Sin(Time.time * 5f + (startPos.x + startPos.y) * 100) * 0.2f;
             Vector3 newPos = startPos + new Vector3(0f, offset, 0f);
             transform.position = newPos;
-            SelectTarget();
+
+            SelectTarget(); //寻找目标
         }
 
         if (targetCell != null)
         {
             if (isSleeping)
             {
-                return; // 如果处于休眠状态，则不执行后续代码
+                return; // 处于休眠状态
             }
 
             Vector3 direction = targetCell.transform.position - transform.position;
@@ -50,6 +53,7 @@ public class EffectorTCellController : MonoBehaviour
         }
     }
 
+    // 寻找最近目标
     private void SelectTarget()
     {
         cells = GameObject.FindGameObjectsWithTag("cell");
@@ -71,11 +75,13 @@ public class EffectorTCellController : MonoBehaviour
         }
     }
 
+    // 冷却
     public void Sleep()
     {
         StartCoroutine(EnterSleepMode());
     }
 
+    // 冷却计时
     private IEnumerator EnterSleepMode()
     {
         isSleeping = true;
@@ -87,6 +93,7 @@ public class EffectorTCellController : MonoBehaviour
         isSleeping = false;
     }
 
+    // 颜色渐变
     IEnumerator ChangeColor(GameObject targetCell, Color targetColor, float duration)
     {
         float timeElapsed = 0;

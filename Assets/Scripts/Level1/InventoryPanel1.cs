@@ -1,5 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/* 
+ * 该脚本用于放置道具
+ */
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,31 +9,31 @@ using UnityEngine.EventSystems;
 
 public class InventoryPanel1 : MonoBehaviour
 {
-    Button button1, button2, button3, button4, button5, button6;
+    public GameObject Panel;            // 道具面板
+    public GameObject generatePoses;    // 刷怪点
+    public Camera mainCamera;           // 主摄像机
+    public GameObject[] Pane = new GameObject[6];   // 用于放置的物体
+    public GameObject[] Name = new GameObject[6];   // 跟随鼠标的物体（没有组件的模型）
+    public int[] Num = new int[6] { 5, 2, 0, 0, 0, 0 };  // 每个道具的数量
+    public LayerMask terrainLayer; // 地形图层 
+    public TextMeshProUGUI[] remainNum = new TextMeshProUGUI[6];  //道具数量显示
 
-    public GameObject Panel; // 面板
-    public GameObject generatePoses;
-    public Camera mainCamera;
-    public GameObject[] Pane = new GameObject[6];
-    public GameObject[] Name = new GameObject[6];
-    public int[] Num = new int[6] { 5, 2, 0, 0, 0, 0 };
-    public LayerMask terrainLayer; // 地形的图层
-    public TextMeshProUGUI[] remainNum = new TextMeshProUGUI[6];
-
-    private int[] Count = new int[6];
-    private float placementOffset = 5f;
-    private bool gameStart = false;
+    private int[] Count = new int[6];   // 道具计数器
+    private float placementOffset = 5f; // 放置偏移
+    private bool gameStart = false;     // 判断游戏是否开始
     private string[] buttonname = { "button1", "button2", "button3", "button4", "button5", "button6" };
-    private GameObject followmouseprefab;
+    private GameObject followmouseprefab; //跟随鼠标的物体
     private int objectnum = 0;
     private int currentObject, pastObject;
+    private Button button1, button2, button3, button4, button5, button6; //物品格子
 
     private void Start()
     {
-
+        // 初始化索引
         currentObject = -1;
         pastObject = -1;
 
+        // 统计使用的道具格数量
         if (GameObject.Find("button1") != null)
         {
             button1 = GameObject.Find("button1").GetComponent<Button>();
@@ -74,9 +75,11 @@ public class InventoryPanel1 : MonoBehaviour
 
     void Update()
     {
+        // 更新道具数量值
         for (int i = 0; i < objectnum; i++)
             remainNum[i].text = (Num[i]-Count[i]).ToString();
 
+        // 选中物品栏
         if (Panel.activeSelf)
         {
             for (int i = 0; i < objectnum; i++)
@@ -92,6 +95,7 @@ public class InventoryPanel1 : MonoBehaviour
             }
         }
 
+        // 获取点击后，跟随鼠标的物体
         if (currentObject != pastObject)
         {
             pastObject = currentObject;
@@ -105,11 +109,13 @@ public class InventoryPanel1 : MonoBehaviour
 
         }
 
+        // 鼠标跟随
         if (currentObject != -1)
         {
             followmouseprefab.transform.position = getPlacePosition();
         }
 
+        // 道具放置
         if (Input.GetMouseButtonDown(0) && !IsPointerOverUI() && currentObject != -1)
         {
             if (Count[currentObject] >= Num[currentObject])
@@ -128,28 +134,31 @@ public class InventoryPanel1 : MonoBehaviour
         }
     }
 
+    // 计算放置点
     Vector3 getPlacePosition()
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
+        // 得到射线与地形的交点
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, terrainLayer))
         {
-            Debug.Log("finding");
-
-            Vector3 placementPosition = ray.origin + ray.direction * (hit.distance - placementOffset);
+            Vector3 placementPosition = ray.origin + ray.direction * (hit.distance - placementOffset); //添加一个偏移量，避免嵌入地面中
             return placementPosition;
         }
         return Vector3.zero;    
     }
 
+    // 按钮控制 游戏开始
     public void StartGame()
     {
         Panel.SetActive(false);
         generatePoses.SetActive(true);
         gameStart = true;
     }
-void func1()
+
+    // 按钮事件监听
+    void func1()
     {
         if (currentObject != 0)
         {
@@ -201,7 +210,6 @@ void func1()
         else currentObject = -1;
     }
 
-    // Update is called once per frame
     private bool IsPointerOverUI()
     {
         // 检查鼠标点击是否在UI上

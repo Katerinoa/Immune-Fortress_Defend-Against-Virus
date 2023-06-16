@@ -1,5 +1,5 @@
 /*
- * 该脚本用于控制病毒的运动 移动、浮动、旋转等
+ * 该脚本用于控制病毒的随机旋转
  * */
 using System;
 using UnityEngine;
