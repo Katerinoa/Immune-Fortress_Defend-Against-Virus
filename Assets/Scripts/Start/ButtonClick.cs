@@ -5,20 +5,31 @@ using UnityEngine.SceneManagement;
 public class ButtonClick : MonoBehaviour
 {
     public GameObject setting;
-    public void ChangeToLevel1()
+    public void ClickStart()
     {
-        SceneManager.LoadScene("prelevel1");
+        SceneManager.LoadScene("Middlepic");
     }
-
-    public void ChangeToSetting()
+    public void ClickSetting()
     {
         setting.SetActive(true);
         gameObject.SetActive(false);
-        //SceneManager.LoadScene(2);
     }
-    public void Quit()
+    public void ClickQuit()
     {
-        //UnityEditor.EditorApplication.isPlaying = false;
         Application.Quit();
     }
+
+    public void ClickLevel1()
+    {
+        SceneManager.LoadScene("Level1");
+    }
+    public void ClickLevel2()
+    {
+        SceneManager.LoadScene("Level2");
+    }
+    public void ClickLevel3()
+    {
+        SceneManager.LoadScene("Level3");
+    }
+
 }
